@@ -1,0 +1,52 @@
+$black: #000;
+$white: #FFF;
+$grey: #f7f7f7;
+$darkgrey: #5e5e5e;
+$red: #d35136;
+$green: #27b599;
+$blue: #088ecc;
+$darkblue: #11171c;
+
+$padding: 10px;
+$margin: 10px;
+$main-width: 1000px;
+
+$font-size: 14px;
+$font-family: 'Lato', sans-serif;
+$line-height: 1.4;
+
+$break-four: 1050px;
+$break-three: 760px;
+$break-two: 520px;
+$break-one: 360px;
+
+@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');
+@import url('normalize.css');
+
+//Utilities
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+//Main styles
+* {
+    position: relative;
+    -webkit-box-sizeing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body, .wrap {
+    min-height: 100%;
+}
+
+body {
+    color: $grey;
+    font-size: $font-size;
+    font-family: $font-family;
+    line-height: $line-height;
+    background: $darkblue;
+}
