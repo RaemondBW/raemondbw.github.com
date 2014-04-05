@@ -7,7 +7,7 @@ $green: #27b599;
 $blue: #088ecc;
 $darkblue: #11171c;
 
-$padding: 10px;
+$padding: 50px;
 $margin: 10px;
 $main-width: 1000px;
 
@@ -63,7 +63,7 @@ body {
     .my-info {
         text-align: center;
         padding: $padding*3 0;
-        border-bottom: 1px solid $darkgrey;
+        //border-bottom: 1px solid $darkgrey;
  
         .portfolio-image {
             border-radius: 50%;

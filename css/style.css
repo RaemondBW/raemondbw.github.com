@@ -38,8 +38,7 @@ body {
 /* line 63, style.scss */
 .sidebar .my-info {
   text-align: center;
-  padding: 30px 0;
-  border-bottom: 1px solid #5e5e5e;
+  padding: 150px 0;
 }
 /* line 68, style.scss */
 .sidebar .my-info .portfolio-image {
