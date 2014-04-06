@@ -35,10 +35,17 @@ body {
   width: 100%;
   height: 100%;
 }
+@media screen and (min-width: 760px) {
+  /* line 54, style.scss */
+  .sidebar {
+    float: left;
+    width: 20%;
+  }
+}
 /* line 63, style.scss */
 .sidebar .my-info {
   text-align: center;
-  padding: 150px 0;
+  padding: 30px 0;
 }
 /* line 68, style.scss */
 .sidebar .my-info .portfolio-image {
@@ -109,4 +116,130 @@ body {
 /* line 131, style.scss */
 .social a.googleplus:hover {
   background-position: -75px -25px;
+}
+
+/* line 139, style.scss */
+.menus {
+  text-align: center;
+}
+@media screen and (min-width: 760px) {
+  /* line 139, style.scss */
+  .menus {
+    padding: 20px 30px;
+  }
+}
+/* line 146, style.scss */
+.menus h3 {
+  text-transform: uppercase;
+  font-size: 120%;
+  font-weight: normal;
+  padding-left: 25px;
+  cursor: pointer;
+  width: 20%;
+  margin: 20px 110px 10px;
+}
+@media screen and (min-width: 360px) {
+  /* line 146, style.scss */
+  .menus h3 {
+    margin: 20px auto 20px;
+  }
+}
+@media screen and (min-width: 760px) {
+  /* line 146, style.scss */
+  .menus h3 {
+    margin: 20px 0 10px 0;
+  }
+}
+/* line 163, style.scss */
+.menus h3:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 18px;
+  display: block;
+  background: url(../images/nav-sprite.png) no-repeat;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-device-pixel-ratio: 2) {
+  /* line 163, style.scss */
+  .menus h3:before {
+    background: url(../images/nav-sprite@2x.png) no-repeat;
+    background-size: 49px 18px;
+  }
+}
+/* line 178, style.scss */
+.menus h3.work {
+  color: #d35136;
+}
+/* line 181, style.scss */
+.menus h3.work:before {
+  width: 15px;
+  background-position: 0px 0px;
+}
+/* line 187, style.scss */
+.menus h3.about {
+  color: #27b599;
+}
+/* line 190, style.scss */
+.menus h3.about:before {
+  width: 17px;
+  background-position: -15px 0px;
+}
+/* line 196, style.scss */
+.menus h3.contact {
+  color: #088ecc;
+}
+/* line 199, style.scss */
+.menus h3.contact:before {
+  width: 17px;
+  background-position: -32px 0px;
+}
+
+/* line 207, style.scss */
+ul {
+  list-style: none;
+  padding: 0;
+  display: none;
+  margin: 0 135px 10px;
+  text-align: left;
+}
+@media screen and (min-width: 760px) {
+  /* line 207, style.scss */
+  ul {
+    margin: 0 0 0 25px;
+    display: block;
+    width: auto;
+  }
+}
+/* line 220, style.scss */
+ul.open {
+  display: inline-block;
+  margin: 0 auto 10px 60px;
+}
+@media screen and (min-width: 760px) {
+  /* line 220, style.scss */
+  ul.open {
+    margin: 0 0 0 25px;
+    display: block;
+    width: auto;
+  }
+}
+/* line 232, style.scss */
+ul li a {
+  color: #5e5e5e;
+  text-decoration: none;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  -ms-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+}
+/* line 241, style.scss */
+ul li a:hover, ul li a.current-menu-item {
+  color: white;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  -ms-transition: color 0.4s ease;
+  transition: color 0.4s ease;
 }
