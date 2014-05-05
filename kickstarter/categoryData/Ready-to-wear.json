@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Ready-to-wear", 
+            "goal": "2500.0", 
+            "title": "Year 34 by Brianne Shew \u2014 Kickstarter", 
+            "backers": "71", 
+            "name": "Brianne Shew", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/2023394885/year-34/", 
+            "location": "Savannah, GA", 
+            "totalPledged": "3272.0", 
+            "description": "SCAD Senior Collection"
+        }, 
+        {
+            "category": "Ready-to-wear", 
+            "goal": "4500.0", 
+            "title": "Send Plante Clothing to Charleston Fashion Week! by Becky Plante \u2014 Kickstarter", 
+            "backers": "105", 
+            "name": "Becky Plante", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/plante/send-plante-clothing-to-charleston-fashion-week/", 
+            "location": "New York, NY", 
+            "totalPledged": "5534.01", 
+            "description": "Emerging design duo PLANTE will be showing a collection of 8- 12 looks at Charleston Fashion Week."
+        }, 
+        {
+            "category": "Ready-to-wear", 
+            "goal": "20000.0", 
+            "title": "Poppy & Bloom Spring/Summer 2014 Collection by Poppy & Bloom \u2014 Kickstarter", 
+            "backers": "85", 
+            "name": "Poppy & Bloom", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/plussizefashion/poppy-and-bloom-spring-summer-2014-collection/", 
+            "location": "Seattle, WA", 
+            "totalPledged": "20527.0", 
+            "description": "Poppy & Bloom brings you a collection of whimsical prints, timeless shapes, and flattering silhouettes for plus sizes 12- 24W"
+        }
+    ]
+}

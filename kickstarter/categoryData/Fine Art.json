@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "category": "Fine Art", 
+            "goal": "7000.0", 
+            "title": "JUICE + ICE by TWO SPIRIT \u2014 Kickstarter", 
+            "backers": "89", 
+            "name": "TWO SPIRIT", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/2spirit/juice-ice/", 
+            "location": "Traverse City, MI", 
+            "totalPledged": "7053.0", 
+            "description": "TWO SPIRIT is a collaboration between John Holland and Heather Pineda."
+        }, 
+        {
+            "category": "Fine Art", 
+            "goal": "4500.0", 
+            "title": "Shadow Tessellations by Christine Dalenta/Benjamin Parker \u2014 Kickstarter", 
+            "backers": "86", 
+            "name": "Christine Dalenta/Benjamin Parker", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1027521965/shadow-tessellations/", 
+            "location": "Manchester, CT", 
+            "totalPledged": "4834.0", 
+            "description": "A Unique Project Combining Photography and Paper Folding"
+        }, 
+        {
+            "category": "Fine Art", 
+            "goal": "22500.0", 
+            "title": "The Superlative Light by Robert Shults \u2014 Kickstarter", 
+            "backers": "131", 
+            "name": "Robert Shults", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1437149198/the-superlative-light/", 
+            "location": "Austin, TX", 
+            "totalPledged": "23841.0", 
+            "description": "A photobook exploring one of the world's most powerful lasers by Robert Shults in collaboration with science fiction author Rudy Rucker"
+        }, 
+        {
+            "category": "Fine Art", 
+            "goal": "2000.0", 
+            "title": "Wet Plate Collodion Photography within Hand Blown Glass by Emma Howell \u2014 Kickstarter", 
+            "backers": "60", 
+            "name": "Emma Howell", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/emmahowell/wet-plate-collodion-photography-within-hand-blown/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "2052.0", 
+            "description": "Bringing depth to traditional wet plate collodion ambrotypes by exposing directly into large format hand blown glass forms"
+        }, 
+        {
+            "category": "Fine Art", 
+            "goal": "11000.0", 
+            "title": "Ballerine by Brandon Walker \u2014 Kickstarter", 
+            "backers": "70", 
+            "name": "Brandon Walker", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/629156444/ballerine/", 
+            "location": "San Diego, CA", 
+            "totalPledged": "11157.5", 
+            "description": "Images that explore the dark backstage world of the ballerina."
+        }
+    ]
+}

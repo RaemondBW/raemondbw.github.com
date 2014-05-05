@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Small Batch", 
+            "goal": "4000.0", 
+            "title": "Mei & Mo's Weeger Spice: The Only Spice You'll Ever Need by Mei & Mo \u2014 Kickstarter", 
+            "backers": "121", 
+            "name": "Mei & Mo", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/2009478441/mei-and-mos-weeger-spice-the-only-spice-youll-ever/", 
+            "location": "New York, NY", 
+            "totalPledged": "6519.0", 
+            "description": "When you taste Weeger Spice you'll ask, \"What IS that?\"... in a good way!"
+        }, 
+        {
+            "category": "Small Batch", 
+            "goal": "25000.0", 
+            "title": "Boujie Baking Goes Big! by Cassie Forrington \u2014 Kickstarter", 
+            "backers": "428", 
+            "name": "Cassie Forrington", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/518578712/boujie-baking-goes-big/", 
+            "location": "Arcata, CA", 
+            "totalPledged": "26875.2", 
+            "description": "Boujie Baking Co., a one-woman op, has been accepted for sale at Whole Foods! Beer + Dessert = AWESOME. Become a beer-kissed backer!"
+        }, 
+        {
+            "category": "Small Batch", 
+            "goal": "20000.0", 
+            "title": "SOSU Barrel-Aged Sriracha by Sosu Sauces \u2014 Kickstarter", 
+            "backers": "2,165", 
+            "name": "Sosu Sauces", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/657999288/sosu-barrel-aged-sriracha/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "104146.51", 
+            "description": "Aged in whiskey barrels for a unique fruity, spicy, and smoky flavor. You\u2019ve never tasted sriracha quite like this before."
+        }
+    ]
+}

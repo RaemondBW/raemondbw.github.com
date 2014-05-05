@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Restaurants", 
+            "goal": "5000.0", 
+            "title": "Pfennig Bakery Opening in Lakeview by Axel Erk \u2014 Kickstarter", 
+            "backers": "104", 
+            "name": "Axel Erk", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1220009593/pfennig-bakery-opening-in-lakeview/", 
+            "location": "Chicago, IL", 
+            "totalPledged": "5365.0", 
+            "description": "Pfennig Bakery brings you Fresh Bread & Pastry from 2 Passionate German Bakers"
+        }, 
+        {
+            "category": "Restaurants", 
+            "goal": "250000.0", 
+            "title": "Superior Motors: Community Restaurant & Farm Ecosystem by Kevin Sousa \u2014 Kickstarter", 
+            "backers": "2,026", 
+            "name": "Kevin Sousa", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/379429428/superior-motors-community-restaurant-and-farm-ecos/", 
+            "location": "Braddock, PA", 
+            "totalPledged": "310225.01", 
+            "description": "A direct appeal to fund an inventive and inclusionary restaurant within a very deserving and special community. #SuperiorMotors"
+        }
+    ]
+}

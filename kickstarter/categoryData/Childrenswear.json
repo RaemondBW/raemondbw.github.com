@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Childrenswear", 
+            "goal": "24500.0", 
+            "title": "GIRLS WILL BE:  Shorts designed to let girls be kids by Girls Will Be \u2014 Kickstarter", 
+            "backers": "668", 
+            "name": "Girls Will Be", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/girlswillbe/girls-will-be-shorts-designed-to-let-girls-be-kids/", 
+            "location": "Austin, TX", 
+            "totalPledged": "30253.0", 
+            "description": "Because not all girls want to wear shorty shorts or skinny fits\u2014or pink, ruffles, or bows. Help us change the world of girls clothing!"
+        }, 
+        {
+            "category": "Childrenswear", 
+            "goal": "2500.0", 
+            "title": "QUIRKIE KIDS - pink tees for girls AND boys by Martine Zoer \u2014 Kickstarter", 
+            "backers": "69", 
+            "name": "Martine Zoer", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/715281789/quirkie-kids-pink-tees-for-girls-and-boys/", 
+            "location": "Seattle, WA", 
+            "totalPledged": "2699.5", 
+            "description": "QUIRKIE KIDS is a line of pink tee for girls AND boys with playful designs of things not normally associated with the color pink."
+        }
+    ]
+}

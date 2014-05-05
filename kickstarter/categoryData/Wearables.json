@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Wearables", 
+            "goal": "50000.0", 
+            "title": "Insight: Smarter Tech for the Smarter Athlete by BSX Athletics \u2014 Kickstarter", 
+            "backers": "548", 
+            "name": "BSX Athletics", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1655571865/insight-smarter-tech-for-the-smarter-athlete/", 
+            "location": "Houston, TX", 
+            "totalPledged": "121897.1", 
+            "description": "The first ever all-in-one wearable sensor that pairs with your sports watch. Includes lactate threshold technology, HR, cadence & more"
+        }, 
+        {
+            "category": "Wearables", 
+            "goal": "100000.0", 
+            "title": "OpenBCI: An Open Source Brain-Computer Interface For Makers by Joel Murphy & Conor Russomanno \u2014 Kickstarter", 
+            "backers": "947", 
+            "name": "Joel Murphy & Conor Russomanno", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/openbci/openbci-an-open-source-brain-computer-interface-fo/", 
+            "location": "Brooklyn, NY", 
+            "totalPledged": "215438.57", 
+            "description": "A customizable and fully open brain-computer interface platform that gives you access to high-quality brain wave data."
+        }, 
+        {
+            "category": "Wearables", 
+            "goal": "100000.0", 
+            "title": "NeuroOn: World's first sleep mask for polyphasic sleep by Intelclinic \u2014 Kickstarter", 
+            "backers": "1,944", 
+            "name": "Intelclinic", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/intelclinic/neuroon-worlds-first-sleep-mask-for-polyphasic-sle/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "438573.56", 
+            "description": "Ever wished there were more hours in the day? Introducing the NeuroOn mask that creates a unique sleep schedule for you."
+        }
+    ]
+}

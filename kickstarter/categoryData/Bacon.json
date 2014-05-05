@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Bacon", 
+            "goal": "500.0", 
+            "title": "Candied Bacon Chocolate Chip Cookies by Sinful Delights Bakery & Candy Co. \u2014 Kickstarter", 
+            "backers": "106", 
+            "name": "Sinful Delights Bakery & Candy Co.", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1802611608/candied-bacon-chocolate-chip-cookies/", 
+            "location": "Oxford, OH", 
+            "totalPledged": "2680.0", 
+            "description": "Sharing the deliciousness of candied bacon and chocolate in one lovely, savory cookie."
+        }, 
+        {
+            "category": "Bacon", 
+            "goal": "27000.0", 
+            "title": "Bakin' Bakery Food Truck by Renee LaLonde \u2014 Kickstarter", 
+            "backers": "234", 
+            "name": "Renee LaLonde", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1399431974/bakin-bakery-food-truck/", 
+            "location": "Denver, CO", 
+            "totalPledged": "28091.55", 
+            "description": "A sweet and savory bacon infused food truck. Inspired by fresh local, seasonal, and foraged ingredients. Heavily community influenced."
+        }
+    ]
+}

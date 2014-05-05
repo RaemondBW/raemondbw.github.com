@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Gadgets", 
+            "goal": "15000.0", 
+            "title": "Game Frame: The Art of Pixels by Jeremy Williams \u2014 Kickstarter", 
+            "backers": "709", 
+            "name": "Jeremy Williams", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/jerware/game-frame-the-art-of-pixels/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "154647.84", 
+            "description": "Game Frame is a grid of 256 ultra-bright LED pixels, perfect for showcasing pixel art and old school video game graphics."
+        }, 
+        {
+            "category": "Gadgets", 
+            "goal": "15000.0", 
+            "title": "SHRU - The intelligent cat companion by Jason O'Mara \u2014 Kickstarter", 
+            "backers": "4,693", 
+            "name": "Jason O'Mara", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1046165765/egg-the-intelligent-cat-companion/", 
+            "location": "Portland, OR", 
+            "totalPledged": "170779.42", 
+            "description": "This is not just another cat toy. Shru is a cat companion. It mimics and responds like a living animal."
+        }
+    ]
+}

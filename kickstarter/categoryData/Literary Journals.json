@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Literary Journals", 
+            "goal": "1350.0", 
+            "title": "Driftwood Press: A Literary Endeavor by James McNulty, Jerrod Schwarz \u2014 Kickstarter", 
+            "backers": "19", 
+            "name": "James McNulty, Jerrod Schwarz", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/971644559/driftwood-press-a-literary-endeavor/", 
+            "location": "Tampa, FL", 
+            "totalPledged": "1360.0", 
+            "description": "Encouraged by the success of our debut issue, Driftwood Press is looking to publish print editions, pay our authors, and keep afloat."
+        }, 
+        {
+            "category": "Literary Journals", 
+            "goal": "25000.0", 
+            "title": "Fireside Magazine Year 3 by Brian White \u2014 Kickstarter", 
+            "backers": "714", 
+            "name": "Brian White", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/firesidemag/fireside-magazine-year-3/", 
+            "location": "Boston, MA", 
+            "totalPledged": "26004.0", 
+            "description": "We have two goals: finding and publishing great storytelling regardless of genre, and fair pay for creators."
+        }
+    ]
+}

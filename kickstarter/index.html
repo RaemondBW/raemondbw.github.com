@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <title>Amount Raised By Category</title>
+</head>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<style>
+
+text {
+  font: 15px sans-serif;
+  position: absolute;
+  z-index: 50;
+}
+
+rect:hover {
+        fill: orange;
+      }
+      
+      #tooltip {
+        position: absolute;
+        width: 250px;
+        height: 98px;
+        padding: 10px;
+        z-index: 100;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+      }
+      
+      #tooltip.hidden {
+        display: none;
+      }
+      
+      #tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+body {
+  text-align: center;
+}
+
+#svg div {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -425px;
+  margin-left: -425px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  text-decoration: underline;
+
+}
+
+li {
+  display: inline;
+  list-style-type: none;
+  font-family: 'Josefin Sans', sans-serif;
+  padding-right: 60px;
+  padding-left: 20px;
+}
+
+ul {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+</style>
+<body>
+  <h1>visualizing kickstarter</h1>
+  <ul>
+    <li><a href="projectsByCategory.html">all projects</a></li>
+    <li><u>projects by category</u></li>
+  </ul>
+  <div id="svg"></div>
+  <div id="tooltip" class="hidden">
+      <p>Category Name: <strong id="name">Important Label Heading</strong></p>
+      <p>Number of Backers: <span id="backers"></span></p>
+      <p>Amount Raised: <span id="value">100</span></p>
+      <p>Number of Projects: <span id="projects"></span></p>
+      <p>Success Rate: <span id="rate"></span>%</p>
+    </div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var diameter = 850,
+    format = d3.format(",d"),
+    color = d3.scale.category20c();
+
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([diameter, diameter])
+    .padding(1.5);
+
+var svg = d3.select("#svg").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+    .attr("class", "bubble");
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+var color = d3.scale.category20();
+
+d3.json("valuesByCategoryUSD2.json", function(error, root) {
+  var node = svg.selectAll(".node")
+      .data(bubble.nodes(classes(root))
+      .filter(function(d) { return !d.data; }))
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("circle")
+      .attr("r", function(d) { return Math.round(d.r); })
+      .style("fill", function(d,i){
+        if (i == 0) {
+          //return color(i);
+          return "white";
+        } else {
+          return color(i);//(i%19)+1);
+        }
+      });
+
+  node.append("text")
+      .attr("dy", ".3em")
+      .style("text-anchor", "middle")
+      .text(function(d) { if (d.r > 30) { return d.className;} });
+
+  node.on("click", function(d) {
+    if (typeof d.className === 'undefined') {
+    } else {
+      window.location = "categoryData/"+d.className+".html"
+    }
+  });
+
+  node.on("mouseover", function(d) {
+      if (typeof d.className === 'undefined') {
+        d3.select("#tooltip").classed("hidden", true);
+        d3.selectAll("#pie").remove();
+      } else {
+        //create the pie chart
+        d3.selectAll("#pie").remove();
+        var w = d.r*2;
+        var h = d.r*2;
+
+        var dataset = [ d.projects-d.successful, d.successful ];
+
+        var outerRadius = (w/2)+10;
+        var innerRadius = w/2 -1;//0;
+        var arc = d3.svg.arc()  
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius);
+        
+        var pie = d3.layout.pie();
+        
+        //Set up groups
+        var arcs = svg.selectAll("g.arc")
+                .data(pie(dataset))
+                .enter()
+                .append("g")
+                .style("left", d.x + "px")
+                .style("top", d.y + "px")
+                .attr("id", "pie")
+                .attr("class", "arc")
+                .attr("transform", "translate(" + d.x + "," + d.y + ")");
+                //.attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+        
+        //Draw arc paths
+        arcs.append("path")
+            .attr("fill", function(d, i) {
+              if (i == 0) {
+                return "red";
+              } else {
+                return "green";
+              }
+              //console.log(i);
+              //return color(i);
+            })
+            .attr("d", arc);
+
+        //Get this bar's x/y values, then augment for the tooltip
+        var xPosition = parseFloat(d.x) + d.r + 30;
+        var yPosition = parseFloat(d.y) - 49;
+
+        d3.select("#name")
+          .text(d.className);
+
+        d3.select("#backers")
+          .text(numberWithCommas(d.backers));
+
+        d3.select("#projects")
+          .text(numberWithCommas(d.projects));
+
+        d3.select("#rate")
+          .text((d.successful/d.projects*100).toFixed(1));
+
+        //Update the tooltip position and value
+        d3.select("#tooltip")
+          .style("left", xPosition + "px")
+          .style("top", yPosition + "px")           
+          .select("#value")
+          .text("$" + numberWithCommas(d.value.toFixed(2)));
+       
+        //Show the tooltip
+        d3.select("#tooltip").classed("hidden", false);
+      }
+    })
+});
+
+// Returns a flattened hierarchy containing all leaf nodes under the root.
+function classes(root) {
+  var classes = [];
+  root.data.forEach(function (value) { classes.push({className: value.category, value: value.raised, backers: value.backers, successful: value.successful, projects: value.numProjects})});
+  return {children: classes};
+}
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+</script>

@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Festivals", 
+            "goal": "18000.0", 
+            "title": "Raise the Rooftop by Rooftop Films \u2014 Kickstarter", 
+            "backers": "308", 
+            "name": "Rooftop Films", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/rooftopfilms/raise-the-rooftop/", 
+            "location": "New York, NY", 
+            "totalPledged": "20596.0", 
+            "description": "Support Rooftop Films' 18th year of creating the most unique film viewing experiences in NYC and beyond."
+        }, 
+        {
+            "category": "Festivals", 
+            "goal": "13000.0", 
+            "title": "2014 Atlanta Film Festival - Bring Artists to Atlanta by Atlanta Film Festival \u2014 Kickstarter", 
+            "backers": "360", 
+            "name": "Atlanta Film Festival", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/atlff/2014-atlanta-film-festival-bring-artists-to-atlant", 
+            "location": "Atlanta, GA", 
+            "totalPledged": "17909.0", 
+            "description": "When artists meet audiences in person, it's magic. Help us bring more filmmakers \u2013 and more magic \u2013 to Atlanta in 2014."
+        }
+    ]
+}

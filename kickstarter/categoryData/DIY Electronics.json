@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "DIY Electronics", 
+            "goal": "26800.0", 
+            "title": "Portable Dual Arduino (TM) Micro XPlorerBoard by Rich Electronics \u2014 Kickstarter", 
+            "backers": "169", 
+            "name": "Rich Electronics", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1576747460/portable-dual-arduino-micro-xplorerboard/", 
+            "location": "Savannah, GA", 
+            "totalPledged": "32920.29", 
+            "description": "The Portable XPlorerBoard lets you plug in 2 Arduino Micros for your projects and eliminates loose parts with its built in components."
+        }, 
+        {
+            "category": "DIY Electronics", 
+            "goal": "85000.0", 
+            "title": "Circuit Scribe: Draw Circuits Instantly by Electroninks Incorporated \u2014 Kickstarter", 
+            "backers": "12,277", 
+            "name": "Electroninks Incorporated", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/electroninks/circuit-scribe-draw-circuits-instantly/", 
+            "location": "Urbana, IL", 
+            "totalPledged": "674425.17", 
+            "description": "Circuit Scribe is a rollerball pen that writes with conductive silver ink.  It makes creating circuits as easy as doodling."
+        }, 
+        {
+            "category": "DIY Electronics", 
+            "goal": "10000.0", 
+            "title": "1Sheeld: Replace your Arduino shields with your smartphone! by Integreight, Inc. \u2014 Kickstarter", 
+            "backers": "1,480", 
+            "name": "Integreight, Inc.", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/integreight/1sheeld-replace-your-arduino-shields-with-your-sma/", 
+            "location": "Dover, DE", 
+            "totalPledged": "85210.0", 
+            "description": "Imagine an Arduino shield that can be configured to be an LCD, GPS, Wifi, or any shield you may think of!"
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "data": [
+        {
+            "category": "Sound", 
+            "goal": "30000.0", 
+            "title": "Wear  --  A wearable personal assistive listening device by Eric Rosenthal, Michelle Temple \u2014 Kickstarter", 
+            "backers": "384", 
+            "name": "Eric Rosenthal, Michelle Temple", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/771490867/wear-a-wearable-personal-assistive-hearing-device/", 
+            "location": "Brooklyn, NY", 
+            "totalPledged": "40168.0", 
+            "description": "Wear is an affordable, attractive, lightweight wearable assistive directional microphone designed to improve quality of hearing."
+        }, 
+        {
+            "category": "Sound", 
+            "goal": "35000.0", 
+            "title": "DrumPants: An Entire Band in your Pocket by Tyler Freeman \u2014 Kickstarter", 
+            "backers": "558", 
+            "name": "Tyler Freeman", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1400947701/drumpants-an-entire-band-in-your-pocket/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "74236.0", 
+            "description": "World's first industrial quality wearable musical instrument. Watch someone play it to believe it."
+        }, 
+        {
+            "category": "Sound", 
+            "goal": "60000.0", 
+            "title": "Roadie Tuner: the ultimate guitarist tool by Band Industries \u2014 Kickstarter", 
+            "backers": "2,002", 
+            "name": "Band Industries", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/roadietuner/roadie-tuner-the-ultimate-guitarist-tool/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "178613.94", 
+            "description": "Tune your guitar quickly and accurately, and keep your strings fit with the built in health check. Roadie is the ultimate guitar tool."
+        }, 
+        {
+            "category": "Sound", 
+            "goal": "70000.0", 
+            "title": "The Motion Synth: Turn Movement into Music by AUUG \u2014 Kickstarter", 
+            "backers": "313", 
+            "name": "AUUG", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1892750571/the-motion-synth-turn-movement-into-music/", 
+            "location": "Canberra, AU", 
+            "totalPledged": "75585.0", 
+            "description": "Transform your iPhone or iPod touch into an intuitive and expressive motion-controlled musical instrument"
+        }
+    ]
+}

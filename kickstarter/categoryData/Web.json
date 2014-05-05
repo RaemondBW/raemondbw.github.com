@@ -1,0 +1,52 @@
+{
+    "data": [
+        {
+            "category": "Web", 
+            "goal": "30000.0", 
+            "title": "2 High Schoolers'  Dream - TravelExchange Web and Mobile App by Gina Ni  & Gia Ni (Tony Ni facilitating) \u2014 Kickstarter", 
+            "backers": "6", 
+            "name": "Gina Ni  & Gia Ni (Tony Ni facilitating)", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/travelexchange/2-high-schoolers-dream-travelexchange-web-and-mobi/", 
+            "location": "San Francisco, CA", 
+            "totalPledged": "705.0", 
+            "description": "A free website and mobile App matches 2 travelers with each other\u2019s local towns as the destination and take turns to host each other."
+        }, 
+        {
+            "category": "Web", 
+            "goal": "10000.0", 
+            "title": "CulSire  (Kul-Sire) ~ Where Culture Meets Desire by LaN\u00e9e Javet \u2014 Kickstarter", 
+            "backers": "125", 
+            "name": "LaN\u00e9e Javet", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1827567311/culsire-kul-sire-where-culture-meets-desire/", 
+            "location": "Chandler, AZ", 
+            "totalPledged": "10131.0", 
+            "description": "An explosion of Urban Lifestyle! We ARE THE HUB for connecting you to  Businesses, Resources, Services, TV & Technology across America"
+        }, 
+        {
+            "category": "Web", 
+            "goal": "75.0", 
+            "title": "Act Natural - Web App by Daniel Ebel \u2014 Kickstarter", 
+            "backers": "18", 
+            "name": "Daniel Ebel", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/200379238/act-natural-web-app/", 
+            "location": "Chicago, IL", 
+            "totalPledged": "119.0", 
+            "description": "A civic app to help people find Chicago parks with natural areas in order to enjoy nature in the city. Over 60 venues are featured."
+        }, 
+        {
+            "category": "Web", 
+            "goal": "12000.0", 
+            "title": "Infoactive - Drop live data into interactive infographics by Trina Chiasson \u2014 Kickstarter", 
+            "backers": "1,448", 
+            "name": "Trina Chiasson", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/trinachi/infoactive-drop-live-data-into-interactive-infogra/", 
+            "location": "Chicago, IL", 
+            "totalPledged": "55109.65", 
+            "description": "Create mobile-friendly, dynamic infographics. Transform data into beautiful stories to analyze and explore."
+        }
+    ]
+}

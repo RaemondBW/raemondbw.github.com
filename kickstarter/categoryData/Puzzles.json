@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Puzzles", 
+            "goal": "300.0", 
+            "title": "The Lunatic - Maze Puzzles Designed and Created by Marcus Allred \u2014 Kickstarter", 
+            "backers": "28", 
+            "name": "Marcus Allred", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/787761497/the-lunatic-maze-puzzles-designed-and-created/", 
+            "location": "Queen Creek, AZ", 
+            "totalPledged": "2005.0", 
+            "description": "A Variety of Handcrafted Maze Puzzles in Exotic Woods to Expand The Mind With Multiple Ways to Play."
+        }, 
+        {
+            "category": "Puzzles", 
+            "goal": "16000.0", 
+            "title": "Zen Puzzles\u2122: Artisanal, Wooden Jigsaw Puzzles by Zen Art & Design \u2014 Kickstarter", 
+            "backers": "198", 
+            "name": "Zen Art & Design", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/zenartdesign/zen-puzzlestm-artisanal-wooden-jigsaw-puzzles/", 
+            "location": "Northampton, MA", 
+            "totalPledged": "30553.0", 
+            "description": "Creating hand-designed, artisanal, wooden jigsaw puzzles for everyone.  Eco-Friendly and Made in the USA."
+        }, 
+        {
+            "category": "Puzzles", 
+            "goal": "5000.0", 
+            "title": "Murder by Meta -- A Crossword Puzzle Mystery by Matt Gaffney \u2014 Kickstarter", 
+            "backers": "493", 
+            "name": "Matt Gaffney", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1302909545/murder-by-meta-a-crossword-puzzle-mystery/", 
+            "location": "Staunton, VA", 
+            "totalPledged": "9030.48", 
+            "description": "Daphne Pratt was big in the puzzle world -- until her murder at a crossword tournament. Solve the puzzles to unmask her killer."
+        }
+    ]
+}

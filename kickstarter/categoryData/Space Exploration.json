@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Space Exploration", 
+            "goal": "5000.0", 
+            "title": "ISS-Above by Liam Kennedy \u2014 Kickstarter", 
+            "backers": "199", 
+            "name": "Liam Kennedy", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1385270522/iss-above/", 
+            "location": "Pasadena, CA", 
+            "totalPledged": "17731.0", 
+            "description": "A device that lights up whenever the International Space Station is nearby (that happens more often than you might expect)"
+        }, 
+        {
+            "category": "Space Exploration", 
+            "goal": "1750.0", 
+            "title": "Manned Mock Mars Mission by Ian Etter \u2014 Kickstarter", 
+            "backers": "50", 
+            "name": "Ian Etter", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/420044302/manned-mock-mars-mission/", 
+            "location": "Iowa City, IA", 
+            "totalPledged": "1776.0", 
+            "description": "I will be building a mock space station and simulate living on Mars for two weeks."
+        }, 
+        {
+            "category": "Space Exploration", 
+            "goal": "50000.0", 
+            "title": "CAT: Launch a Water-Propelled Satellite into Deep Space by Benjamin Longmier, Ph.D. \u2014 Kickstarter", 
+            "backers": "1,185", 
+            "name": "Benjamin Longmier, Ph.D.", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/longmier/cat-launch-a-water-propelled-satellite-into-deep-s/", 
+            "location": "Ann Arbor, MI", 
+            "totalPledged": "96799.5", 
+            "description": "Join the first crowdsourced mission to explore a destination of your choice in the far reaches of space. @GoBluePlasma"
+        }
+    ]
+}

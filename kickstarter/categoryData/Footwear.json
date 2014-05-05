@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "category": "Footwear", 
+            "goal": "10000.0", 
+            "title": "Clays: Really simple sandals. by Clay Reeves \u2014 Kickstarter", 
+            "backers": "385", 
+            "name": "Clay Reeves", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1759110697/clays-really-simple-sandals/", 
+            "location": "Atlanta, GA", 
+            "totalPledged": "26242.0", 
+            "description": "Sandals made with a Vibram sole and parachute cord lacing. Tie yours simply or come up with something new. (We did!)"
+        }, 
+        {
+            "category": "Footwear", 
+            "goal": "20000.0", 
+            "title": "INKKAS - Colorful Handmade South American Sneakers! by Inkkas \u2014 Kickstarter", 
+            "backers": "1,068", 
+            "name": "Inkkas", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/inkkas2014/inkkas-colorful-handmade-south-american-sneakers/", 
+            "location": "Brooklyn, NY", 
+            "totalPledged": "77031.0", 
+            "description": "Inkkas are beautiful, unique shoes handcrafted by local artisans in Peru using authentic South American textiles."
+        }
+    ]
+}

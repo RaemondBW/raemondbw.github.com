@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Robots", 
+            "goal": "5000.0", 
+            "title": "uArm: Put a Miniature Industrial Robot Arm on Your Desk by UFactory \u2014 Kickstarter", 
+            "backers": "1,263", 
+            "name": "UFactory", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/ufactory/uarm-put-a-miniature-industrial-robot-arm-on-your/", 
+            "location": "Shenzhen, China", 
+            "totalPledged": "251887.0", 
+            "description": "uArm is an Arduino-powered desktop 4-axis parallel-mechanism robot arm, modeled after the ABB industrial PalletPack robot."
+        }, 
+        {
+            "category": "Robots", 
+            "goal": "15000.0", 
+            "title": "Robots, Drawing, and Engineering: An Online Course by NarwhalEdu \u2014 Kickstarter", 
+            "backers": "188", 
+            "name": "NarwhalEdu", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/narwhaledu/robots-drawing-and-engineering-an-online-course/", 
+            "location": "Cambridge, MA", 
+            "totalPledged": "20593.04", 
+            "description": "Online introduction to engineering course + sweet drawing robot arm kit. Starts Feb 2014, taking 100 students. engineering = creativity"
+        }, 
+        {
+            "category": "Robots", 
+            "goal": "2500.0", 
+            "title": "FIRST Robotics Team 271: The Mechanical Marauders by FIRST Robotics Team 271 \u2014 Kickstarter", 
+            "backers": "58", 
+            "name": "FIRST Robotics Team 271", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/4017545/first-robotics-team-271-the-mechanical-marauders/", 
+            "location": "Bay Shore, NY", 
+            "totalPledged": "2531.0", 
+            "description": "FIRST Robotics Team 271 is Bay Shore High School's robotics team:  inspiring students in the fields of engineering and technology."
+        }
+    ]
+}

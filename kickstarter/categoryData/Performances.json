@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "category": "Performances", 
+            "goal": "3500.0", 
+            "title": "UPside Dance Presents 'Strum' with Composer Mark Growden by UPside Dance Company \u2014 Kickstarter", 
+            "backers": "57", 
+            "name": "UPside Dance Company", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1928397609/upside-dance-presents-strum-with-composer-mark-gro/", 
+            "location": "Healdsburg, CA", 
+            "totalPledged": "4154.0", 
+            "description": "'STRUM' A vibrant dance performance celebrating the commonality between musical instruments and dancers."
+        }, 
+        {
+            "category": "Performances", 
+            "goal": "800.0", 
+            "title": "Lang Dance Senior Show by Judy Iocovozzi \u2014 Kickstarter", 
+            "backers": "55", 
+            "name": "Judy Iocovozzi", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/135328396/lang-dance-senior-show/", 
+            "location": "Brooklyn, NY", 
+            "totalPledged": "2145.0", 
+            "description": "Help fund the collective Thesis works of Eugene Lang College Dance Seniors!"
+        }, 
+        {
+            "category": "Performances", 
+            "goal": "20000.0", 
+            "title": "THANK YOU FOR COMING by Faye Driscoll \u2014 Kickstarter", 
+            "backers": "294", 
+            "name": "Faye Driscoll", 
+            "currency": "USD", 
+            "link": "https://www.kickstarter.com/projects/1914723201/thank-you-for-coming-0/", 
+            "location": "New York, NY", 
+            "totalPledged": "20065.99", 
+            "description": "A show about being all wrapped up in each other \u2013 Thank You For Coming"
+        }
+    ]
+}
