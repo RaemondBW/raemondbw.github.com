@@ -35,6 +35,7 @@
     }
     .title {
         height: 45%;
+        min-height: 335px;
         display: -webkit-flexbox;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -63,6 +64,9 @@
         margin-right: 3px;
         margin-left: 3px;
     }
+    .content {
+        width: 100%;
+    }
     </style>
     <div class="title">
         <div class="title-box">
@@ -83,101 +87,102 @@
             </div>
         </div>
     </div>
-    
-    <div class="content-grid mdl-grid">
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <figure class="mdl-card__media">
-                <img src="images/thermostat_lifestyle_1.jpg" alt="" />
-            </figure>
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Nest RF Engineer</h2>
+    <div class="mdl-layout__content content">
+        <div class="content-grid mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <figure class="mdl-card__media">
+                    <img src="images/thermostat_lifestyle_1.jpg" alt="" />
+                </figure>
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Nest RF Engineer</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>May 2013 - Present</p>
+                    <ul>
+                        <li>Created Nest's first RF test automation systems (ATS). Including the creation of a Nest test framework used throughout all factory test stations.</li>
+                        <li>Support numerous projects in development, debugging RF circuits and modules, interacting directly with CMs, embedded platform and comms software teams.</li>
+                        <!--<li>Nest Protect: Created and validated the RF Protocol to propagate an alarm through a mesh 15.4 network.</li>-->
+                    </ul>
+                </div>
             </div>
-            <div class="mdl-card__supporting-text">
-                <p>May 2013 - Present</p>
-                <ul>
-                    <li>Created Nest's first RF test automation systems (ATS). Including the creation of a Nest test framework used throughout all factory test stations.</li>
-                    <li>Support numerous projects in development, debugging RF circuits and modules, interacting directly with CMs, embedded platform and comms software teams.</li>
-                    <!--<li>Nest Protect: Created and validated the RF Protocol to propagate an alarm through a mesh 15.4 network.</li>-->
-                </ul>
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <figure class="mdl-card__media">
+                    <img src="images/berkeley.jpg" alt="" />
+                </figure>
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">UC Berkeley EECS</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>Bachelors of Science, May 2014</p>
+                    <p>Computer Science Coursework</p>
+                    <ul>
+                        <li>Operating Systems and System Programming (CS162)</li>
+                        <li>Introduction to Artificial Intelligence (CS188)</li>
+                        <li>Computer Security (CS161)</li>
+                        <li>Efficient Algorithms and Intractable Problems (CS170)</li>
+                        <li>Discrete Mathematics and Probability Theory (CS70)</li>
+                        <li>Structure and Interpretation of Computer Programs (CS61a)</li>
+                        <li>Machine Structures (CS61c)</li>
+                        <li>Introduction to Communication Networks (EE122)</li>
+                    </ul>
+                    <p>Electrical Engineering Coursework</p>
+                    <ul>
+                        <li>Signals and Systems (EE20)</li>
+                        <li>Circuits (EE40)</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <figure class="mdl-card__media">
-                <img src="images/berkeley.jpg" alt="" />
-            </figure>
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">UC Berkeley EECS</h2>
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Bluetooth Scanner</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
+                </div>
             </div>
-            <div class="mdl-card__supporting-text">
-                <p>Bachelors of Science, May 2014</p>
-                <p>Computer Science Coursework</p>
-                <ul>
-                    <li>Operating Systems and System Programming (CS162)</li>
-                    <li>Introduction to Artificial Intelligence (CS188)</li>
-                    <li>Computer Security (CS161)</li>
-                    <li>Efficient Algorithms and Intractable Problems (CS170)</li>
-                    <li>Discrete Mathematics and Probability Theory (CS70)</li>
-                    <li>Structure and Interpretation of Computer Programs (CS61a)</li>
-                    <li>Machine Structures (CS61c)</li>
-                    <li>Introduction to Communication Networks (EE122)</li>
-                </ul>
-                <p>Electrical Engineering Coursework</p>
-                <ul>
-                    <li>Signals and Systems (EE20)</li>
-                    <li>Circuits (EE40)</li>
-                </ul>
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <figure class="mdl-card__media">
+                    <img src="images/classTime.jpg" alt="" />
+                </figure>
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">ClassTime</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
+                </div>
+                <!-- <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
+                    <div class="mdl-layout-spacer"></div>
+                    <button class="mdl-button mdl-button--icon"><i class="material-icons">language</i></button>
+                </div>-->
             </div>
-        </div>
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Bluetooth Scanner</h2>
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Catch-A-Bus</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
+                </div>
             </div>
-            <div class="mdl-card__supporting-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
+            <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
+                <figure class="mdl-card__media">
+                    <img src="images/nReduce.png" alt="" />
+                </figure>
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">nReduce - online free startup incubator</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>July 2012 - August 2012</p>
+                    <ul>
+                        <li>Built a database of investor and press contacts focused toward a series of demo days. Which was covered by a number of journalists, <a href="https://pando.com/2012/09/05/eight-companies-make-their-debut-at-nreduces-first-virtual-demo-day/">Pandodaily</a> and <a href="http://venturebeat.com/2012/09/05/nreduce-demo-day/">VentureBeat</a></li>
+                    </ul>
+                </div>
+                <!--<div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
+                    <div class="mdl-layout-spacer"></div>
+                    <button class="mdl-button mdl-button--icon"><i class="material-icons">language</i></button>
+                </div>-->
             </div>
-        </div>
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <figure class="mdl-card__media">
-                <img src="images/classTime.jpg" alt="" />
-            </figure>
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">ClassTime</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
-            </div>
-            <!-- <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
-                <div class="mdl-layout-spacer"></div>
-                <button class="mdl-button mdl-button--icon"><i class="material-icons">language</i></button>
-            </div>-->
-        </div>
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Catch-A-Bus</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
-            </div>
-        </div>
-        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-shadow--3dp">
-            <figure class="mdl-card__media">
-                <img src="images/nReduce.png" alt="" />
-            </figure>
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">nReduce - online free startup incubator</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <p>July 2012 - August 2012</p>
-                <ul>
-                    <li>Built a database of investor and press contacts focused toward a series of demo days. Which was covered by a number of journalists, <a href="https://pando.com/2012/09/05/eight-companies-make-their-debut-at-nreduces-first-virtual-demo-day/">Pandodaily</a> and <a href="http://venturebeat.com/2012/09/05/nreduce-demo-day/">VentureBeat</a></li>
-                </ul>
-            </div>
-            <!--<div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
-                <div class="mdl-layout-spacer"></div>
-                <button class="mdl-button mdl-button--icon"><i class="material-icons">language</i></button>
-            </div>-->
         </div>
     </div>
   </body>
