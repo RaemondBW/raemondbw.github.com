@@ -43,7 +43,7 @@
                 height: 100%;
             }
             .title {
-                height: 57%;
+                height: 43%;
                 min-height: 390px;
                 display: -webkit-flexbox;
                 display: -ms-flexbox;
@@ -101,13 +101,13 @@
                 padding-top:10px;
                 background-color: white;
                 padding-bottom: 13px;
+                -webkit-box-shadow: 0 8px 6px -6px #9e9e9e;
+                -moz-box-shadow: 0 8px 6px -6px #9e9e9e;
+                box-shadow: 0 8px 6px -6px #9e9e9e;
             }
             .sticky {
                 position: fixed;
                 top: 0;
-                -webkit-box-shadow: 0 8px 6px -6px #9e9e9e;
-                -moz-box-shadow: 0 8px 6px -6px #9e9e9e;
-                box-shadow: 0 8px 6px -6px #9e9e9e;
             }
             .sticky + .content {
                 padding-top: 60px;
@@ -370,7 +370,7 @@
         <script>
           window.onscroll = function() {handleScroll()};
           var navbar = $('.button-group')[0];
-          var sticky = navbar.offsetTop-1;
+          var sticky = navbar.offsetTop;
 
           var $grid = $('.grid').isotope({
             itemSelector: ".element-item",
