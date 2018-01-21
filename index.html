@@ -6,6 +6,15 @@
     </head>
     <body class="mdl-color--grey-100">
         <style>
+            .small-img-circle {
+                border-radius: 50%;
+                max-width:40px;
+                position: absolute;
+                left: 10px;
+                display: none;
+            }
+
+            
             .img-circle {
                 border-radius: 50%;
                 max-width:200px;
@@ -123,8 +132,9 @@
             </div>
         </div>
         <div class="subtitle button-group filter-button-group">
+            <img class="small-img-circle" src="images/raemond.jpg"/>
             <button class="mdl-button mdl-js-button" data-filter=".work">Work</button>
-            <button class="mdl-button mdl-js-button" data-filter=".personal_project">personal projects</button>
+            <button class="mdl-button mdl-js-button" data-filter=".personal_project">Fun</button>
             <button class="mdl-button mdl-js-button"data-filter=".school">School</button>
         </div>
         <div class="mdl-layout__content content">
@@ -393,8 +403,10 @@
           function handleScroll() {
             if (window.pageYOffset >= sticky) {
               navbar.classList.add("sticky");
+              $('.small-img-circle').show()
             } else {
               navbar.classList.remove("sticky");
+              $('.small-img-circle').hide()
 
             }
           }
