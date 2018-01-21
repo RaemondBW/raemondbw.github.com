@@ -351,11 +351,11 @@
             var $buttonGroup = $( buttonGroup );
             $buttonGroup.on( 'click', 'button', function() {
               if ($(this)[0] === $buttonGroup.find('.is-checked')[0]) {
-                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--primary');
+                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
                 $grid.isotope({ filter: "*" });
               } else {
-                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--primary');
-                $( this ).addClass('is-checked mdl-button--primary');
+                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
+                $( this ).addClass('is-checked mdl-button--accent');
                 var filterValue = $( this ).attr('data-filter');
                 $grid.isotope({ filter: filterValue });
               }
