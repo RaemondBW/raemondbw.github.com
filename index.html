@@ -56,8 +56,8 @@
                 align-text: center;
                 justify-content: center;
             }
-            .grid-item {
-                margin-bottom: 20px;
+            .element-item {
+                margin: 10px;
             }
             .mdl-card__actions {
                 display: flex;
@@ -104,11 +104,16 @@
                 </div>
             </div>
         </div>
+        <div class="subtitle button-group filter-button-group">
+            <button class="mdl-button mdl-js-button" data-filter=".work">Work</button>
+            <button class="mdl-button mdl-js-button" data-filter=".personal_project">personal projects</button>
+            <button class="mdl-button mdl-js-button"data-filter=".school">School</button>
+        </div>
         <div class="mdl-layout__content content">
             <!--<div class="content-grid mdl-grid"> -->
             <div class="content-grid">
-            <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 350, "isFitWidth": true }'>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+            <div class="grid"><!-- data-isotope='{ "itemSelector": ".element-item", "columnWidth": 350, "isFitWidth": true }'>-->
+                <div class="mdl-card element-item mdl-shadow--3dp work">
                     <figure class="mdl-card__media">
                         <img src="images/essential.jpg" alt="" />
                     </figure>
@@ -119,7 +124,7 @@
                         <p>November 2017 - Present</p>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp work">
                     <figure class="mdl-card__media">
                         <img src="images/delight.png" alt="" />
                     </figure>
@@ -154,7 +159,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
                     <figure class="mdl-card__media">
                         <img src="images/react_native_time.png" alt="" />
                     </figure>
@@ -169,7 +174,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
                     <figure class="mdl-card__media">
                         <img src="images/pcea_1.jpg" alt="" />
                     </figure>
@@ -187,7 +192,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp work">
                     <figure class="mdl-card__media">
                         <img src="images/nest_secure_resized.png" alt="" />
                     </figure>
@@ -207,7 +212,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp school">
                     <figure class="mdl-card__media">
                         <img src="images/berkeley-small.jpg" alt="" />
                     </figure>
@@ -234,7 +239,7 @@
                         </ul>
                     </div>
                 </div>
-                <!--<div class="mdl-card grid-item mdl-shadow--3dp">
+                <!--<div class="mdl-card element-item mdl-shadow--3dp">
                     <div class="mdl-card__title">
                         <h2 class="mdl-card__title-text">Bluetooth Scanner</h2>
                     </div>
@@ -242,7 +247,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur et quisquam quo, aut obcaecati eveniet! Sunt modi cupiditate commodi veniam, debitis eum alias eligendi iste! Blanditiis animi aspernatur corrupti.</p>
                     </div>
                 </div>-->
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
                     <figure class="mdl-card__media">
                         <img src="images/classTime.jpg" alt="" />
                     </figure>
@@ -259,7 +264,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp school">
                     <figure class="mdl-card__media">
                         <img src="images/Berkeley-Note-Sheet-Sample.png" alt="" />
                     </figure>
@@ -274,7 +279,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp school">
                     <figure class="mdl-card__media">
                         <img src="images/kickstarter.jpg" alt="" />
                     </figure>
@@ -290,7 +295,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
                     <figure class="mdl-card__media">
                         <img src="images/Catch-A-Bus.jpg" alt="" />
                     </figure>
@@ -305,7 +310,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mdl-card grid-item mdl-shadow--3dp">
+                <div class="mdl-card element-item mdl-shadow--3dp work">
                     <figure class="mdl-card__media">
                         <img src="images/nReduce.jpg" alt="" />
                     </figure>
@@ -332,7 +337,32 @@
         <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
         <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
-        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script>
+          var $grid = $('.grid').isotope({
+            itemSelector: ".element-item",
+            columnWidth: 350,
+            isFitWidth: true
+          });
+
+          // change is-checked class on buttons
+          $('.button-group').each( function( i, buttonGroup ) {
+            var $buttonGroup = $( buttonGroup );
+            $buttonGroup.on( 'click', 'button', function() {
+              if ($(this)[0] === $buttonGroup.find('.is-checked')[0]) {
+                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--primary');
+                $grid.isotope({ filter: "*" });
+              } else {
+                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--primary');
+                $( this ).addClass('is-checked mdl-button--primary');
+                var filterValue = $( this ).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
+              }
+            });
+          });
+
+        </script>
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
