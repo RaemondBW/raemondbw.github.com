@@ -381,9 +381,9 @@
           $('.button-group').each( function( i, buttonGroup ) {
             var $buttonGroup = $( buttonGroup );
             $buttonGroup.on( 'click', 'button', function() {
-              //if (window.pageYOffset >= sticky) {
+              if (window.pageYOffset >= sticky) {
                   $('.content')[0].scrollIntoView();
-              //}
+              }
               if ($(this)[0] === $buttonGroup.find('.is-checked')[0]) {
                 $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
                 $grid.isotope({ filter: "*" });
