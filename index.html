@@ -13,7 +13,6 @@
                 left: 10px;
                 display: none;
             }
-
             
             .img-circle {
                 border-radius: 50%;
@@ -368,6 +367,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
         <script>
+          window.onscroll = function() {handleScroll()};
+          var navbar = $('.button-group')[0];
+          var sticky = navbar.offsetTop;
+          
           var $grid = $('.grid').isotope({
             itemSelector: ".element-item",
             columnWidth: 350,
@@ -378,6 +381,9 @@
           $('.button-group').each( function( i, buttonGroup ) {
             var $buttonGroup = $( buttonGroup );
             $buttonGroup.on( 'click', 'button', function() {
+              if (window.pageYOffset >= sticky) {
+                  $('.content')[0].scrollIntoView();
+              }
               if ($(this)[0] === $buttonGroup.find('.is-checked')[0]) {
                 $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
                 $grid.isotope({ filter: "*" });
@@ -390,16 +396,6 @@
             });
           });
 
-          // When the user scrolls the page, execute myFunction 
-          window.onscroll = function() {handleScroll()};
-  
-          // Get the navbar
-          var navbar = $('.button-group')[0];
-  
-          // Get the offset position of the navbar
-          var sticky = navbar.offsetTop;
-  
-          // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
           function handleScroll() {
             if (window.pageYOffset >= sticky) {
               navbar.classList.add("sticky");
