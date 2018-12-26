@@ -44,20 +44,24 @@ html, body {
 
 </style>
 <body>
-  <h2 align="center">2017 San Francisco Budget</h2>
-  <div id="main" style="min-height: 100%; display: flex">
-    <div id="content" style="flex: 50%;">
-      <svg id ="chart" width="560" height="560" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
+  <div class="container">
+    <div class="row">
+      <h2 align="center">2017 San Francisco Budget</h2>
     </div>
-    <div id="info" style="flex:50%">
-      <h4 id="current_title" align="center">Full Budget</h4>
-      <h5 id="budget_subtotal" align="center">$10,221,212,885.00</h5>
-      <table id="line_items" style="width:100%" class="highlight">
-        <tr>
-          <th>Department</th>
-          <th>Budget</th>
-        </tr>
-      </table>
+    <div class="row" id="main">
+      <div id="content" class="col s12 l8">
+        <svg id ="chart" width="750" height="750" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
+      </div>
+      <div id="info" class="col s12 l4">
+        <h4 id="current_title" align="center">Full Budget</h4>
+        <h5 id="budget_subtotal" align="center">$10,221,212,885.00</h5>
+        <table id="line_items" style="width:100%" class="highlight">
+          <tr>
+            <th>Department</th>
+            <th>Budget</th>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </body>
