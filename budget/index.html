@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
 <meta charset="utf-8">
 <style>
 
@@ -27,20 +37,73 @@
   pointer-events: none;
 }
 
+html, body {
+    min-height: 100% !important;
+    height: 100%;
+}
+
 </style>
-<svg width="960" height="960"></svg>
+<body>
+  <h2 align="center">2017 San Francisco Budget</h2>
+  <div id="main" style="min-height: 100%; display: flex">
+    <div id="content" style="flex: 50%;">
+      <svg id ="chart" width="560" height="560" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
+    </div>
+    <div id="info" style="flex:50%">
+      <h4 id="current_title" align="center">Full Budget</h4>
+      <h5 id="budget_subtotal" align="center">$10,221,212,885.00</h5>
+      <table id="line_items" style="width:100%" class="highlight">
+        <tr>
+          <th>Department</th>
+          <th>Budget</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
+var container = document.getElementById('content');
+var width = container.offsetWidth;
+var height = container.offsetHeight;
+var m_diameter = Math.min(width, height);
+
 var svg = d3.select("svg"),
+    aspect = width / height,
     margin = 20,
-    diameter = +svg.attr("width"),
+    diameter = m_diameter,
     g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-var color = d3.scaleLinear()
+$(window).on('resize', function() {
+    svg.attr("width", container.offsetWidth);
+    svg.attr("height", container.offsetHeight);
+    width = container.offsetWidth;
+    height = container.offsetHeight;
+    m_diameter = Math.min(width, height);
+}).trigger('resize');
+
+var rect = svg.node().getBoundingClientRect(),
+    width = rect.width,
+    height = rect.height;
+
+
+/*var color = d3.scaleLinear()
     .domain([-1, 5])
     .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);
+    .interpolate(d3.interpolateHcl);*/
+var color = function(name, depth) {
+  //console.log(name, depth);
+    if (depth == 0) {
+        return "#ffffff";
+    } else if (depth == 1) {
+        return "#64b5f6";
+    } else if (depth == -1) {
+        return "#ffffff";
+    } else {
+        return "#ffffff";
+    }
+}
 
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
@@ -57,12 +120,40 @@ d3.json("flare.json", function(error, root) {
       nodes = pack(root).descendants(),
       view;
 
+  // Fill the table with the root values
+  $('#current_title').text('Full Budget');
+  $('#budget_subtotal').text('$' + root.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+  var table = $('#line_items');
+  table.find("tr:gt(0)").remove();
+  for (var i = root.children.length-1; i >= 0; i--) {
+    var row = table[0].insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = root.children[i].data.name;
+    cell2.innerHTML = '$' + root.children[i].value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
+
   var circle = g.selectAll("circle")
     .data(nodes)
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-      .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-      .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+      .style("fill", function(d) { return d.children ? color(d.data.name, d.depth) : null; })
+      .on("click", function(d) {
+        $('#current_title').text(d.data.name + " Budget");
+        $('#budget_subtotal').text('$' + d.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+        //var table = $('#line_items');
+        table.find("tr:gt(0)").remove();
+        for (var i = 0; i < d.data.children.length; i++) {
+          var row = table[0].insertRow(1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = d.data.children[i].name;
+          cell2.innerHTML = '$' + d.data.children[i].size.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        if (focus !== d) zoom(d), d3.event.stopPropagation();
+      });
 
   var text = g.selectAll("text")
     .data(nodes)
@@ -72,11 +163,34 @@ d3.json("flare.json", function(error, root) {
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.data.name; });
 
+  var label = g.selectAll("text")
+    .data(nodes)
+    .enter().append("text")
+      .attr("class", "label")
+      .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+      .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
+      .attr("dy", "1em")
+      .text(function(d) { return '$' + Number(d.value).toLocaleString();});
+
   var node = g.selectAll("circle,text");
 
   svg
       .style("background", color(-1))
-      .on("click", function() { zoom(root); });
+      .on("click", function() { 
+        // Fill the table with the root values
+        $('#current_title').text('Full Budget');
+        $('#budget_subtotal').text('$' + root.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        var table = $('#line_items');
+        table.find("tr:gt(0)").remove();
+        for (var i = root.children.length-1; i >= 0; i--) {
+          var row = table[0].insertRow(1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = root.children[i].data.name;
+          cell2.innerHTML = '$' + root.children[i].value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        zoom(root);
+      });
 
   zoomTo([root.x, root.y, root.r * 2 + margin]);
 
