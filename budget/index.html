@@ -46,21 +46,23 @@ html, body {
 <body>
   <div class="container">
     <div class="row">
-      <h2 align="center">2017 San Francisco Budget</h2>
+      <h2 align="center">Where Does San Francisco's $11B Budget Go?</h2>
     </div>
     <div class="row" id="main">
-      <div id="content" class="col s12 l8">
-        <svg id ="chart" width="750" height="750" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
+      <div id="content" class="col s12 l8" style="min-height:75vh">
+        <svg id ="chart" width="600" height="600" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
       </div>
       <div id="info" class="col s12 l4">
-        <h4 id="current_title" align="center">Full Budget</h4>
-        <h5 id="budget_subtotal" align="center">$10,221,212,885.00</h5>
-        <table id="line_items" style="width:100%" class="highlight">
-          <tr>
-            <th>Department</th>
-            <th>Budget</th>
-          </tr>
-        </table>
+        <h5 id="current_title" align="center">Full Budget</h4>
+        <h6 id="budget_subtotal" align="center">$10,221,212,885.00</h5>
+        <div style="max-height:75vh; overflow-y:scroll;">
+          <table id="line_items" style="width:100%; display:block;" class="striped">
+            <tr>
+              <th>Department</th>
+              <th>Budget</th>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -71,7 +73,7 @@ html, body {
 var container = document.getElementById('content');
 var width = container.offsetWidth;
 var height = container.offsetHeight;
-var m_diameter = Math.min(width, height);
+var m_diameter = Math.min(width-25, height-25);
 
 var svg = d3.select("svg"),
     aspect = width / height,
@@ -113,7 +115,7 @@ var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
     .padding(2);
 
-d3.json("flare.json", function(error, root) {
+d3.json("easy_to_read_flare.json", function(error, root) {
   if (error) throw error;
 
   root = d3.hierarchy(root)
