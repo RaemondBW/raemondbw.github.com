@@ -42,6 +42,16 @@ html, body {
     height: 100%;
 }
 
+#content {
+  min-height: 40vh;
+}
+
+@media only screen and ( min-width: 993px ){
+    #content{
+        min-height:75vh;
+    }
+}
+
 </style>
 <body>
   <div class="container">
@@ -52,17 +62,21 @@ html, body {
       <p align="center" style="margin-bottom:0">* Higher than $11B because of interdepartment transfers.</p>
     </div>
     <div class="row" id="main">
-      <div id="content" class="col s12 l8" style="min-height:75vh">
+      <div id="content" class="col s12 l8">
         <svg id ="chart" width="600" height="600" style="min-height: 100%; width:100%" perserveAspectRatio="xMinYMid"></svg>
       </div>
       <div id="info" class="col s12 l4">
         <h5 id="current_title" align="center">Full Budget</h4>
         <h6 id="budget_subtotal" align="center">$13,662,986,799.00</h5>
+        <table style="width:100%;">
+          <tr>
+            <th>Department</th>
+            <th>Budget</th>
+          </tr>
+        </table>
         <div style="max-height:70vh; overflow-y:scroll;">
-          <table id="line_items" style="width:100%; display:block;" class="striped">
+          <table id="line_items" style="width:100%;" class="striped">
             <tr>
-              <th>Department</th>
-              <th>Budget</th>
             </tr>
           </table>
         </div>
@@ -76,7 +90,7 @@ html, body {
 var container = document.getElementById('content');
 var width = container.offsetWidth;
 var height = container.offsetHeight;
-var m_diameter = Math.min(width-25, height-25);
+var m_diameter = Math.min(width, height);
 
 var svg = d3.select("svg"),
     aspect = width / height,
@@ -95,6 +109,8 @@ $(window).on('resize', function() {
 var rect = svg.node().getBoundingClientRect(),
     width = rect.width,
     height = rect.height;
+
+svg.attr("align","center");
 
 
 /*var color = d3.scaleLinear()
@@ -135,7 +151,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
   var table = $('#line_items');
   table.find("tr:gt(0)").remove();
   for (var i = root.children.length-1; i >= 0; i--) {
-    var row = table[0].insertRow(1);
+    var row = table[0].insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = root.children[i].data.name;
@@ -154,7 +170,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
         //var table = $('#line_items');
         table.find("tr:gt(0)").remove();
         for (var i = 0; i < d.data.children.length; i++) {
-          var row = table[0].insertRow(1);
+          var row = table[0].insertRow(0);
           var cell1 = row.insertCell(0);
           var cell2 = row.insertCell(1);
           cell1.innerHTML = d.data.children[i].name;
@@ -192,7 +208,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
         var table = $('#line_items');
         table.find("tr:gt(0)").remove();
         for (var i = root.children.length-1; i >= 0; i--) {
-          var row = table[0].insertRow(1);
+          var row = table[0].insertRow(0);
           var cell1 = row.insertCell(0);
           var cell2 = row.insertCell(1);
           cell1.innerHTML = root.children[i].data.name;
