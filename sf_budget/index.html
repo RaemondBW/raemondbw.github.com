@@ -46,9 +46,18 @@ html, body {
   min-height: 40vh;
 }
 
+#budget_table {
+  max-height:45vh;
+  overflow-y:scoll;
+}
+
 @media only screen and ( min-width: 993px ){
     #content{
-        min-height:75vh;
+      min-height:75vh;
+    }
+    #budget_table {
+      max-height:70vh;
+      overflow-y:scroll;
     }
 }
 
@@ -74,7 +83,7 @@ html, body {
             <th>Budget</th>
           </tr>
         </table>
-        <div style="max-height:70vh; overflow-y:scroll;">
+        <div id="budget_table">
           <table id="line_items" style="width:100%;" class="striped">
             <tr>
             </tr>
@@ -149,7 +158,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
   $('#current_title').text('Full Budget');
   $('#budget_subtotal').text('$' + root.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
   var table = $('#line_items');
-  table.find("tr:gt(0)").remove();
+  table.find("tr").remove();
   for (var i = root.children.length-1; i >= 0; i--) {
     var row = table[0].insertRow(0);
     var cell1 = row.insertCell(0);
@@ -168,7 +177,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
         $('#budget_subtotal').text('$' + d.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 
         //var table = $('#line_items');
-        table.find("tr:gt(0)").remove();
+        table.find("tr").remove();
         for (var i = 0; i < d.data.children.length; i++) {
           var row = table[0].insertRow(0);
           var cell1 = row.insertCell(0);
@@ -206,7 +215,7 @@ d3.json("sf_budget_2018.json", function(error, root) {
         $('#current_title').text('Full Budget');
         $('#budget_subtotal').text('$' + root.value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         var table = $('#line_items');
-        table.find("tr:gt(0)").remove();
+        table.find("tr").remove();
         for (var i = root.children.length-1; i >= 0; i--) {
           var row = table[0].insertRow(0);
           var cell1 = row.insertCell(0);
