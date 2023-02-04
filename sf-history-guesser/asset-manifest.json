@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sf-history-guesser/static/css/main.e6105d4c.css",
+    "main.js": "/sf-history-guesser/static/js/main.b888027d.js",
+    "static/js/787.6319340e.chunk.js": "/sf-history-guesser/static/js/787.6319340e.chunk.js",
+    "index.html": "/sf-history-guesser/index.html",
+    "main.e6105d4c.css.map": "/sf-history-guesser/static/css/main.e6105d4c.css.map",
+    "main.b888027d.js.map": "/sf-history-guesser/static/js/main.b888027d.js.map",
+    "787.6319340e.chunk.js.map": "/sf-history-guesser/static/js/787.6319340e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6105d4c.css",
+    "static/js/main.b888027d.js"
+  ]
+}
