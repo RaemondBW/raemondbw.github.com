@@ -120,6 +120,15 @@
             transform: translateY(-2px);
         }
         
+        /* Make cards with links clickable */
+        .project-card.clickable {
+            cursor: pointer;
+        }
+        
+        .project-card.clickable .card-media a {
+            pointer-events: none;
+        }
+        
         .card-media {
             width: 100%;
             height: 190px;
@@ -441,7 +450,7 @@
                 <!-- Skip Scooters -->
                 <div class="project-card element-item work">
                     <div class="card-media">
-                        <iframe src="https://www.youtube.com/embed/5Yf2glVnnF4?controls=0&rel=0&showinfo=0" 
+                        <iframe src="https://www.youtube.com/embed/kuiSsOkRX6s?controls=0&rel=0&showinfo=0" 
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen
                                 title="Skip Scooters Video">
@@ -775,6 +784,24 @@
             masonry: {
                 columnWidth: 350,
                 gutter: 0
+            }
+        });
+
+        // Make cards with image links clickable
+        $('.project-card').each(function() {
+            var $card = $(this);
+            var $imageLink = $card.find('.card-media a');
+            
+            if ($imageLink.length > 0) {
+                var href = $imageLink.attr('href');
+                $card.addClass('clickable');
+                
+                $card.on('click', function(e) {
+                    // Don't trigger if clicking on a link inside card content
+                    if (!$(e.target).closest('.card-content a').length) {
+                        window.open(href, '_blank');
+                    }
+                });
             }
         });
 
