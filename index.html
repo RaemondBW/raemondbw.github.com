@@ -1,543 +1,777 @@
 <!DOCTYPE html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G45LKW0Y0C"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-G45LKW0Y0C');
-        </script>
-        <title>Raemond.com</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    </head>
-    <body class="mdl-color--grey-100">
-        <style>
-            .small-img-circle {
-                border-radius: 50%;
-                max-width:40px;
-                position: absolute;
-                left: 10px;
-                display: none;
-            }
-            
-            .img-circle {
-                border-radius: 50%;
-                max-width:200px;
-                align-items:center;
-            }
-            .content-column {
-                background-color: #f3f3f3;
-                padding: 30px;
-            }
-            .content-column h2 {
-                font-size: 1.6em;
-                margin-top: 0;
-                margin-bottom: 10px;
-            }
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G45LKW0Y0C"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G45LKW0Y0C');
+    </script>
+    
+    <title>Raemond.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- Material Web Components -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+        }
+    }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    
+    <style>
+        :root {
+            --md-sys-color-surface: #fefbff;
+            --md-sys-color-on-surface: #1c1b1f;
+            --md-sys-color-surface-variant: #e7e0ec;
+            --md-sys-color-on-surface-variant: #49454f;
+            --md-sys-color-primary: #37474f;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-secondary: #625b71;
+            --md-sys-color-on-secondary: #ffffff;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.5;
+        }
+        
+        .small-img-circle {
+            border-radius: 50%;
+            max-width: 40px;
+            position: absolute;
+            left: 10px;
+            display: none;
+        }
+        
+        .img-circle {
+            border-radius: 50%;
+            max-width: 200px;
+            align-items: center;
+        }
+        
+        .content-grid {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 8px;
+        }
+        
+        html, body {
+            height: 100%;
+        }
+        
+        .title {
+            height: 43%;
+            min-height: 390px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--md-sys-color-surface);
+            padding: 2rem;
+        }
+        
+        .title-box {
+            width: 200px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .element-item {
+            margin: 10px;
+            z-index: 1;
+        }
+        
+        .content {
+            width: 100%;
+        }
+        
+        /* Material 3 Card Styling */
+        .project-card {
+            width: 330px;
+            margin: 16px;
+            border-radius: 12px;
+            background: var(--md-sys-color-surface);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            transform: translateY(-2px);
+        }
+        
+        .card-media {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-media img, .card-media iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+        
+        .card-content {
+            padding: 16px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+            color: var(--md-sys-color-on-surface);
+        }
+        
+        .card-text {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        
+        .card-text p:first-child {
+            font-weight: 500;
+            color: var(--md-sys-color-primary);
+        }
+        
+        .grid {
+            /* Let Isotope handle the layout */
+        }
+        
+        /* Desktop: 3 columns */
+        @media only screen and (min-width: 1067px) {
             .content-grid {
                 max-width: 1050px;
-                margin: 0 auto;
-                padding: 8px;
             }
-            .mdl-card__media {
-                margin: 0;
+            .project-card {
+                width: calc(33.333% - 16px);
+                margin: 8px;
             }
-            .mdl-card__media > img {
-                max-width: 100%;
+        }
+        
+        /* Tablet: 2 columns */
+        @media only screen and (max-width: 1066px) and (min-width: 717px) {
+            .content-grid {
+                max-width: 700px;
             }
-            html, body {
-                height: 100%;
+            .project-card {
+                width: calc(50% - 16px);
+                margin: 8px;
             }
-            .title {
-                height: 43%;
-                min-height: 390px;
-                display: -webkit-flexbox;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-align: center;
-                -ms-flex-align: center;
-                -webkit-align-items: center;
-                align-items: center;
-                justify-content: center;
-                background: white;
+        }
+        
+        /* Mobile: 1 column */
+        @media only screen and (max-width: 716px) {
+            .content-grid {
+                max-width: 350px;
             }
-            .title-box {
-                width:200px;
+            .project-card {
+                width: calc(100% - 16px);
+                margin: 8px;
             }
-            .subtitle {
-                width: 100%;
-                text-align: center;
-                align-text: center;
-                justify-content: center;
+        }
+        
+        .button-group {
+            z-index: 2;
+            padding: 16px;
+            background-color: var(--md-sys-color-surface);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        
+        .sticky + .content {
+            padding-top: 80px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Active filter button styling */
+        md-text-button[unelevated] {
+            background-color: var(--md-sys-color-primary) !important;
+            color: #ffffff !important;
+            --md-text-button-label-text-color: #ffffff !important;
+            --md-sys-color-on-surface: #ffffff !important;
+        }
+        
+        md-text-button[unelevated]:focus,
+        md-text-button[unelevated]:active,
+        md-text-button[unelevated]:hover {
+            background-color: var(--md-sys-color-primary) !important;
+            color: #ffffff !important;
+            --md-text-button-label-text-color: #ffffff !important;
+            --md-sys-color-on-surface: #ffffff !important;
+        }
+        
+        md-text-button[unelevated] button {
+            color: var(--md-sys-color-on-primary) !important;
+        }
+        
+        md-text-button[unelevated] .label {
+            color: var(--md-sys-color-on-primary) !important;
+        }
+        
+        /* Typography using Material 3 type scale */
+        .display-medium {
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 3.2rem;
+            margin: 0;
+        }
+        
+        .headline-small {
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 2rem;
+            margin: 0;
+        }
+        
+        .body-medium {
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.25rem;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .display-medium {
+                font-size: 2rem;
+                line-height: 2.4rem;
             }
-            .element-item {
-                margin: 10px;
-                z-index:1;
+            
+            .headline-small {
+                font-size: 1.25rem;
+                line-height: 1.6rem;
             }
-            .mdl-card__actions {
-                display: flex;
-                box-sizing:border-box;
-                align-items: center;
-            }
-            .mdl-card__actions > .mdl-button--icon {
-                margin-right: 3px;
-                margin-left: 3px;
-            }
-            .content {
-                width: 100%;
-            }
+        }
+    </style>
+</head>
 
-            @media only screen and (max-width: 1066px) {
-                /* For mobile phones: */
-                .content-grid {
-                    max-width: 700px;
-                }
-            }
-
-            @media only screen and (max-width: 716px) {
-                /* For mobile phones: */
-                .content-grid {
-                    max-width: 350px;
-                }
-            }
-
-            .button-group {
-                z-index:2;
-                padding-top:10px;
-                background-color: white;
-                padding-bottom: 13px;
-                -webkit-box-shadow: 0 8px 6px -6px #9e9e9e;
-                -moz-box-shadow: 0 8px 6px -6px #9e9e9e;
-                box-shadow: 0 8px 6px -6px #9e9e9e;
-            }
-            .sticky {
-                position: fixed;
-                top: 0;
-            }
-            .sticky + .content {
-                padding-top: 60px;
-            }
-        </style>
-        <div class="title">
-            <div class="title-box">
-                <img class="img-circle" src="images/raemond.jpg"/>
-                <h2 class="subtitle mdl-color-text--grey-600">Raemond</h2>
-                <h4 class="subtitle mdl-color-text--grey-600">Bergstrom-Wood</h4>
-                <div class="subtitle">
-                    <a style="margin:5px; color:#ff000000" href="https://github.com/RaemondBW">
-                        <img src="images/github.png" width="30" height="30"/>
-                    </a>
-                    <a style="margin:5px; color:#ff000000" href="https://linkedin.com/in/raemond">
-                        <img src="images/linkedin.png" width="30" height="30"/>
-                    </a>
-                    <a style="margin:5px; color:#ff000000" href="https://twitter.com/RaemondBW">
-                        <img src="images/twitter.png" width="30" height="30"/>
-                    </a>
-                    <a style="margin:5px; color:#ff000000" href="https://instagram.com/RaemondBW">
-                        <img src="images/instagram.png" width="30" height="30"/>
-                    </a>
-                </div>
+<body>
+    <div class="title">
+        <div class="title-box">
+            <img class="img-circle" src="images/raemond.jpg" alt="Raemond Bergstrom-Wood"/>
+            <h1 class="subtitle display-medium" style="color: var(--md-sys-color-on-surface-variant);">Raemond</h1>
+            <h2 class="subtitle headline-small" style="color: var(--md-sys-color-on-surface-variant);">Bergstrom-Wood</h2>
+            <div class="social-links">
+                <a href="https://github.com/RaemondBW" aria-label="GitHub">
+                    <img src="images/github.png" width="30" height="30" alt="GitHub"/>
+                </a>
+                <a href="https://linkedin.com/in/raemond" aria-label="LinkedIn">
+                    <img src="images/linkedin.png" width="30" height="30" alt="LinkedIn"/>
+                </a>
+                <a href="https://twitter.com/RaemondBW" aria-label="Twitter">
+                    <img src="images/twitter.png" width="30" height="30" alt="Twitter"/>
+                </a>
+                <a href="https://instagram.com/RaemondBW" aria-label="Instagram">
+                    <img src="images/instagram.png" width="30" height="30" alt="Instagram"/>
+                </a>
             </div>
         </div>
-        <div class="subtitle button-group filter-button-group">
-            <img class="small-img-circle" src="images/raemond.jpg"/>
-            <button class="mdl-button mdl-js-button" data-filter=".work">Work</button>
-            <button class="mdl-button mdl-js-button" data-filter=".personal_project">Fun</button>
-            <button class="mdl-button mdl-js-button"data-filter=".school">School</button>
-        </div>
-        <div class="mdl-layout__content content">
-            <div class="content-grid">
+    </div>
+    
+    <div class="button-group filter-button-group">
+        <img class="small-img-circle" src="images/raemond.jpg" alt="Raemond"/>
+        <md-text-button data-filter=".work">Work</md-text-button>
+        <md-text-button data-filter=".personal_project">Fun</md-text-button>
+        <md-text-button data-filter=".school">School</md-text-button>
+    </div>
+    
+    <div class="content">
+        <div class="content-grid">
             <div class="grid">
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
+                <!-- HN Glance Project -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
                         <a href="https://hn-glance.raemond.com/">
-                            <img src="images/hn-glance.jpg" alt=""/>
+                            <img src="images/hn-glance.jpg" alt="HN Glance Screenshot"/>
                         </a>
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">HN (Hacker News) Glance</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>March 2023</p>
-                        <p>HN Glance is a website that summarizes the /best articles on news.ycombinator.com. It uses a react.js frontend and python (flask) backend. Summaries are generated via the OpenAI ChatGPT API. The project was developed entirely through prompts with ChatGPT(4).</p>
+                    <div class="card-content">
+                        <h3 class="card-title">HN (Hacker News) Glance</h3>
+                        <div class="card-text">
+                            <p>March 2023</p>
+                            <p>HN Glance is a website that summarizes the best articles on news.ycombinator.com. It uses a react.js frontend and python (flask) backend. Summaries are generated via the OpenAI ChatGPT API. The project was developed entirely through prompts with ChatGPT(4).</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
+                
+                <!-- SF History Guesser -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
                         <a href="sf-history-guesser">
-                            <img src="images/sf-history-guesser.jpg" alt=""/>
+                            <img src="images/sf-history-guesser.jpg" alt="SF History Guesser Screenshot"/>
                         </a>
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">SF History Guesser</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Febuary 2023</p>
-                        <p>A game inspired by goeguessr, that let's users guess the location of random photos from sfopenhistory (an archive of geotagged historical San Francisco photos). It uses a react.js frontend and is statically hosted. The project was developed largely through prompts with ChatGPT(3.5) though heavy googling was required.</p>
+                    <div class="card-content">
+                        <h3 class="card-title">SF History Guesser</h3>
+                        <div class="card-text">
+                            <p>February 2023</p>
+                            <p>A game inspired by geoguessr, that lets users guess the location of random photos from sfopenhistory (an archive of geotagged historical San Francisco photos). It uses a react.js frontend and is statically hosted. The project was developed largely through prompts with ChatGPT(3.5) though heavy googling was required.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
+                
+                <!-- Wordle Pick -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
                         <a href="wordle/">
-                            <img src="images/wordle-pick.jpg" alt=""/>
+                            <img src="images/wordle-pick.jpg" alt="Wordle Pick Screenshot"/>
                         </a>
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Wordle Pick</h2>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>January 2023</p>
-                        <p>react.js wordle clone that let's you generate games with your own word (to share) or with a random word for fun. The project was developed entirely through prompts with ChatGPT (3.5).</p>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                      <a href="https://apps.apple.com/us/app/daily-cals/id1614789690">
-                      <img src="images/DailyCals.jpg" alt=""/>
-                      </a>
-                    </figure>
-                  <div class="mdl-card__title">
-                      <h2 class="mdl-card__title-text">Daily Cals</h2>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-                      <p>March 2022 - Present</p>
-                      <p>An iOS App to encourage building a habit of getting daily exercise (cals).</p>
-                  </div>
-              </div>
-                <div class="mdl-card element-item mdl-shadow--3dp work">
-                      <figure class="mdl-card__media">
-                        <iframe height="190px" width="330px" src="https://www.youtube.com/embed/5Yf2glVnnF4?controls=0&rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Senior Platform Engineer at Skip Scooters</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>January 2019 - Present</p>
-                        <p>Working on Scooter firmware and associated software.</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Wordle Pick</h3>
+                        <div class="card-text">
+                            <p>January 2023</p>
+                            <p>react.js wordle clone that lets you generate games with your own word (to share) or with a random word for fun. The project was developed entirely through prompts with ChatGPT (3.5).</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <a href="/sf_budget">
-                      <figure class="mdl-card__media">
-                        <img src="images/budget_explorer.jpg" alt="" />
-                      </figure>
-                    </a>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">San Francisco Budget Explorer</h2>
+                
+                <!-- Daily Cals -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <a href="https://apps.apple.com/us/app/daily-cals/id1614789690">
+                            <img src="images/DailyCals.jpg" alt="Daily Cals App Screenshot"/>
+                        </a>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>2018</p>
-                        <p>A website to explore how San Francisco Spends Money.</p>
-                        <ul>
-                            <li>Tech: Python parsing, D3.js</li>
-                            <li>Accessible <a href="/sf_budget">here</a>.</li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Daily Cals</h3>
+                        <div class="card-text">
+                            <p>March 2022 - Present</p>
+                            <p>An iOS App to encourage building a habit of getting daily exercise (cals).</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp work">
-                    <a href="http://www.essential.com">
-                      <figure class="mdl-card__media">
-                        <img src="images/essential-phone-hero.jpg" alt="" />
-                      </figure>
-                    </a>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Software Engineer at Essential</h2>
+                
+                <!-- Skip Scooters -->
+                <div class="project-card element-item work">
+                    <div class="card-media">
+                        <iframe src="https://www.youtube.com/embed/5Yf2glVnnF4?controls=0&rel=0&showinfo=0" 
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                title="Skip Scooters Video">
+                        </iframe>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>November 2017 - October 2018</p>
-                        <ul>
-                            <li>Lead Firmware for Home Accessories
-                                <ul>
-                                    <li>Developed FreeRTOS based app and diag application</li>
-                                    <li>Wrote sensor, wireless, and hardware interface libraries</li>
-                                    <li>Designed and implemented ultrasonic sensor algorithms \& filtering</li>
-                                    <li>Brought up and developed the signal processing algorithms for 24GHz Radar based Human presence detection</li>
-                                    <li>Worked with chip vendors through SOW/MSA to develop custom chip firmware</li>
-                                    <li>CM bring-up and test station bringup</li>
-                                </ul>
-                            </li>
-                            <li>Hardware
-                                <ul>
-                                    <li>Responsible for part selection and block diagrams</li>
-                                    <li>Schematics and layout reviews</li>
-                                    <li>Prototyping product hardware</li>
-                                    <li>CM Selection and bring-up</li>
-                                </ul>
-                            </li>
-                            <li>Product Management
-                                <ul>
-                                    <li>Worked to create a home accessory road map</li>
-                                    <li>Worked through multiple design iterations with ID</li>
-                                    <li>Worked with a third party contractor to get through a POC electrical (schematics/layout) and PD (mechanical) design.</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Senior Platform Engineer at Skip Scooters</h3>
+                        <div class="card-text">
+                            <p>January 2019 - Present</p>
+                            <p>Working on Scooter firmware and associated software.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp work">
-                    <figure class="mdl-card__media">
-                        <img src="images/delight.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Founder and Software Engineer at Arete Labs (Acquired)</h2>
+                
+                <!-- SF Budget Explorer -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <a href="/sf_budget">
+                            <img src="images/budget_explorer.jpg" alt="SF Budget Explorer Screenshot"/>
+                        </a>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>August 2016 - November 2017</p>
-                        <ul>
-                            <li>Firmware
-                                <ul>
-                                    <li>Developed FreeRTOS based app and diag application</li>
-                                    <li>Wrote sensor, wireless, service connection and hardware interface libraries</li>
-                                    <li>Designed and implemented sensor fusion & filtering</li>
-                                    <li>WiFi Soft AP based pairing</li>
-                                </ul>
-                            </li>
-                            <li>Service
-                                <ul>
-                                    <li>Firebase based service with functions deployed for various features. Examples include home state set based on phone location state changes.</li>
-                                    <li>Integration with Amazon Alexa</li>
-                                    <li>Push notifications</li>
-                                </ul>
-                            </li>
-                            <li>App
-                                <ul>
-                                    <li>Developed and Designed a feature complete iOS app developed in Swift.</li>
-                                    <li>Device/Service in app pairing/provisioning</li>
-                                    <li>Push notifications</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">San Francisco Budget Explorer</h3>
+                        <div class="card-text">
+                            <p>2018</p>
+                            <p>A website to explore how San Francisco Spends Money.</p>
+                            <ul>
+                                <li>Tech: Python parsing, D3.js</li>
+                                <li>Accessible <a href="/sf_budget">here</a>.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                        <img src="images/matchup_tennis.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Matchup Tennis</h2>
+                
+                <!-- Essential -->
+                <div class="project-card element-item work">
+                    <div class="card-media">
+                        <a href="http://www.essential.com">
+                            <img src="images/essential-phone-hero.jpg" alt="Essential Phone"/>
+                        </a>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>2017</p>
-                        <p>A Tennis website for meeting equal level players in your area.</p>
-                        <ul>
-                            <li>Tech: Flask, Google App Engine, Cloud Data Store, React, Bootstrap</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                        <img src="images/react_native_time.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">React Native Time Chooser</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>2017</p>
-                        <p>I wasn't happy with the design of any of the react native time chooser components, so I created one that feels like the latest android time picker but with hours and seconds on the same page.</p>
-                        <ul>
-                            <li>Completely customizable colors, sizing, ect.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                        <img src="images/pcea_1.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Patient Controlled Epidural Analgesia Monitor</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>2017</p>
-                        <p>Worked with the Stanford Medical School Anesthesiology Department to develop a product to help doctors track pain levels and the regularity of pain medication requests</p>
-                        <ul>
-                            <li>Co-designed the hardware to have a potentiometer based pain level meter and a pressure sensitive resistor to catch button presses</li>
-                            <li>Developed a FreeRTOS based firmware to push button presses and pain level changes to Firebase</li>
-                            <li>Developed an iOS app (Swift) to plot current pain levels and pain medication requests</li>
-                            <li>Created a simple service that would send push notification to doctors upon pain levels reaching a customizable level and an abnormal number of medication requests</li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Software Engineer at Essential</h3>
+                        <div class="card-text">
+                            <p>November 2017 - October 2018</p>
+                            <ul>
+                                <li>Lead Firmware for Home Accessories
+                                    <ul>
+                                        <li>Developed FreeRTOS based app and diag application</li>
+                                        <li>Wrote sensor, wireless, and hardware interface libraries</li>
+                                        <li>Designed and implemented ultrasonic sensor algorithms & filtering</li>
+                                        <li>Brought up and developed the signal processing algorithms for 24GHz Radar based Human presence detection</li>
+                                        <li>Worked with chip vendors through SOW/MSA to develop custom chip firmware</li>
+                                        <li>CM bring-up and test station bringup</li>
+                                    </ul>
+                                </li>
+                                <li>Hardware
+                                    <ul>
+                                        <li>Responsible for part selection and block diagrams</li>
+                                        <li>Schematics and layout reviews</li>
+                                        <li>Prototyping product hardware</li>
+                                        <li>CM Selection and bring-up</li>
+                                    </ul>
+                                </li>
+                                <li>Product Management
+                                    <ul>
+                                        <li>Worked to create a home accessory road map</li>
+                                        <li>Worked through multiple design iterations with ID</li>
+                                        <li>Worked with a third party contractor to get through a POC electrical (schematics/layout) and PD (mechanical) design.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp work">
-                  <figure class="mdl-card__media">
-                    <iframe height="190px" width="330px" src="https://www.youtube.com/embed/ar9MC6Bkeqs?controls=0&rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Nest Hardware/Software Engineer</h2>
+                
+                <!-- Arete Labs -->
+                <div class="project-card element-item work">
+                    <div class="card-media">
+                        <img src="images/delight.jpg" alt="Arete Labs Product"/>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>May 2013 - August 2016</p>
-                        <ul>
-                            <li>Lead RF for an Nest Security, including integration of LTE, WCDMA, GSM, WiFi 5Ghz & 2.4GHz, BLE, Thread (802.15.4).</li>
-                            <li>Created Nest's first RF test automation systems (ATS). This evolved into the creation of a Nest test framework used throughout all factory test stations.</li>
-                            <li>Interviewed all new team members for RF Hardware design group and the Factory Software Team.</li>
-                            <li>Support numerous projects in development, debugging RF circuits and modules, interacting directly with CMs, embedded platform and communication software teams.</li>
-                            <li>Built an internal website to host and plot RF validation data. (Python, Flask, GAE) Trained fellow RF team members to contribute to/expand the site.</li>
-                            <li>Tested and influenced the RF Protocol to propagate an alarm through a mesh 15.4 network.</li>
-                            <li>Experience with UL, FCC, ETSI, BT Sig Certification Testing.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp school">
-                    <a href="https://berkeley.edu">
-                    <figure class="mdl-card__media">
-                        <img src="images/berkeley-small.jpg" alt="" />
-                    </figure></a>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">UC Berkeley EECS</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Bachelors of Science, May 2014</p>
-                        <p>Computer Science Coursework</p>
-                        <ul>
-                            <li>Operating Systems and System Programming (CS162)</li>
-                            <li>Introduction to Artificial Intelligence (CS188)</li>
-                            <li>Computer Security (CS161)</li>
-                            <li>Efficient Algorithms and Intractable Problems (CS170)</li>
-                            <li>Discrete Mathematics and Probability Theory (CS70)</li>
-                            <li>Structure and Interpretation of Computer Programs (CS61a)</li>
-                            <li>Machine Structures (CS61c)</li>
-                            <li>Introduction to Communication Networks (EE122)</li>
-                        </ul>
-                        <p>Electrical Engineering Coursework</p>
-                        <ul>
-                            <li>Signals and Systems (EE20)</li>
-                            <li>Circuits (EE40)</li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Founder and Software Engineer at Arete Labs (Acquired)</h3>
+                        <div class="card-text">
+                            <p>August 2016 - November 2017</p>
+                            <ul>
+                                <li>Firmware
+                                    <ul>
+                                        <li>Developed FreeRTOS based app and diag application</li>
+                                        <li>Wrote sensor, wireless, service connection and hardware interface libraries</li>
+                                        <li>Designed and implemented sensor fusion & filtering</li>
+                                        <li>WiFi Soft AP based pairing</li>
+                                    </ul>
+                                </li>
+                                <li>Service
+                                    <ul>
+                                        <li>Firebase based service with functions deployed for various features. Examples include home state set based on phone location state changes.</li>
+                                        <li>Integration with Amazon Alexa</li>
+                                        <li>Push notifications</li>
+                                    </ul>
+                                </li>
+                                <li>App
+                                    <ul>
+                                        <li>Developed and Designed a feature complete iOS app developed in Swift.</li>
+                                        <li>Device/Service in app pairing/provisioning</li>
+                                        <li>Push notifications</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                        <img src="images/classTime.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">ClassTime</h2>
+                
+                <!-- Matchup Tennis -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <img src="images/matchup_tennis.jpg" alt="Matchup Tennis Screenshot"/>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Completed May 2014</p>
-                        <ul>
-                            <li>An iOS application for live sharing of user sentiment/confidence in a topic over time. Built for teachers to guage students confidence in the course material over time to tell which topics need more time.</li>
-                            <li>App was writen in Objective C using <a href="https://github.com/core-plot/core-plot">Core Plot</a> for sentiment visualization over time.</li>
-                            <li>Server Backend was built with Facebook Parse.</li>
-                            <li>Open sourced at <a href="https://github.com/RaemondBW/Confidence">github</a>.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp school">
-                    <a href="https://github.com/RaemondBW/EECSSheets">
-                    <figure class="mdl-card__media">
-                        <img src="images/Berkeley-Note-Sheet-Sample.jpg" alt="" />
-                    </figure></a>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">EECS Sheets</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>2014</p>
-                        <ul>
-                            <li>Created a set of LaTeX note sheets to aid students in learning and studying for a set of CS Classes at Berkeley.</li>
-                            <li>Check it out here: <a href="https://github.com/RaemondBW/EECSSheets">here</a>.</li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Matchup Tennis</h3>
+                        <div class="card-text">
+                            <p>2017</p>
+                            <p>A Tennis website for meeting equal level players in your area.</p>
+                            <ul>
+                                <li>Tech: Flask, Google App Engine, Cloud Data Store, React, Bootstrap</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp school">
-                    <a href="/kickstarter/projectsByCategory.html">
-                    <figure class="mdl-card__media">
-                        <img src="images/kickstarter.jpg" alt="" />
-                    </figure></a>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Crowdsourcing Visualized</h2>
+                
+                <!-- React Native Time Chooser -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <img src="images/react_native_time.jpg" alt="React Native Time Chooser"/>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>Completed May 2014</p>
-                        <ul>
-                            <li>Scraped multiple crowdsourcing websites to visualize the distribution of funding between product categories.</li>
-                            <li>Built with D3.js.</li>
-                            <li>Live at <a href="/kickstarter/projectsByCategory.html">here</a>.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-card element-item mdl-shadow--3dp personal_project">
-                    <figure class="mdl-card__media">
-                        <img src="images/Catch-A-Bus.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Catch-A-Bus</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>May 2013</p>
-                        <ul>
-                            <li>An Android application to give real time bus arrival predictions using a card interface.</li>
-                            <li>Utilized the Next Bus API for the location of local public transit.</li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">React Native Time Chooser</h3>
+                        <div class="card-text">
+                            <p>2017</p>
+                            <p>I wasn't happy with the design of any of the react native time chooser components, so I created one that feels like the latest android time picker but with hours and seconds on the same page.</p>
+                            <ul>
+                                <li>Completely customizable colors, sizing, etc.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="mdl-card element-item mdl-shadow--3dp work">
-                    <figure class="mdl-card__media">
-                        <img src="images/nReduce.jpg" alt="" />
-                    </figure>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">nReduce - online free startup incubator</h2>
+                
+                <!-- PCEA Monitor -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <img src="images/pcea_1.jpg" alt="PCEA Monitor"/>
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        <p>nReduce was a online startup incubator, that unlike YCombinator, any company could join. It hosted weekly project checkins and allowed members of the startup community world wide give feedback and advice to each other.</p>
-                        <p>July 2012 - August 2012</p>
-                        <ul>
-                            <li>I built a database of investor and press contacts focused toward a series of demo days, which was covered by a number of journalists, <a href="https://pando.com/2012/09/05/eight-companies-make-their-debut-at-nreduces-first-virtual-demo-day/">Pandodaily</a> and <a href="http://venturebeat.com/2012/09/05/nreduce-demo-day/">VentureBeat</a></li>
-                        </ul>
+                    <div class="card-content">
+                        <h3 class="card-title">Patient Controlled Epidural Analgesia Monitor</h3>
+                        <div class="card-text">
+                            <p>2017</p>
+                            <p>Worked with the Stanford Medical School Anesthesiology Department to develop a product to help doctors track pain levels and the regularity of pain medication requests</p>
+                            <ul>
+                                <li>Co-designed the hardware to have a potentiometer based pain level meter and a pressure sensitive resistor to catch button presses</li>
+                                <li>Developed a FreeRTOS based firmware to push button presses and pain level changes to Firebase</li>
+                                <li>Developed an iOS app (Swift) to plot current pain levels and pain medication requests</li>
+                                <li>Created a simple service that would send push notification to doctors upon pain levels reaching a customizable level and an abnormal number of medication requests</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+                
+                <!-- Nest -->
+                <div class="project-card element-item work">
+                    <div class="card-media">
+                        <iframe src="https://www.youtube.com/embed/ar9MC6Bkeqs?controls=0&rel=0&showinfo=0" 
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                title="Nest Video">
+                        </iframe>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Nest Hardware/Software Engineer</h3>
+                        <div class="card-text">
+                            <p>May 2013 - August 2016</p>
+                            <ul>
+                                <li>Lead RF for an Nest Security, including integration of LTE, WCDMA, GSM, WiFi 5Ghz & 2.4GHz, BLE, Thread (802.15.4).</li>
+                                <li>Created Nest's first RF test automation systems (ATS). This evolved into the creation of a Nest test framework used throughout all factory test stations.</li>
+                                <li>Interviewed all new team members for RF Hardware design group and the Factory Software Team.</li>
+                                <li>Support numerous projects in development, debugging RF circuits and modules, interacting directly with CMs, embedded platform and communication software teams.</li>
+                                <li>Built an internal website to host and plot RF validation data. (Python, Flask, GAE) Trained fellow RF team members to contribute to/expand the site.</li>
+                                <li>Tested and influenced the RF Protocol to propagate an alarm through a mesh 15.4 network.</li>
+                                <li>Experience with UL, FCC, ETSI, BT Sig Certification Testing.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- UC Berkeley -->
+                <div class="project-card element-item school">
+                    <div class="card-media">
+                        <a href="https://berkeley.edu">
+                            <img src="images/berkeley-small.jpg" alt="UC Berkeley"/>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">UC Berkeley EECS</h3>
+                        <div class="card-text">
+                            <p>Bachelors of Science, May 2014</p>
+                            <p>Computer Science Coursework</p>
+                            <ul>
+                                <li>Operating Systems and System Programming (CS162)</li>
+                                <li>Introduction to Artificial Intelligence (CS188)</li>
+                                <li>Computer Security (CS161)</li>
+                                <li>Efficient Algorithms and Intractable Problems (CS170)</li>
+                                <li>Discrete Mathematics and Probability Theory (CS70)</li>
+                                <li>Structure and Interpretation of Computer Programs (CS61a)</li>
+                                <li>Machine Structures (CS61c)</li>
+                                <li>Introduction to Communication Networks (EE122)</li>
+                            </ul>
+                            <p>Electrical Engineering Coursework</p>
+                            <ul>
+                                <li>Signals and Systems (EE20)</li>
+                                <li>Circuits (EE40)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ClassTime -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <img src="images/classTime.jpg" alt="ClassTime App"/>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">ClassTime</h3>
+                        <div class="card-text">
+                            <p>Completed May 2014</p>
+                            <ul>
+                                <li>An iOS application for live sharing of user sentiment/confidence in a topic over time. Built for teachers to gauge students confidence in the course material over time to tell which topics need more time.</li>
+                                <li>App was written in Objective C using <a href="https://github.com/core-plot/core-plot">Core Plot</a> for sentiment visualization over time.</li>
+                                <li>Server Backend was built with Facebook Parse.</li>
+                                <li>Open sourced at <a href="https://github.com/RaemondBW/Confidence">github</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- EECS Sheets -->
+                <div class="project-card element-item school">
+                    <div class="card-media">
+                        <a href="https://github.com/RaemondBW/EECSSheets">
+                            <img src="images/Berkeley-Note-Sheet-Sample.jpg" alt="EECS Sheets Sample"/>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">EECS Sheets</h3>
+                        <div class="card-text">
+                            <p>2014</p>
+                            <ul>
+                                <li>Created a set of LaTeX note sheets to aid students in learning and studying for a set of CS Classes at Berkeley.</li>
+                                <li>Check it out here: <a href="https://github.com/RaemondBW/EECSSheets">here</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Crowdsourcing Visualized -->
+                <div class="project-card element-item school">
+                    <div class="card-media">
+                        <a href="/kickstarter/projectsByCategory.html">
+                            <img src="images/kickstarter.jpg" alt="Kickstarter Visualization"/>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Crowdsourcing Visualized</h3>
+                        <div class="card-text">
+                            <p>Completed May 2014</p>
+                            <ul>
+                                <li>Scraped multiple crowdsourcing websites to visualize the distribution of funding between product categories.</li>
+                                <li>Built with D3.js.</li>
+                                <li>Live at <a href="/kickstarter/projectsByCategory.html">here</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Catch-A-Bus -->
+                <div class="project-card element-item personal_project">
+                    <div class="card-media">
+                        <img src="images/Catch-A-Bus.jpg" alt="Catch-A-Bus App"/>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Catch-A-Bus</h3>
+                        <div class="card-text">
+                            <p>May 2013</p>
+                            <ul>
+                                <li>An Android application to give real time bus arrival predictions using a card interface.</li>
+                                <li>Utilized the Next Bus API for the location of local public transit.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- nReduce -->
+                <div class="project-card element-item work">
+                    <div class="card-media">
+                        <img src="images/nReduce.jpg" alt="nReduce"/>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">nReduce - online free startup incubator</h3>
+                        <div class="card-text">
+                            <p>nReduce was a online startup incubator, that unlike YCombinator, any company could join. It hosted weekly project checkins and allowed members of the startup community world wide give feedback and advice to each other.</p>
+                            <p>July 2012 - August 2012</p>
+                            <ul>
+                                <li>I built a database of investor and press contacts focused toward a series of demo days, which was covered by a number of journalists, <a href="https://pando.com/2012/09/05/eight-companies-make-their-debut-at-nreduces-first-virtual-demo-day/">Pandodaily</a> and <a href="http://venturebeat.com/2012/09/05/nreduce-demo-day/">VentureBeat</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.3.0/material.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-        <script src="https://storage.googleapis.com/code.getmdl.io/1.3.0/material.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-        <script>
-          window.onscroll = function() {handleScroll()};
-          var navbar = $('.button-group')[0];
-          var sticky = navbar.offsetTop;
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script>
+        window.onscroll = function() {handleScroll()};
+        var navbar = $('.button-group')[0];
+        var sticky = navbar.offsetTop;
 
-          var $grid = $('.grid').isotope({
+        var $grid = $('.grid').isotope({
             itemSelector: ".element-item",
-            columnWidth: 350,
-            isFitWidth: true
-          });
-
-          // change is-checked class on buttons
-          $('.button-group').each( function( i, buttonGroup ) {
-            var $buttonGroup = $( buttonGroup );
-            $buttonGroup.on( 'click', 'button', function() {
-              if (window.pageYOffset >= sticky) {
-                  $('.content')[0].scrollIntoView();
-              }
-              if ($(this)[0] === $buttonGroup.find('.is-checked')[0]) {
-                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
-                $grid.isotope({ filter: "*" });
-              } else {
-                $buttonGroup.find('.is-checked').removeClass('is-checked mdl-button--accent');
-                $( this ).addClass('is-checked mdl-button--accent');
-                var filterValue = $( this ).attr('data-filter');
-                $grid.isotope({ filter: filterValue });
-              }
-            });
-          });
-
-          function handleScroll() {
-            if (window.pageYOffset >= sticky) {
-              navbar.classList.add("sticky");
-              $('.small-img-circle').show()
-            } else {
-              navbar.classList.remove("sticky");
-              $('.small-img-circle').hide()
-
+            layoutMode: 'masonry',
+            masonry: {
+                columnWidth: 350,
+                gutter: 0
             }
-          }
-        </script>
-    </body>
-</html>
+        });
+
+        // Handle filter button clicks
+        $('.button-group').each(function(i, buttonGroup) {
+            var $buttonGroup = $(buttonGroup);
+            $buttonGroup.on('click', 'md-text-button', function() {
+                // Blur the button to remove focus state
+                this.blur();
+                
+                if (window.pageYOffset >= sticky) {
+                    $('.content')[0].scrollIntoView();
+                }
+                
+                // Check if clicking the same button (toggle off)
+                if ($(this).attr('unelevated') !== undefined) {
+                    // Remove active state from clicked button
+                    this.removeAttribute('unelevated');
+                    // Show all items
+                    $grid.isotope({ filter: "*" });
+                } else {
+                    // Remove active state from all buttons
+                    $buttonGroup.find('md-text-button').each(function() {
+                        this.removeAttribute('unelevated');
+                    });
+                    
+                    // Add active state to clicked button
+                    this.setAttribute('unelevated', '');
+                    var filterValue = $(this).attr('data-filter');
+                    $grid.isotope({ filter: filterValue });
+                }
+            });
+        });
+
+        function handleScroll() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky");
+                $('.small-img-circle').show();
+            } else {
+                navbar.classList.remove("sticky");
+                $('.small-img-circle').hide();
+            }
+        }
+    </script>
+</body>
+</html> 
