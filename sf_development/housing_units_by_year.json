@@ -1,0 +1,1518 @@
+{
+  "years": [
+    1850,
+    1851,
+    1853,
+    1860,
+    1863,
+    1865,
+    1866,
+    1867,
+    1868,
+    1869,
+    1870,
+    1871,
+    1872,
+    1873,
+    1874,
+    1875,
+    1876,
+    1877,
+    1878,
+    1879,
+    1880,
+    1881,
+    1882,
+    1883,
+    1884,
+    1885,
+    1886,
+    1887,
+    1888,
+    1889,
+    1890,
+    1891,
+    1892,
+    1893,
+    1894,
+    1895,
+    1896,
+    1897,
+    1898,
+    1899,
+    1900,
+    1901,
+    1902,
+    1903,
+    1904,
+    1905,
+    1906,
+    1907,
+    1908,
+    1909,
+    1910,
+    1911,
+    1912,
+    1913,
+    1914,
+    1915,
+    1916,
+    1917,
+    1918,
+    1919,
+    1920,
+    1921,
+    1922,
+    1923,
+    1924,
+    1925,
+    1926,
+    1927,
+    1928,
+    1929,
+    1930,
+    1931,
+    1932,
+    1933,
+    1934,
+    1935,
+    1936,
+    1937,
+    1938,
+    1939,
+    1940,
+    1941,
+    1942,
+    1943,
+    1944,
+    1945,
+    1946,
+    1947,
+    1948,
+    1949,
+    1950,
+    1951,
+    1952,
+    1953,
+    1954,
+    1955,
+    1956,
+    1957,
+    1958,
+    1959,
+    1960,
+    1961,
+    1962,
+    1963,
+    1964,
+    1965,
+    1966,
+    1967,
+    1968,
+    1969,
+    1970,
+    1971,
+    1972,
+    1973,
+    1974,
+    1975,
+    1976,
+    1977,
+    1978,
+    1979,
+    1980,
+    1981,
+    1982,
+    1983,
+    1984,
+    1985,
+    1986,
+    1987,
+    1988,
+    1989,
+    1990,
+    1991,
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "types": [
+    "",
+    "Commercial Hotel",
+    "Commercial Misc",
+    "Commercial Office",
+    "Commercial Retail",
+    "Government",
+    "Industrial",
+    "Miscellaneous/Mixed-Use",
+    "Multi-Family Residential",
+    "Single Family Residential"
+  ],
+  "data": {
+    "1850": {
+      "Single Family Residential": 2,
+      "Multi-Family Residential": 2
+    },
+    "1851": {
+      "Commercial Misc": 1
+    },
+    "1853": {
+      "Single Family Residential": 1,
+      "Commercial Office": 7,
+      "Commercial Retail": 7
+    },
+    "1860": {
+      "Multi-Family Residential": 2
+    },
+    "1863": {
+      "Multi-Family Residential": 10
+    },
+    "1865": {
+      "Single Family Residential": 4,
+      "Multi-Family Residential": 2
+    },
+    "1866": {
+      "Commercial Retail": 2
+    },
+    "1867": {
+      "Single Family Residential": 2
+    },
+    "1868": {
+      "Multi-Family Residential": 6
+    },
+    "1869": {
+      "Single Family Residential": 1
+    },
+    "1870": {
+      "Single Family Residential": 20,
+      "Multi-Family Residential": 13
+    },
+    "1871": {
+      "Single Family Residential": 3
+    },
+    "1872": {
+      "Single Family Residential": 1,
+      "Commercial Retail": 1
+    },
+    "1873": {
+      "Single Family Residential": 3,
+      "Multi-Family Residential": 4
+    },
+    "1874": {
+      "Single Family Residential": 6
+    },
+    "1875": {
+      "Single Family Residential": 21,
+      "Multi-Family Residential": 93,
+      "Commercial Office": 1
+    },
+    "1876": {
+      "Multi-Family Residential": 13
+    },
+    "1877": {
+      "Single Family Residential": 2
+    },
+    "1878": {
+      "Multi-Family Residential": 61,
+      "Single Family Residential": 4
+    },
+    "1879": {
+      "Single Family Residential": 2,
+      "Multi-Family Residential": 12,
+      "Commercial Retail": 1
+    },
+    "1880": {
+      "Single Family Residential": 81,
+      "Multi-Family Residential": 270,
+      "Commercial Misc": 4,
+      "Commercial Hotel": 3,
+      "Commercial Retail": 4
+    },
+    "1881": {
+      "Commercial Retail": 1,
+      "Single Family Residential": 3,
+      "Multi-Family Residential": 3
+    },
+    "1882": {
+      "Single Family Residential": 2,
+      "Multi-Family Residential": 12
+    },
+    "1883": {
+      "Multi-Family Residential": 9,
+      "Single Family Residential": 8
+    },
+    "1884": {
+      "Single Family Residential": 3,
+      "Multi-Family Residential": 10
+    },
+    "1885": {
+      "Single Family Residential": 151,
+      "Multi-Family Residential": 381,
+      "Commercial Retail": 9,
+      "Commercial Misc": 15,
+      "Commercial Office": 2,
+      "Commercial Hotel": 5,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1886": {
+      "Single Family Residential": 7,
+      "Multi-Family Residential": 22
+    },
+    "1887": {
+      "Multi-Family Residential": 21,
+      "Single Family Residential": 6
+    },
+    "1888": {
+      "Single Family Residential": 11,
+      "Multi-Family Residential": 20
+    },
+    "1889": {
+      "Single Family Residential": 10,
+      "Multi-Family Residential": 35
+    },
+    "1890": {
+      "Single Family Residential": 296,
+      "Multi-Family Residential": 903,
+      "Commercial Retail": 9,
+      "Commercial Misc": 49,
+      "Commercial Office": 1,
+      "Industrial": 1
+    },
+    "1891": {
+      "Single Family Residential": 12,
+      "Multi-Family Residential": 8
+    },
+    "1892": {
+      "Multi-Family Residential": 50,
+      "Single Family Residential": 29,
+      "Commercial Retail": 1
+    },
+    "1893": {
+      "Single Family Residential": 18,
+      "Multi-Family Residential": 21,
+      "Commercial Retail": 2
+    },
+    "1894": {
+      "Multi-Family Residential": 8,
+      "Single Family Residential": 6
+    },
+    "1895": {
+      "Single Family Residential": 156,
+      "Multi-Family Residential": 399,
+      "Commercial Misc": 55,
+      "Commercial Hotel": 20,
+      "Commercial Retail": 9,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1896": {
+      "Multi-Family Residential": 23,
+      "Single Family Residential": 19
+    },
+    "1897": {
+      "Single Family Residential": 10,
+      "Multi-Family Residential": 18
+    },
+    "1898": {
+      "Single Family Residential": 62,
+      "Multi-Family Residential": 103,
+      "Commercial Misc": 11
+    },
+    "1899": {
+      "Multi-Family Residential": 23,
+      "Single Family Residential": 6,
+      "Commercial Misc": 1
+    },
+    "1900": {
+      "Miscellaneous/Mixed-Use": 91,
+      "Commercial Office": 163,
+      "Multi-Family Residential": 20553,
+      "Single Family Residential": 6678,
+      "Commercial Misc": 501,
+      "Commercial Retail": 474,
+      "Commercial Hotel": 344,
+      "Government": 8,
+      "Industrial": 48
+    },
+    "1901": {
+      "Commercial Retail": 18,
+      "Commercial Office": 1,
+      "Single Family Residential": 73,
+      "Multi-Family Residential": 171,
+      "Commercial Misc": 2
+    },
+    "1902": {
+      "Single Family Residential": 296,
+      "Multi-Family Residential": 989,
+      "Commercial Office": 18,
+      "Miscellaneous/Mixed-Use": 5,
+      "Commercial Retail": 30,
+      "Commercial Misc": 34,
+      "Industrial": 4,
+      "Commercial Hotel": 3
+    },
+    "1903": {
+      "Multi-Family Residential": 427,
+      "Commercial Office": 3,
+      "Commercial Misc": 7,
+      "Single Family Residential": 220,
+      "Commercial Retail": 3,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1904": {
+      "Multi-Family Residential": 3428,
+      "Commercial Office": 15,
+      "Single Family Residential": 876,
+      "Commercial Retail": 81,
+      "Commercial Misc": 111,
+      "Commercial Hotel": 651,
+      "Miscellaneous/Mixed-Use": 2,
+      "Industrial": 7
+    },
+    "1905": {
+      "Multi-Family Residential": 2516,
+      "Single Family Residential": 818,
+      "Commercial Office": 15,
+      "Commercial Retail": 41,
+      "Commercial Misc": 57,
+      "Industrial": 5,
+      "Miscellaneous/Mixed-Use": 3,
+      "Commercial Hotel": 265
+    },
+    "1906": {
+      "Multi-Family Residential": 5901,
+      "Commercial Office": 102,
+      "Commercial Retail": 314,
+      "Single Family Residential": 1941,
+      "Commercial Hotel": 563,
+      "Miscellaneous/Mixed-Use": 51,
+      "Government": 24,
+      "Commercial Misc": 153,
+      "Industrial": 31
+    },
+    "1907": {
+      "Multi-Family Residential": 9381,
+      "Single Family Residential": 2134,
+      "Commercial Retail": 706,
+      "Commercial Hotel": 3127,
+      "Commercial Office": 272,
+      "Miscellaneous/Mixed-Use": 76,
+      "Commercial Misc": 622,
+      "Industrial": 50
+    },
+    "1908": {
+      "Multi-Family Residential": 7773,
+      "Single Family Residential": 2362,
+      "Commercial Retail": 338,
+      "Commercial Office": 129,
+      "Miscellaneous/Mixed-Use": 20,
+      "Commercial Misc": 239,
+      "Commercial Hotel": 1696,
+      "Industrial": 9
+    },
+    "1909": {
+      "Single Family Residential": 894,
+      "Multi-Family Residential": 4626,
+      "Commercial Retail": 233,
+      "Commercial Office": 56,
+      "Commercial Hotel": 1066,
+      "Commercial Misc": 343,
+      "Miscellaneous/Mixed-Use": 27,
+      "Industrial": 6
+    },
+    "1910": {
+      "Multi-Family Residential": 5615,
+      "Single Family Residential": 1695,
+      "Commercial Retail": 144,
+      "Commercial Hotel": 821,
+      "Commercial Office": 97,
+      "Commercial Misc": 130,
+      "Industrial": 20,
+      "Miscellaneous/Mixed-Use": 14
+    },
+    "1911": {
+      "Multi-Family Residential": 4668,
+      "Single Family Residential": 977,
+      "Commercial Hotel": 1285,
+      "Commercial Retail": 120,
+      "Commercial Office": 24,
+      "Commercial Misc": 106,
+      "Industrial": 11,
+      "Miscellaneous/Mixed-Use": 4,
+      "Government": 1
+    },
+    "1912": {
+      "Multi-Family Residential": 4577,
+      "Commercial Office": 51,
+      "Single Family Residential": 1462,
+      "Miscellaneous/Mixed-Use": 116,
+      "Commercial Hotel": 821,
+      "Commercial Misc": 211,
+      "Commercial Retail": 108,
+      "Industrial": 3
+    },
+    "1913": {
+      "Multi-Family Residential": 3682,
+      "Single Family Residential": 1109,
+      "Commercial Hotel": 1148,
+      "Commercial Misc": 154,
+      "Commercial Retail": 101,
+      "Commercial Office": 75,
+      "Industrial": 5,
+      "Miscellaneous/Mixed-Use": 9,
+      "Government": 1
+    },
+    "1914": {
+      "Multi-Family Residential": 3154,
+      "Single Family Residential": 1120,
+      "Miscellaneous/Mixed-Use": 31,
+      "Commercial Retail": 105,
+      "Commercial Office": 22,
+      "Commercial Misc": 149,
+      "Commercial Hotel": 801,
+      "Industrial": 10
+    },
+    "1915": {
+      "Single Family Residential": 1021,
+      "Multi-Family Residential": 2703,
+      "Commercial Retail": 66,
+      "Commercial Hotel": 144,
+      "Commercial Misc": 31,
+      "Miscellaneous/Mixed-Use": 11,
+      "Commercial Office": 70,
+      "Industrial": 14
+    },
+    "1916": {
+      "Multi-Family Residential": 2642,
+      "Commercial Hotel": 298,
+      "Single Family Residential": 1191,
+      "Miscellaneous/Mixed-Use": 6,
+      "Industrial": 16,
+      "Commercial Retail": 180,
+      "Commercial Misc": 149,
+      "Commercial Office": 18
+    },
+    "1917": {
+      "Single Family Residential": 701,
+      "Multi-Family Residential": 1412,
+      "Miscellaneous/Mixed-Use": 7,
+      "Commercial Retail": 126,
+      "Commercial Office": 10,
+      "Commercial Misc": 87,
+      "Industrial": 2,
+      "Commercial Hotel": 10
+    },
+    "1918": {
+      "Single Family Residential": 329,
+      "Multi-Family Residential": 527,
+      "Commercial Office": 25,
+      "Commercial Misc": 5,
+      "Commercial Hotel": 4,
+      "Commercial Retail": 24,
+      "Industrial": 9
+    },
+    "1919": {
+      "Commercial Retail": 68,
+      "Multi-Family Residential": 802,
+      "Commercial Misc": 110,
+      "Miscellaneous/Mixed-Use": 7,
+      "Single Family Residential": 731,
+      "Commercial Office": 8,
+      "Industrial": 23,
+      "Government": 1
+    },
+    "1920": {
+      "Single Family Residential": 889,
+      "Multi-Family Residential": 1074,
+      "Commercial Retail": 78,
+      "Commercial Misc": 26,
+      "Commercial Office": 29,
+      "Industrial": 15,
+      "Miscellaneous/Mixed-Use": 9,
+      "Commercial Hotel": 23
+    },
+    "1921": {
+      "Commercial Retail": 112,
+      "Multi-Family Residential": 1418,
+      "Single Family Residential": 954,
+      "Commercial Office": 11,
+      "Commercial Misc": 58,
+      "Industrial": 10,
+      "Government": 2
+    },
+    "1922": {
+      "Multi-Family Residential": 4073,
+      "Commercial Misc": 128,
+      "Miscellaneous/Mixed-Use": 2,
+      "Single Family Residential": 1992,
+      "Commercial Retail": 191,
+      "Commercial Hotel": 96,
+      "Commercial Office": 72,
+      "Industrial": 10
+    },
+    "1923": {
+      "Single Family Residential": 2873,
+      "Multi-Family Residential": 5548,
+      "Commercial Retail": 132,
+      "Industrial": 55,
+      "Commercial Office": 41,
+      "Commercial Misc": 167,
+      "Commercial Hotel": 763,
+      "Miscellaneous/Mixed-Use": 5
+    },
+    "1924": {
+      "Multi-Family Residential": 5597,
+      "Single Family Residential": 3339,
+      "Commercial Retail": 110,
+      "Commercial Office": 61,
+      "Commercial Misc": 238,
+      "Commercial Hotel": 196,
+      "Industrial": 77,
+      "Miscellaneous/Mixed-Use": 17
+    },
+    "1925": {
+      "Commercial Misc": 135,
+      "Multi-Family Residential": 5850,
+      "Commercial Retail": 137,
+      "Single Family Residential": 3934,
+      "Commercial Office": 197,
+      "Industrial": 33,
+      "Commercial Hotel": 434,
+      "Miscellaneous/Mixed-Use": 19
+    },
+    "1926": {
+      "Multi-Family Residential": 5421,
+      "Single Family Residential": 3298,
+      "Commercial Misc": 181,
+      "Commercial Office": 15,
+      "Commercial Retail": 165,
+      "Commercial Hotel": 1275,
+      "Industrial": 31,
+      "Miscellaneous/Mixed-Use": 8
+    },
+    "1927": {
+      "Multi-Family Residential": 6326,
+      "Single Family Residential": 3071,
+      "Commercial Office": 33,
+      "Commercial Retail": 124,
+      "Commercial Hotel": 717,
+      "Miscellaneous/Mixed-Use": 20,
+      "Commercial Misc": 104,
+      "Industrial": 39,
+      "Government": 1
+    },
+    "1928": {
+      "Multi-Family Residential": 4014,
+      "Single Family Residential": 2262,
+      "Commercial Office": 72,
+      "Commercial Hotel": 244,
+      "Commercial Retail": 66,
+      "Commercial Misc": 80,
+      "Miscellaneous/Mixed-Use": 5,
+      "Industrial": 25
+    },
+    "1929": {
+      "Multi-Family Residential": 2273,
+      "Commercial Retail": 62,
+      "Single Family Residential": 1592,
+      "Commercial Office": 16,
+      "Commercial Hotel": 445,
+      "Commercial Misc": 265,
+      "Industrial": 20,
+      "Miscellaneous/Mixed-Use": 7
+    },
+    "1930": {
+      "Single Family Residential": 1493,
+      "Multi-Family Residential": 854,
+      "Commercial Retail": 48,
+      "Miscellaneous/Mixed-Use": 6,
+      "Commercial Misc": 19,
+      "Commercial Office": 10,
+      "Commercial Hotel": 805,
+      "Industrial": 21
+    },
+    "1931": {
+      "Commercial Retail": 53,
+      "Commercial Office": 102,
+      "Industrial": 16,
+      "Multi-Family Residential": 1095,
+      "Single Family Residential": 1706,
+      "Commercial Misc": 82,
+      "Miscellaneous/Mixed-Use": 5
+    },
+    "1932": {
+      "Multi-Family Residential": 526,
+      "Commercial Retail": 36,
+      "Single Family Residential": 747,
+      "Commercial Hotel": 1,
+      "Commercial Misc": 8,
+      "Industrial": 4,
+      "Commercial Office": 1
+    },
+    "1933": {
+      "Multi-Family Residential": 279,
+      "Single Family Residential": 473,
+      "Commercial Retail": 50,
+      "Commercial Office": 1,
+      "Commercial Misc": 3,
+      "Industrial": 3,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1934": {
+      "Multi-Family Residential": 128,
+      "Single Family Residential": 167,
+      "Commercial Retail": 30,
+      "Commercial Misc": 6,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1935": {
+      "Single Family Residential": 640,
+      "Commercial Retail": 16,
+      "Multi-Family Residential": 201,
+      "Commercial Office": 2,
+      "Commercial Misc": 7,
+      "Industrial": 11,
+      "Miscellaneous/Mixed-Use": 4,
+      "Commercial Hotel": 2
+    },
+    "1936": {
+      "Multi-Family Residential": 528,
+      "Single Family Residential": 1458,
+      "Commercial Misc": 17,
+      "Commercial Office": 21,
+      "Commercial Retail": 37,
+      "Industrial": 8,
+      "Government": 2
+    },
+    "1937": {
+      "Commercial Retail": 40,
+      "Multi-Family Residential": 484,
+      "Single Family Residential": 1537,
+      "Commercial Misc": 14,
+      "Industrial": 36,
+      "Commercial Hotel": 21,
+      "Commercial Office": 2,
+      "Miscellaneous/Mixed-Use": 3,
+      "": 3
+    },
+    "1938": {
+      "Multi-Family Residential": 516,
+      "Single Family Residential": 1926,
+      "Commercial Office": 10,
+      "Commercial Retail": 38,
+      "Industrial": 9,
+      "Commercial Misc": 11
+    },
+    "1939": {
+      "Commercial Retail": 41,
+      "Multi-Family Residential": 655,
+      "Single Family Residential": 2541,
+      "Commercial Office": 14,
+      "Industrial": 10,
+      "Commercial Misc": 11,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1940": {
+      "Multi-Family Residential": 1213,
+      "Single Family Residential": 3651,
+      "Miscellaneous/Mixed-Use": 2,
+      "Commercial Retail": 51,
+      "Industrial": 5,
+      "Commercial Misc": 10,
+      "Commercial Office": 28,
+      "Commercial Hotel": 41
+    },
+    "1941": {
+      "Multi-Family Residential": 507,
+      "Single Family Residential": 3932,
+      "Commercial Retail": 41,
+      "Commercial Office": 4,
+      "Commercial Misc": 7,
+      "Miscellaneous/Mixed-Use": 2,
+      "Industrial": 212
+    },
+    "1942": {
+      "Multi-Family Residential": 3289,
+      "Single Family Residential": 1205,
+      "Commercial Retail": 3,
+      "Industrial": 17,
+      "Commercial Misc": 1,
+      "Commercial Office": 2,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1943": {
+      "Commercial Retail": 3,
+      "Multi-Family Residential": 159,
+      "Single Family Residential": 956,
+      "Industrial": 4,
+      "Commercial Misc": 1,
+      "Government": 136
+    },
+    "1944": {
+      "Industrial": 19,
+      "Single Family Residential": 1325,
+      "Multi-Family Residential": 155,
+      "Commercial Retail": 1,
+      "Miscellaneous/Mixed-Use": 1,
+      "Government": 1
+    },
+    "1945": {
+      "Single Family Residential": 991,
+      "Multi-Family Residential": 683,
+      "Commercial Retail": 13,
+      "Industrial": 18,
+      "Miscellaneous/Mixed-Use": 9,
+      "Commercial Office": 4
+    },
+    "1946": {
+      "Commercial Retail": 61,
+      "Multi-Family Residential": 675,
+      "Single Family Residential": 1732,
+      "Commercial Office": 32,
+      "Commercial Misc": 8,
+      "Industrial": 30,
+      "Commercial Hotel": 22
+    },
+    "1947": {
+      "Commercial Retail": 48,
+      "Multi-Family Residential": 1012,
+      "Single Family Residential": 2363,
+      "Commercial Misc": 25,
+      "Miscellaneous/Mixed-Use": 8,
+      "Industrial": 23,
+      "Commercial Office": 14,
+      "Government": 1
+    },
+    "1948": {
+      "Commercial Retail": 101,
+      "Single Family Residential": 2273,
+      "Multi-Family Residential": 1127,
+      "Commercial Misc": 25,
+      "Commercial Office": 11,
+      "Industrial": 40,
+      "Miscellaneous/Mixed-Use": 10,
+      "Commercial Hotel": 1,
+      "Government": 1
+    },
+    "1949": {
+      "Commercial Retail": 58,
+      "Single Family Residential": 1415,
+      "Commercial Misc": 9,
+      "Commercial Office": 10,
+      "Multi-Family Residential": 2056,
+      "Industrial": 15,
+      "Miscellaneous/Mixed-Use": 2
+    },
+    "1950": {
+      "Multi-Family Residential": 1932,
+      "Commercial Retail": 83,
+      "Single Family Residential": 1932,
+      "Commercial Office": 13,
+      "Commercial Misc": 21,
+      "Industrial": 50,
+      "Government": 4,
+      "Miscellaneous/Mixed-Use": 16
+    },
+    "1951": {
+      "Commercial Retail": 63,
+      "Multi-Family Residential": 1609,
+      "Single Family Residential": 1721,
+      "Commercial Misc": 26,
+      "Government": 1,
+      "Industrial": 27,
+      "Miscellaneous/Mixed-Use": 3,
+      "Commercial Office": 6,
+      "Commercial Hotel": 23
+    },
+    "1952": {
+      "Single Family Residential": 872,
+      "Commercial Misc": 7,
+      "Multi-Family Residential": 354,
+      "Commercial Office": 6,
+      "Commercial Retail": 21,
+      "Commercial Hotel": 21,
+      "Industrial": 17,
+      "Miscellaneous/Mixed-Use": 9
+    },
+    "1953": {
+      "Commercial Retail": 50,
+      "Single Family Residential": 800,
+      "Multi-Family Residential": 461,
+      "Miscellaneous/Mixed-Use": 2,
+      "Commercial Misc": 6,
+      "Commercial Office": 9,
+      "Commercial Hotel": 32,
+      "Industrial": 23
+    },
+    "1954": {
+      "Multi-Family Residential": 1071,
+      "Commercial Misc": 6,
+      "Single Family Residential": 952,
+      "Commercial Office": 11,
+      "Commercial Hotel": 207,
+      "Commercial Retail": 10,
+      "Industrial": 20,
+      "Miscellaneous/Mixed-Use": 6
+    },
+    "1955": {
+      "Multi-Family Residential": 1003,
+      "Commercial Hotel": 426,
+      "Single Family Residential": 1057,
+      "Commercial Office": 19,
+      "Commercial Retail": 25,
+      "Industrial": 18,
+      "Commercial Misc": 19,
+      "Miscellaneous/Mixed-Use": 13,
+      "Government": 2
+    },
+    "1956": {
+      "Commercial Office": 7,
+      "Multi-Family Residential": 942,
+      "Single Family Residential": 914,
+      "Commercial Misc": 10,
+      "Commercial Hotel": 241,
+      "Commercial Retail": 47,
+      "Industrial": 36,
+      "Government": 10
+    },
+    "1957": {
+      "Single Family Residential": 725,
+      "Multi-Family Residential": 571,
+      "Miscellaneous/Mixed-Use": 5,
+      "Commercial Office": 13,
+      "Government": 1,
+      "Commercial Misc": 5,
+      "Industrial": 21,
+      "Commercial Retail": 30,
+      "Commercial Hotel": 161
+    },
+    "1958": {
+      "Commercial Misc": 72,
+      "Single Family Residential": 813,
+      "Multi-Family Residential": 952,
+      "Commercial Retail": 12,
+      "Commercial Office": 10,
+      "Industrial": 11,
+      "Commercial Hotel": 79
+    },
+    "1959": {
+      "Commercial Hotel": 368,
+      "Commercial Office": 12,
+      "Single Family Residential": 795,
+      "Multi-Family Residential": 1562,
+      "Commercial Misc": 9,
+      "Commercial Retail": 16,
+      "Industrial": 23,
+      "Government": 1,
+      "Miscellaneous/Mixed-Use": 5
+    },
+    "1960": {
+      "Commercial Retail": 15,
+      "Commercial Office": 29,
+      "Multi-Family Residential": 1808,
+      "Commercial Misc": 374,
+      "Single Family Residential": 768,
+      "Industrial": 18,
+      "Commercial Hotel": 107,
+      "Miscellaneous/Mixed-Use": 4,
+      "Government": 1
+    },
+    "1961": {
+      "Multi-Family Residential": 2653,
+      "Single Family Residential": 620,
+      "Commercial Misc": 8,
+      "Commercial Hotel": 68,
+      "Commercial Retail": 21,
+      "Industrial": 19,
+      "Commercial Office": 5,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1962": {
+      "Multi-Family Residential": 3335,
+      "Single Family Residential": 848,
+      "Commercial Misc": 9,
+      "Commercial Hotel": 679,
+      "Commercial Office": 13,
+      "Commercial Retail": 27,
+      "Industrial": 22,
+      "Miscellaneous/Mixed-Use": 10
+    },
+    "1963": {
+      "Commercial Hotel": 324,
+      "Multi-Family Residential": 2837,
+      "Commercial Retail": 34,
+      "Single Family Residential": 1087,
+      "Commercial Misc": 12,
+      "Industrial": 20,
+      "Commercial Office": 40,
+      "Miscellaneous/Mixed-Use": 3
+    },
+    "1964": {
+      "Multi-Family Residential": 3592,
+      "Miscellaneous/Mixed-Use": 4,
+      "Single Family Residential": 893,
+      "Commercial Misc": 42,
+      "Commercial Office": 16,
+      "Industrial": 44,
+      "Commercial Retail": 15
+    },
+    "1965": {
+      "Multi-Family Residential": 3124,
+      "Single Family Residential": 546,
+      "Commercial Office": 458,
+      "Commercial Misc": 46,
+      "Commercial Retail": 6,
+      "Industrial": 11,
+      "Commercial Hotel": 191,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1966": {
+      "Commercial Retail": 15,
+      "Multi-Family Residential": 1281,
+      "Commercial Misc": 17,
+      "Single Family Residential": 362,
+      "Commercial Office": 17,
+      "Industrial": 6
+    },
+    "1967": {
+      "Single Family Residential": 214,
+      "Multi-Family Residential": 798,
+      "Commercial Retail": 38,
+      "Commercial Misc": 10,
+      "Commercial Office": 16,
+      "Industrial": 10,
+      "Commercial Hotel": 72
+    },
+    "1968": {
+      "Commercial Retail": 53,
+      "Multi-Family Residential": 1569,
+      "Commercial Office": 37,
+      "Single Family Residential": 221,
+      "Commercial Misc": 5,
+      "Commercial Hotel": 245,
+      "Industrial": 25,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1969": {
+      "Commercial Office": 13,
+      "Commercial Retail": 18,
+      "Multi-Family Residential": 1480,
+      "Single Family Residential": 114,
+      "Commercial Misc": 296,
+      "Commercial Hotel": 103,
+      "Miscellaneous/Mixed-Use": 3,
+      "Industrial": 12,
+      "Government": 71
+    },
+    "1970": {
+      "Commercial Office": 8,
+      "Commercial Hotel": 444,
+      "Multi-Family Residential": 775,
+      "Commercial Retail": 42,
+      "Single Family Residential": 358,
+      "Commercial Misc": 185,
+      "Industrial": 11,
+      "Miscellaneous/Mixed-Use": 4,
+      "Government": 2
+    },
+    "1971": {
+      "Commercial Office": 2,
+      "Multi-Family Residential": 1611,
+      "Single Family Residential": 122,
+      "Commercial Misc": 5,
+      "Miscellaneous/Mixed-Use": 6,
+      "Commercial Hotel": 453,
+      "Commercial Retail": 7,
+      "Industrial": 10,
+      "Government": 40
+    },
+    "1972": {
+      "Multi-Family Residential": 1448,
+      "Single Family Residential": 601,
+      "Commercial Misc": 16,
+      "Commercial Hotel": 3319,
+      "Commercial Retail": 21,
+      "Industrial": 6,
+      "Commercial Office": 3,
+      "Miscellaneous/Mixed-Use": 2
+    },
+    "1973": {
+      "Commercial Office": 23,
+      "Commercial Misc": 8,
+      "Commercial Retail": 13,
+      "Single Family Residential": 301,
+      "Multi-Family Residential": 1910,
+      "Industrial": 8,
+      "Commercial Hotel": 499,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1974": {
+      "Commercial Retail": 63,
+      "Miscellaneous/Mixed-Use": 2,
+      "Multi-Family Residential": 1400,
+      "Commercial Hotel": 771,
+      "Single Family Residential": 218,
+      "Commercial Office": 5,
+      "Commercial Misc": 5,
+      "Industrial": 6
+    },
+    "1975": {
+      "Commercial Misc": 152,
+      "Multi-Family Residential": 1809,
+      "Single Family Residential": 1048,
+      "Commercial Office": 5,
+      "Government": 1,
+      "Commercial Retail": 20,
+      "Industrial": 13,
+      "Miscellaneous/Mixed-Use": 5,
+      "Commercial Hotel": 303
+    },
+    "1976": {
+      "Commercial Office": 4,
+      "Single Family Residential": 263,
+      "Multi-Family Residential": 534,
+      "Commercial Hotel": 46,
+      "Commercial Retail": 23,
+      "Commercial Misc": 3,
+      "Industrial": 8,
+      "Miscellaneous/Mixed-Use": 2
+    },
+    "1977": {
+      "Multi-Family Residential": 768,
+      "Single Family Residential": 344,
+      "Commercial Retail": 27,
+      "Commercial Misc": 57,
+      "Industrial": 10,
+      "Miscellaneous/Mixed-Use": 4,
+      "Commercial Office": 13,
+      "Commercial Hotel": 33
+    },
+    "1978": {
+      "Single Family Residential": 861,
+      "Multi-Family Residential": 1087,
+      "Commercial Office": 3,
+      "Commercial Retail": 39,
+      "Commercial Misc": 34,
+      "Industrial": 7,
+      "Miscellaneous/Mixed-Use": 3,
+      "Commercial Hotel": 128
+    },
+    "1979": {
+      "Single Family Residential": 514,
+      "Commercial Retail": 44,
+      "Multi-Family Residential": 745,
+      "Commercial Office": 9,
+      "Industrial": 29,
+      "Commercial Misc": 2,
+      "Miscellaneous/Mixed-Use": 5
+    },
+    "1980": {
+      "Single Family Residential": 842,
+      "Multi-Family Residential": 630,
+      "Commercial Misc": 13,
+      "Commercial Retail": 47,
+      "Commercial Office": 9,
+      "Industrial": 24,
+      "Commercial Hotel": 84,
+      "Miscellaneous/Mixed-Use": 24
+    },
+    "1981": {
+      "Single Family Residential": 668,
+      "Commercial Office": 15,
+      "Commercial Retail": 23,
+      "Commercial Misc": 4,
+      "Multi-Family Residential": 345,
+      "Industrial": 9
+    },
+    "1982": {
+      "Single Family Residential": 998,
+      "Commercial Office": 40,
+      "Commercial Retail": 37,
+      "Multi-Family Residential": 582,
+      "Industrial": 8,
+      "Commercial Hotel": 60,
+      "Commercial Misc": 2,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1983": {
+      "Commercial Retail": 44,
+      "Multi-Family Residential": 888,
+      "Single Family Residential": 812,
+      "Commercial Office": 35,
+      "Industrial": 30,
+      "Commercial Misc": 45,
+      "Commercial Hotel": 243
+    },
+    "1984": {
+      "Commercial Hotel": 97,
+      "Commercial Retail": 83,
+      "Single Family Residential": 535,
+      "Commercial Office": 28,
+      "Multi-Family Residential": 485,
+      "Industrial": 4,
+      "Commercial Misc": 20
+    },
+    "1985": {
+      "Single Family Residential": 336,
+      "Commercial Office": 12,
+      "Commercial Retail": 16,
+      "Multi-Family Residential": 168,
+      "Industrial": 44,
+      "Commercial Misc": 149
+    },
+    "1986": {
+      "Commercial Retail": 39,
+      "Multi-Family Residential": 654,
+      "Single Family Residential": 738,
+      "Commercial Office": 17,
+      "Industrial": 42,
+      "Commercial Misc": 60,
+      "Miscellaneous/Mixed-Use": 4
+    },
+    "1987": {
+      "Commercial Office": 54,
+      "Single Family Residential": 837,
+      "Multi-Family Residential": 1129,
+      "Commercial Misc": 768,
+      "Commercial Hotel": 1588,
+      "Commercial Retail": 38,
+      "Industrial": 81,
+      "Miscellaneous/Mixed-Use": 11
+    },
+    "1988": {
+      "Single Family Residential": 874,
+      "Multi-Family Residential": 1278,
+      "Commercial Hotel": 646,
+      "Commercial Retail": 49,
+      "Miscellaneous/Mixed-Use": 2,
+      "Industrial": 6,
+      "Commercial Misc": 159,
+      "Commercial Office": 2
+    },
+    "1989": {
+      "Single Family Residential": 653,
+      "Multi-Family Residential": 1946,
+      "Commercial Office": 4,
+      "Commercial Hotel": 462,
+      "Commercial Retail": 84,
+      "Industrial": 7,
+      "Commercial Misc": 486,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "1990": {
+      "Single Family Residential": 802,
+      "Multi-Family Residential": 1180,
+      "Commercial Misc": 669,
+      "Commercial Retail": 57,
+      "Industrial": 12,
+      "Commercial Office": 4,
+      "Miscellaneous/Mixed-Use": 1,
+      "Commercial Hotel": 33
+    },
+    "1991": {
+      "Single Family Residential": 920,
+      "Multi-Family Residential": 344,
+      "Commercial Retail": 27,
+      "Commercial Office": 1,
+      "Commercial Misc": 83,
+      "Industrial": 7
+    },
+    "1992": {
+      "Multi-Family Residential": 210,
+      "Single Family Residential": 867,
+      "Commercial Retail": 14,
+      "Commercial Office": 3,
+      "Commercial Misc": 75,
+      "Industrial": 3,
+      "Government": 1
+    },
+    "1993": {
+      "Miscellaneous/Mixed-Use": 2,
+      "Single Family Residential": 728,
+      "Multi-Family Residential": 381,
+      "Commercial Retail": 9,
+      "Commercial Office": 1,
+      "Industrial": 883,
+      "Commercial Misc": 299,
+      "Government": 1
+    },
+    "1994": {
+      "Single Family Residential": 367,
+      "Multi-Family Residential": 465,
+      "Commercial Retail": 8,
+      "Industrial": 2,
+      "Miscellaneous/Mixed-Use": 49,
+      "Commercial Misc": 83
+    },
+    "1995": {
+      "Single Family Residential": 552,
+      "Commercial Retail": 3,
+      "Multi-Family Residential": 302,
+      "Industrial": 2,
+      "Commercial Office": 4,
+      "Commercial Hotel": 141,
+      "Commercial Misc": 20
+    },
+    "1996": {
+      "Multi-Family Residential": 104,
+      "Single Family Residential": 735,
+      "Commercial Retail": 6,
+      "Commercial Misc": 7,
+      "Industrial": 3,
+      "Miscellaneous/Mixed-Use": 1,
+      "Commercial Office": 2
+    },
+    "1997": {
+      "Single Family Residential": 888,
+      "Government": 1,
+      "Multi-Family Residential": 782,
+      "Commercial Retail": 9,
+      "Industrial": 10,
+      "Commercial Misc": 659,
+      "Miscellaneous/Mixed-Use": 3,
+      "Commercial Office": 2
+    },
+    "1998": {
+      "Single Family Residential": 739,
+      "Commercial Misc": 171,
+      "Multi-Family Residential": 223,
+      "Commercial Retail": 6
+    },
+    "1999": {
+      "Single Family Residential": 1034,
+      "Multi-Family Residential": 292,
+      "Commercial Retail": 6,
+      "Industrial": 18,
+      "Commercial Misc": 121,
+      "Commercial Hotel": 624,
+      "Commercial Office": 4
+    },
+    "2000": {
+      "Single Family Residential": 1283,
+      "Multi-Family Residential": 557,
+      "Commercial Hotel": 216,
+      "Commercial Retail": 17,
+      "Commercial Office": 4,
+      "Commercial Misc": 556,
+      "Miscellaneous/Mixed-Use": 4
+    },
+    "2001": {
+      "Commercial Hotel": 657,
+      "Single Family Residential": 1218,
+      "Commercial Misc": 297,
+      "Multi-Family Residential": 263,
+      "Commercial Retail": 8,
+      "Government": 10,
+      "Industrial": 1
+    },
+    "2002": {
+      "Single Family Residential": 386,
+      "Multi-Family Residential": 878,
+      "Commercial Retail": 11,
+      "Commercial Office": 1,
+      "Commercial Misc": 318,
+      "Industrial": 9
+    },
+    "2003": {
+      "Multi-Family Residential": 481,
+      "Single Family Residential": 30,
+      "Commercial Retail": 10,
+      "Commercial Misc": 349
+    },
+    "2004": {
+      "Multi-Family Residential": 171,
+      "Commercial Retail": 28,
+      "Single Family Residential": 19,
+      "Commercial Misc": 122,
+      "Commercial Office": 9
+    },
+    "2005": {
+      "Multi-Family Residential": 345,
+      "Commercial Misc": 157,
+      "Single Family Residential": 15,
+      "Commercial Hotel": 260,
+      "Commercial Retail": 15,
+      "Industrial": 4,
+      "Commercial Office": 1
+    },
+    "2006": {
+      "Multi-Family Residential": 538,
+      "Single Family Residential": 12,
+      "Commercial Retail": 11,
+      "Commercial Office": 7,
+      "Commercial Misc": 341
+    },
+    "2007": {
+      "Commercial Retail": 33,
+      "Commercial Hotel": 85,
+      "Miscellaneous/Mixed-Use": 1,
+      "Multi-Family Residential": 1056,
+      "Single Family Residential": 6,
+      "Government": 260,
+      "Commercial Misc": 97
+    },
+    "2008": {
+      "Multi-Family Residential": 880,
+      "Commercial Office": 7,
+      "Commercial Retail": 10,
+      "Single Family Residential": 11,
+      "Commercial Misc": 321,
+      "Industrial": 2
+    },
+    "2009": {
+      "Multi-Family Residential": 972,
+      "Commercial Retail": 54,
+      "Single Family Residential": 11,
+      "Commercial Misc": 601,
+      "Commercial Office": 2,
+      "Miscellaneous/Mixed-Use": 2,
+      "Government": 280
+    },
+    "2010": {
+      "Multi-Family Residential": 1290,
+      "Single Family Residential": 8,
+      "Commercial Retail": 4,
+      "Commercial Misc": 441,
+      "Industrial": 2
+    },
+    "2011": {
+      "Multi-Family Residential": 167,
+      "Single Family Residential": 4,
+      "Commercial Misc": 15,
+      "Miscellaneous/Mixed-Use": 21,
+      "Industrial": 1,
+      "Commercial Retail": 1
+    },
+    "2012": {
+      "Single Family Residential": 102,
+      "Multi-Family Residential": 304,
+      "Commercial Retail": 7,
+      "Commercial Office": 1,
+      "Commercial Misc": 11,
+      "Miscellaneous/Mixed-Use": 2,
+      "Government": 1
+    },
+    "2013": {
+      "Multi-Family Residential": 1399,
+      "Commercial Retail": 8,
+      "Single Family Residential": 4,
+      "Commercial Misc": 45,
+      "Miscellaneous/Mixed-Use": 1
+    },
+    "2014": {
+      "Commercial Retail": 14,
+      "Multi-Family Residential": 2158,
+      "Single Family Residential": 37,
+      "Commercial Office": 1,
+      "Commercial Misc": 114
+    },
+    "2015": {
+      "Multi-Family Residential": 1306,
+      "Single Family Residential": 5,
+      "Commercial Retail": 8,
+      "Commercial Hotel": 174,
+      "Commercial Office": 3,
+      "Industrial": 2,
+      "Commercial Misc": 7
+    },
+    "2016": {
+      "Commercial Retail": 24,
+      "Multi-Family Residential": 3864,
+      "Commercial Misc": 18,
+      "Single Family Residential": 5,
+      "Industrial": 1
+    },
+    "2017": {
+      "Single Family Residential": 85,
+      "Multi-Family Residential": 2959,
+      "Industrial": 9,
+      "Commercial Retail": 15,
+      "Commercial Hotel": 159,
+      "Miscellaneous/Mixed-Use": 2,
+      "Commercial Office": 5
+    },
+    "2018": {
+      "Commercial Retail": 21,
+      "Multi-Family Residential": 1846,
+      "Single Family Residential": 7,
+      "Commercial Misc": 120,
+      "Commercial Office": 1,
+      "Miscellaneous/Mixed-Use": 124
+    },
+    "2019": {
+      "Commercial Retail": 14,
+      "Commercial Misc": 16,
+      "Multi-Family Residential": 1588,
+      "Single Family Residential": 10,
+      "Commercial Hotel": 424,
+      "Miscellaneous/Mixed-Use": 163
+    },
+    "2020": {
+      "Commercial Retail": 15,
+      "Multi-Family Residential": 1346,
+      "Single Family Residential": 4,
+      "Miscellaneous/Mixed-Use": 284
+    },
+    "2021": {
+      "Commercial Retail": 5,
+      "Miscellaneous/Mixed-Use": 224,
+      "Commercial Misc": 13,
+      "Multi-Family Residential": 2085,
+      "Single Family Residential": 5,
+      "Commercial Office": 1
+    },
+    "2022": {
+      "Commercial Retail": 14,
+      "Multi-Family Residential": 450,
+      "Single Family Residential": 3,
+      "Commercial Hotel": 431
+    },
+    "2023": {
+      "Commercial Misc": 96,
+      "Multi-Family Residential": 440,
+      "Commercial Retail": 13,
+      "Miscellaneous/Mixed-Use": 335,
+      "Government": 283
+    },
+    "2024": {
+      "Government": 254,
+      "Miscellaneous/Mixed-Use": 395,
+      "Multi-Family Residential": 190,
+      "Commercial Misc": 13
+    },
+    "2025": {
+      "Multi-Family Residential": 3,
+      "Single Family Residential": 1
+    }
+  }
+}

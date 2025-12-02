@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF Housing Units by Year and Type</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            overflow: hidden;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        label {
+            font-weight: 500;
+            color: #555;
+        }
+        input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+        select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            min-height: 400px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        #yearRange {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footnote {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border-left: 4px solid #666;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .footnote p {
+            margin: 0;
+        }
+        .type-filter-group {
+            align-items: flex-start !important;
+        }
+        .checkbox-list {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            gap: 4px 16px;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 13px;
+        }
+        .checkbox-list label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: normal;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .checkbox-list input[type="checkbox"] {
+            cursor: pointer;
+            margin: 0;
+        }
+
+        /* Controls toggle button - hidden on desktop */
+        .controls-wrapper {
+            margin-bottom: 20px;
+        }
+        .controls-toggle {
+            display: none;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .controls-toggle {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 12px 15px;
+                background: white;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+                cursor: pointer;
+                margin-bottom: 0;
+            }
+            .controls-toggle .toggle-icon {
+                font-size: 18px;
+                font-weight: bold;
+                color: #666;
+            }
+            .controls-wrapper.expanded .controls-toggle {
+                border-radius: 8px 8px 0 0;
+                border-bottom: none;
+            }
+            .controls-wrapper.expanded .toggle-icon {
+                transform: rotate(45deg);
+            }
+            .controls {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+                border-radius: 0 0 8px 8px;
+                margin-top: 0;
+            }
+            .controls-wrapper.expanded .controls {
+                display: flex;
+            }
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .checkbox-list {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+            .chart-container {
+                padding: 10px;
+                overflow-x: auto;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-card .value {
+                font-size: 18px;
+            }
+            .footnote {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>San Francisco Housing Units by Year Built</h1>
+        <p class="subtitle">Data from SF Assessor Historical Secured Property Tax Rolls</p>
+
+        <div class="controls-wrapper">
+            <button class="controls-toggle" id="controlsToggle">
+                <span class="toggle-text">Filters</span>
+                <span class="toggle-icon">+</span>
+            </button>
+            <div class="controls" id="controlsPanel">
+                <div class="control-group">
+                    <label>Year Range:</label>
+                    <div id="yearRange">
+                        <input type="number" id="minYear" min="1850" max="2025" value="1901">
+                        <span>to</span>
+                        <input type="number" id="maxYear" min="1850" max="2025" value="2025">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Chart Type:</label>
+                    <select id="chartType">
+                        <option value="stacked">Stacked Bar</option>
+                        <option value="grouped" selected>Grouped Bar</option>
+                        <option value="line">Line Chart</option>
+                    </select>
+                </div>
+                <div class="control-group type-filter-group">
+                    <label>Property Types:</label>
+                    <div id="typeFilter" class="checkbox-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="chart"></canvas>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Units (Selected Range)</h3>
+                <div class="value" id="totalUnits">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Peak Year</h3>
+                <div class="value" id="peakYear">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Peak Year Units</h3>
+                <div class="value" id="peakUnits">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Years with Data</h3>
+                <div class="value" id="yearsCount">-</div>
+            </div>
+        </div>
+
+        <div class="footnote">
+            <p>* <strong>Pre-1901 data note:</strong> 32,609 units are recorded as built before 1901, with 28,860 of those assigned to the year 1900. The 1900 figure likely represents a placeholder year for buildings whose exact construction date is unknown, particularly those destroyed in the 1906 earthquake and fire. Earlier years show more modest figures: 1890 (1,259 units), 1895 (640 units), 1885 (564 units), 1880 (362 units).</p>
+        </div>
+    </div>
+
+    <script>
+        let rawData = null;
+        let chart = null;
+
+        const typeColors = {
+            'Single Family Residential': '#4e79a7',
+            'Multi-Family Residential': '#f28e2c',
+            'Commercial Hotel': '#e15759',
+            'Commercial Retail': '#76b7b2',
+            'Commercial Office': '#59a14f',
+            'Commercial Misc': '#edc949',
+            'Industrial': '#af7aa1',
+            'Government': '#ff9da7',
+            'Miscellaneous/Mixed-Use': '#9c755f',
+            '': '#bab0ab'
+        };
+
+        const defaultChecked = ['Single Family Residential', 'Multi-Family Residential'];
+        const defaultMinYear = 1901;
+        const defaultMaxYear = 2025;
+        const defaultChartType = 'grouped';
+
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                minYear: params.get('minYear') ? parseInt(params.get('minYear')) : null,
+                maxYear: params.get('maxYear') ? parseInt(params.get('maxYear')) : null,
+                chartType: params.get('chart'),
+                types: params.get('types') ? params.get('types').split(',') : null
+            };
+        }
+
+        function updateUrlParams() {
+            const params = new URLSearchParams();
+            const minYear = parseInt(document.getElementById('minYear').value);
+            const maxYear = parseInt(document.getElementById('maxYear').value);
+            const chartType = document.getElementById('chartType').value;
+            const checkboxes = document.querySelectorAll('#typeFilter input[type="checkbox"]:checked');
+            const selectedTypes = Array.from(checkboxes).map(cb => cb.value);
+
+            if (minYear !== defaultMinYear) params.set('minYear', minYear);
+            if (maxYear !== defaultMaxYear) params.set('maxYear', maxYear);
+            if (chartType !== defaultChartType) params.set('chart', chartType);
+
+            const typesChanged = selectedTypes.length !== defaultChecked.length ||
+                !selectedTypes.every(t => defaultChecked.includes(t));
+            if (typesChanged && selectedTypes.length > 0) {
+                params.set('types', selectedTypes.join(','));
+            }
+
+            const newUrl = params.toString()
+                ? `${window.location.pathname}?${params.toString()}`
+                : window.location.pathname;
+            window.history.replaceState({}, '', newUrl);
+        }
+
+        async function loadData() {
+            const response = await fetch('housing_units_by_year.json');
+            rawData = await response.json();
+
+            const urlParams = getUrlParams();
+
+            // Apply URL params to controls
+            if (urlParams.minYear) document.getElementById('minYear').value = urlParams.minYear;
+            if (urlParams.maxYear) document.getElementById('maxYear').value = urlParams.maxYear;
+            if (urlParams.chartType) document.getElementById('chartType').value = urlParams.chartType;
+
+            // Populate type filter with checkboxes
+            const typeFilter = document.getElementById('typeFilter');
+            const typesToCheck = urlParams.types || defaultChecked;
+
+            rawData.types.filter(t => t).forEach(type => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = type;
+                checkbox.checked = typesToCheck.includes(type);
+                checkbox.addEventListener('change', () => { updateChart(); updateUrlParams(); });
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(type));
+                typeFilter.appendChild(label);
+            });
+
+            updateChart();
+        }
+
+        function getFilteredData() {
+            const minYear = parseInt(document.getElementById('minYear').value);
+            const maxYear = parseInt(document.getElementById('maxYear').value);
+            const checkboxes = document.querySelectorAll('#typeFilter input[type="checkbox"]:checked');
+            const selectedTypes = Array.from(checkboxes).map(cb => cb.value);
+
+            const filteredYears = rawData.years.filter(y => y >= minYear && y <= maxYear);
+            const types = selectedTypes.length > 0 ? selectedTypes : rawData.types.filter(t => t);
+
+            return { years: filteredYears, types };
+        }
+
+        function updateChart() {
+            const { years, types } = getFilteredData();
+            const chartType = document.getElementById('chartType').value;
+
+            const datasets = types.map(type => ({
+                label: type || 'Unknown',
+                data: years.map(year => {
+                    const yearData = rawData.data[year] || {};
+                    return yearData[type] || 0;
+                }),
+                backgroundColor: typeColors[type] || '#999',
+                borderColor: typeColors[type] || '#999',
+                borderWidth: chartType === 'line' ? 2 : 0,
+                fill: chartType === 'line' ? false : true
+            }));
+
+            // Update stats
+            let totalUnits = 0;
+            let peakYear = null;
+            let peakUnits = 0;
+
+            years.forEach(year => {
+                const yearData = rawData.data[year] || {};
+                const yearTotal = types.reduce((sum, type) => sum + (yearData[type] || 0), 0);
+                totalUnits += yearTotal;
+                if (yearTotal > peakUnits) {
+                    peakUnits = yearTotal;
+                    peakYear = year;
+                }
+            });
+
+            document.getElementById('totalUnits').textContent = totalUnits.toLocaleString();
+            document.getElementById('peakYear').textContent = peakYear || '-';
+            document.getElementById('peakUnits').textContent = peakUnits.toLocaleString();
+            document.getElementById('yearsCount').textContent = years.length;
+
+            // Create/update chart
+            const ctx = document.getElementById('chart').getContext('2d');
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            const isLine = chartType === 'line';
+            const isStacked = chartType === 'stacked';
+
+            chart = new Chart(ctx, {
+                type: isLine ? 'line' : 'bar',
+                data: {
+                    labels: years,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: isStacked,
+                            title: {
+                                display: true,
+                                text: 'Year Built'
+                            }
+                        },
+                        y: {
+                            stacked: isStacked,
+                            title: {
+                                display: true,
+                                text: 'Number of Units'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Resize chart container
+            document.querySelector('.chart-container').style.height = '500px';
+        }
+
+        // Event listeners
+        document.getElementById('minYear').addEventListener('change', (e) => {
+            if (parseInt(e.target.value) > parseInt(document.getElementById('maxYear').value)) {
+                document.getElementById('maxYear').value = e.target.value;
+            }
+            updateChart();
+            updateUrlParams();
+        });
+
+        document.getElementById('maxYear').addEventListener('change', (e) => {
+            if (parseInt(e.target.value) < parseInt(document.getElementById('minYear').value)) {
+                document.getElementById('minYear').value = e.target.value;
+            }
+            updateChart();
+            updateUrlParams();
+        });
+
+        document.getElementById('chartType').addEventListener('change', () => {
+            updateChart();
+            updateUrlParams();
+        });
+
+        // Controls toggle for mobile
+        document.getElementById('controlsToggle').addEventListener('click', () => {
+            document.querySelector('.controls-wrapper').classList.toggle('expanded');
+        });
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>
