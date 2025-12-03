@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SF Housing Units by Year and Type</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
@@ -111,6 +112,95 @@
         }
         .footnote p {
             margin: 0;
+        }
+        .map-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .map-section h2 {
+            padding: 15px 20px;
+            margin: 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+        .map-controls {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+        }
+        .map-slider-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .map-decade-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .map-slider-inner {
+            padding: 0 12px;
+        }
+        #map-decade-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #ccc;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            margin: 0;
+        }
+        #map-decade-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: black;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #map-decade-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: black;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .map-slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #555;
+        }
+        .map-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: black;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+            font-size: 0.8rem;
+        }
+        .map-legend-item {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+        }
+        .map-legend-dot {
+            border-radius: 50%;
+            margin-right: 8px;
         }
         .type-filter-group {
             align-items: flex-start !important;
@@ -278,6 +368,44 @@
 
         <div class="footnote">
             <p>* <strong>Pre-1901 data note:</strong> 32,609 units are recorded as built before 1901, with 28,860 of those assigned to the year 1900. The 1900 figure likely represents a placeholder year for buildings whose exact construction date is unknown, particularly those destroyed in the 1906 earthquake and fire. Earlier years show more modest figures: 1890 (1,259 units), 1895 (640 units), 1885 (564 units), 1880 (362 units).</p>
+        </div>
+
+        <div class="map-section">
+            <h2>Housing Construction Map by Decade</h2>
+            <div id="map">
+                <div class="map-legend">
+                    <strong>Housing Units</strong>
+                    <div class="map-legend-item">
+                        <div class="map-legend-dot" style="width: 6px; height: 6px; background: #ff6b35;"></div>
+                        <span>1 unit (current decade)</span>
+                    </div>
+                    <div class="map-legend-item">
+                        <div class="map-legend-dot" style="width: 12px; height: 12px; background: #ff6b35;"></div>
+                        <span>10+ units (current decade)</span>
+                    </div>
+                    <div class="map-legend-item">
+                        <div class="map-legend-dot" style="width: 6px; height: 6px; background: #666;"></div>
+                        <span>Previous decades</span>
+                    </div>
+                </div>
+            </div>
+            <div class="map-controls">
+                <div class="map-slider-wrapper">
+                    <div class="map-decade-display">
+                        <span id="map-current-decade">1900s</span>
+                    </div>
+                    <div class="map-slider-inner">
+                        <input type="range" id="map-decade-slider" min="0" max="12" value="0" step="1">
+                        <div class="map-slider-labels">
+                            <span>1900s</span>
+                            <span>1930s</span>
+                            <span>1960s</span>
+                            <span>1990s</span>
+                            <span>2020s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -496,6 +624,136 @@
 
         // Load data on page load
         loadData();
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Map initialization
+        const isMobile = window.innerWidth < 768;
+        const initialZoom = isMobile ? 11 : 12;
+
+        const sfMap = L.map('map', {
+            preferCanvas: true
+        }).setView([37.76, -122.44], initialZoom);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            maxZoom: 19
+        }).addTo(sfMap);
+
+        const mapDecades = [
+            1901, 1911, 1921, 1931, 1941, 1951, 1961, 1971, 1981, 1991, 2001, 2011, 2021
+        ];
+        const preModernDecades = [1801, 1841, 1851, 1861, 1871, 1881, 1891];
+
+        let mapHousingData = {};
+        let mapCurrentDecadeIndex = 0;
+        let mapLayers = {
+            previous: L.layerGroup().addTo(sfMap),
+            current: L.layerGroup().addTo(sfMap)
+        };
+
+        const baseZoom = 13;
+        function getMapRadius(units, zoom) {
+            let base;
+            if (units <= 1) base = 3;
+            else if (units <= 5) base = 5;
+            else if (units <= 10) base = 7;
+            else if (units <= 20) base = 9;
+            else if (units <= 50) base = 11;
+            else base = 14;
+
+            const scale = Math.pow(2, (zoom - baseZoom) * 0.5);
+            return Math.max(1, base * scale);
+        }
+
+        async function loadMapData() {
+            try {
+                const response = await fetch('housing_units_by_decade.csv');
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+
+                for (let i = 1; i < lines.length; i++) {
+                    const parts = lines[i].split(',');
+                    const decade = parseInt(parts[0]);
+                    const lat = parseFloat(parts[2]);
+                    const lon = parseFloat(parts[3]);
+                    const units = parseInt(parts[4]);
+
+                    if (!mapHousingData[decade]) {
+                        mapHousingData[decade] = [];
+                    }
+                    mapHousingData[decade].push({ lat, lon, units });
+                }
+
+                updateMapView();
+            } catch (error) {
+                console.error('Error loading map data:', error);
+            }
+        }
+
+        function updateMapView() {
+            const selectedDecade = mapDecades[mapCurrentDecadeIndex];
+            const zoom = sfMap.getZoom();
+
+            mapLayers.previous.clearLayers();
+            mapLayers.current.clearLayers();
+
+            // Add pre-1900 data as grey dots
+            for (const decade of preModernDecades) {
+                const data = mapHousingData[decade] || [];
+                data.forEach(point => {
+                    const radius = getMapRadius(point.units, zoom);
+                    const circle = L.circleMarker([point.lat, point.lon], {
+                        radius: radius,
+                        fillColor: '#666666',
+                        color: '#666666',
+                        weight: 0,
+                        fillOpacity: 0.4
+                    });
+                    circle.addTo(mapLayers.previous);
+                });
+            }
+
+            // Add markers for all decades up to selected
+            for (let i = 0; i <= mapCurrentDecadeIndex; i++) {
+                const decade = mapDecades[i];
+                const data = mapHousingData[decade] || [];
+                const isCurrent = (i === mapCurrentDecadeIndex);
+
+                data.forEach(point => {
+                    const radius = getMapRadius(point.units, zoom);
+                    const color = isCurrent ? '#ff6b35' : '#666666';
+                    const fillOpacity = isCurrent ? 0.8 : 0.4;
+
+                    const circle = L.circleMarker([point.lat, point.lon], {
+                        radius: radius,
+                        fillColor: color,
+                        color: color,
+                        weight: 0,
+                        fillOpacity: fillOpacity
+                    });
+
+                    if (isCurrent) {
+                        circle.addTo(mapLayers.current);
+                    } else {
+                        circle.addTo(mapLayers.previous);
+                    }
+                });
+            }
+
+            const decadeLabel = (selectedDecade - 1) + 's';
+            document.getElementById('map-current-decade').textContent = decadeLabel;
+        }
+
+        sfMap.on('zoomend', updateMapView);
+
+        document.getElementById('map-decade-slider').addEventListener('input', (e) => {
+            mapCurrentDecadeIndex = parseInt(e.target.value);
+            updateMapView();
+        });
+
+        loadMapData();
     </script>
 </body>
 </html>
