@@ -1,0 +1,17 @@
+{
+    "appclips": {
+      "apps": ["G5JFC849XY.com.raemond.reader.Clip"]
+    },
+    "applinks": {
+      "details": [
+        {
+          "appIDs": ["G5JFC849XY.com.raemond.reader.Clip"],
+          "components": [
+            {
+              "/": "/reader/*"
+            }
+          ]
+        }
+      ]
+    }
+  }
