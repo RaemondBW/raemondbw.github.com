@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader - Shared Article</title>
+
+    <!-- OpenGraph meta tags for link previews -->
+    <meta property="og:title" content="Shared Article">
+    <meta property="og:description" content="Open in Reader app to read this article in a clean, distraction-free format.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Reader">
+    <meta property="og:image" content="https://raemond.com/reader/preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shared Article">
+    <meta name="twitter:description" content="Open in Reader app to read this article in a clean, distraction-free format.">
+    <meta name="twitter:image" content="https://raemond.com/reader/preview.png">
+
+    <!-- App Links -->
+    <meta property="al:ios:app_store_id" content="YOUR_APP_STORE_ID">
+    <meta property="al:ios:app_name" content="Reader">
+    <meta property="al:ios:url" content="">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+            color: #1d1d1f;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .bookmark-card {
+            background: #000;
+            color: #fff;
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin-left: 0;
+            margin-right: 20px;
+            margin-bottom: 24px;
+        }
+
+        .article-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .article-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            object-fit: cover;
+            max-height: 300px;
+        }
+
+        .article-preview {
+            color: #1d1d1f;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .cta-button:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        .secondary-button {
+            display: inline-block;
+            background: transparent;
+            color: #0066cc;
+            padding: 14px 28px;
+            border: none;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .secondary-button:hover {
+            text-decoration: underline;
+        }
+
+        .button-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #86868b;
+        }
+
+        .full-article {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid #d2d2d7;
+        }
+
+        .full-article h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 32px 0 12px;
+            color: #1d1d1f;
+        }
+
+        .full-article h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 28px 0 10px;
+            color: #1d1d1f;
+        }
+
+        .full-article h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 24px 0 8px;
+            color: #1d1d1f;
+        }
+
+        .full-article p {
+            margin-bottom: 16px;
+            color: #1d1d1f;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .full-article blockquote {
+            border-left: 3px solid #d2d2d7;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #86868b;
+            font-style: italic;
+        }
+
+        .full-article img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: #f97316;
+            width: 0%;
+            transition: width 0.1s;
+            z-index: 100;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 0;
+            }
+            .article-preview {
+                padding: 0 20px;
+            }
+            .button-row {
+                padding: 0 20px;
+            }
+            .full-article {
+                padding: 32px 20px 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .bookmark-card {
+                margin-right: 16px;
+                padding: 16px 20px;
+            }
+            .article-title {
+                font-size: 18px;
+            }
+            .article-image {
+                border-radius: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #000;
+                color: #f5f5f7;
+            }
+            .bookmark-card {
+                background: #1d1d1f;
+            }
+            .article-preview {
+                color: #f5f5f7;
+            }
+            .full-article h2,
+            .full-article h3,
+            .full-article h4,
+            .full-article p {
+                color: #f5f5f7;
+            }
+            .full-article blockquote {
+                border-left-color: #424245;
+                color: #a1a1a6;
+            }
+            .full-article {
+                border-top-color: #424245;
+            }
+            .cta-button {
+                background: #f5f5f7;
+                color: #000;
+            }
+            .secondary-button {
+                color: #2997ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="container">
+        <div id="content">
+            <div class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <script>
+        function decodeUrlSafeBase64(str) {
+            let padded = str.replace(/-/g, '+').replace(/_/g, '/');
+            while (padded.length % 4) padded += '=';
+            return atob(padded);
+        }
+
+        function tryDecompress(data) {
+            try {
+                const compressed = Uint8Array.from(data, c => c.charCodeAt(0));
+                const decompressed = pako.inflate(compressed);
+                return new TextDecoder().decode(decompressed);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function parseArticle() {
+            const path = window.location.pathname;
+            const parts = path.split('/').filter(p => p);
+
+            if (parts.length < 2 || parts[0] !== 'reader') {
+                showAppPrompt('Shared Article', 'Open in the Reader app to view this article.');
+                return;
+            }
+
+            let base64Content = parts[1];
+            let isCompressed = base64Content.startsWith('z');
+            if (isCompressed) base64Content = base64Content.substring(1);
+
+            try {
+                const decoded = decodeUrlSafeBase64(base64Content);
+                let jsonStr = isCompressed ? tryDecompress(decoded) : decoded;
+
+                if (!jsonStr) {
+                    showAppPrompt('Shared Article', 'Open in the Reader app to view this article.');
+                    return;
+                }
+
+                const article = JSON.parse(jsonStr);
+                displayArticle(article);
+            } catch (e) {
+                console.error('Parse error:', e);
+                showAppPrompt('Shared Article', 'Open in the Reader app to view this article.');
+            }
+        }
+
+        function displayArticle(article) {
+            const title = article.title || 'Shared Article';
+            const elements = article.elements || [];
+            const sourceURL = article.sourceURL;
+
+            document.title = title + ' - Reader';
+
+            // Get first image
+            const firstImage = elements.find(e => e.type === 'image' && e.imageURL);
+
+            // Get preview text
+            const paragraphs = elements.filter(e => e.type === 'paragraph').slice(0, 2);
+            const previewText = paragraphs.map(p => p.text).join(' ');
+
+            let sourceDomain = '';
+            if (sourceURL) {
+                try { sourceDomain = new URL(sourceURL).hostname; } catch(e) {}
+            }
+
+            let html = `
+                <div class="bookmark-card">
+                    <div class="article-title">${escapeHtml(title)}</div>
+                    ${sourceDomain ? `<div class="article-meta">${escapeHtml(sourceDomain)}</div>` : ''}
+                </div>
+
+                ${firstImage ? `<img src="${escapeHtml(firstImage.imageURL)}" class="article-image" alt="${escapeHtml(firstImage.imageAlt || '')}">` : ''}
+
+                <div class="article-preview">${escapeHtml(previewText.substring(0, 280))}${previewText.length > 280 ? '...' : ''}</div>
+
+                <div class="button-row">
+                    <a href="${window.location.href}" class="cta-button">Open in Reader</a>
+                    <button class="secondary-button" onclick="toggleFullArticle()">Read here</button>
+                </div>
+
+                <div class="full-article" id="full-article" style="display: none;">
+                    ${renderElements(elements)}
+                </div>
+            `;
+
+            document.getElementById('content').innerHTML = html;
+
+            // Setup scroll progress
+            window.addEventListener('scroll', updateProgress);
+        }
+
+        function renderElements(elements) {
+            return elements.map(el => {
+                switch (el.type) {
+                    case 'title': return '';
+                    case 'heading2': return `<h2>${escapeHtml(el.text)}</h2>`;
+                    case 'heading3': return `<h3>${escapeHtml(el.text)}</h3>`;
+                    case 'heading4': return `<h4>${escapeHtml(el.text)}</h4>`;
+                    case 'paragraph': return `<p>${escapeHtml(el.text)}</p>`;
+                    case 'blockquote': return `<blockquote>${escapeHtml(el.text)}</blockquote>`;
+                    case 'image':
+                        return `<img src="${escapeHtml(el.imageURL)}" alt="${escapeHtml(el.imageAlt || '')}" loading="lazy">`;
+                    default: return '';
+                }
+            }).join('');
+        }
+
+        function toggleFullArticle() {
+            const fullArticle = document.getElementById('full-article');
+            const button = document.querySelector('.secondary-button');
+            if (fullArticle.style.display === 'none') {
+                fullArticle.style.display = 'block';
+                button.textContent = 'Hide article';
+            } else {
+                fullArticle.style.display = 'none';
+                button.textContent = 'Read here';
+            }
+        }
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function showAppPrompt(title, message) {
+            document.getElementById('content').innerHTML = `
+                <div class="bookmark-card">
+                    <div class="article-title">${escapeHtml(title)}</div>
+                </div>
+                <div class="article-preview">${escapeHtml(message)}</div>
+                <div class="button-row">
+                    <a href="${window.location.href}" class="cta-button">Open in Reader</a>
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        parseArticle();
+    </script>
+</body>
+</html>
