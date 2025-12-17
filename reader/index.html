@@ -280,15 +280,24 @@
         }
 
         function parseArticle() {
-            const path = window.location.pathname;
-            const parts = path.split('/').filter(p => p);
+            // Get article data from query parameter
+            const params = new URLSearchParams(window.location.search);
+            let base64Content = params.get('a');
 
-            if (parts.length < 2 || parts[0] !== 'reader') {
+            // Legacy: try path format
+            if (!base64Content) {
+                const path = window.location.pathname;
+                const parts = path.split('/').filter(p => p);
+                if (parts.length >= 2 && parts[0] === 'reader') {
+                    base64Content = parts[1];
+                }
+            }
+
+            if (!base64Content) {
                 showAppPrompt('Shared Article', 'Open in the Reader app to view this article.');
                 return;
             }
 
-            let base64Content = parts[1];
             let isCompressed = base64Content.startsWith('z');
             if (isCompressed) base64Content = base64Content.substring(1);
 
