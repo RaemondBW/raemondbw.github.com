@@ -1,171 +1,254 @@
-<html lang="en-US">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-<title>Privacy Policy for the <span class="app-name"></span> Mobile app </title>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Privacy Policy - Ride Call</title>
+        <meta
+            name="description"
+            content="Privacy Policy for Ride Call - The Smart Alarm Clock for Cyclists"
+        />
 
-      <!-- Section-0P -->
-      <div id="mod-0p">
-        <h1>
-          Privacy Policy for the<br><span class="app-name" style="opacity: 1;">Ride Call</span> App
-        </h1>
-        <br>
-        <p>
-          <strong>Last updated:</strong> <span id="mod-0p-date">12/30/2025</span>
-          <br>
-          <span id="mod-0p-url">
-        Previous <a id="mod-0p-link" target="_blank" href="raemond.com/RideCall">versions</a>
-      </span>
-        </p>
-        <p>
-          We are the developers of <span class="app-name" style="opacity: 1;">Ride Call</span>. This privacy policy describes how we process your personal information and which privacy rights you have when you are using <span class="app-name" style="opacity: 1;">Ride Call</span>. Please contact us at the contact information <a href="#contact_us">below</a> if you have any questions or comments.
-        </p>
-        <p>
-          </p><ol id="links">
-            <li><a href="#personal_information_collection">Personal Information Collection and Use</a></li>
-            <li><a href="#personal_information_sharing">Personal Information Sharing</a></li>
-            <li><a href="#social_login">Social Logins</a></li>
-            <li><a href="#in-app_purchase">In-app Purchase Information</a></li>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap"
+            rel="stylesheet"
+        />
 
+        <!-- Styles -->
+        <link rel="stylesheet" href="css/styles.css" />
 
-            <li><a href="#children_personal_information">Children's Personal Information</a></li>
-            <li><a href="#personal_information_retention">How Long We Keep Your Personal Information</a></li>
-            <li><a href="#personal_information_protection">How We Protect Your Personal Information</a></li>
-            <li><a href="#policy_changes">Policy Changes</a></li>
-            <li><a href="#accessibility">Accessibility</a></li>
-            <li><a href="#contact_us">Contact Us</a></li>
-          </ol>
-        <p></p>
-      </div>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/ride-plan-icon.png" />
 
-      <br>
+        <style>
+            .legal-page {
+                padding: 120px 0 80px;
+                min-height: 100vh;
+            }
 
-      <!-- Section-1P -->
-      <div id="mod-1p">
-        <h2 id="personal_information_collection">
-          <span class="num">1</span>. Personal Information Collection and Use
-        </h2>
-        <div id="mod-1p-practices">
-      <p>
-        If you grant <span class="app-name" style="opacity: 1;">Ride Call</span> permission, we may collect and use personal information from you as follows.
-      </p>
-      <ul>
-        <li id="focus-LOCATIONfp">
-          <strong>Location</strong>
-          <div>Purpose: Get accurate local weather data for the user's area.</div>
-        </li>
-        <li id="focus-NOTIFICATIONSfp">
-          <strong>Notifications</strong>
-          <div>Purpose: Send evening alerts about tomorrow's ride conditions.</div>
-        </li>
-        <li id="focus-ALARMSfp">
-          <strong>Alarms</strong>
-          <div>Purpose: Schedule wake-up alarms that work even in Do Not Disturb mode.</div>
-        </li>
-        </ul>
-      <p>
-        Please note that you can decline a permission or revoke it after you granted it in the <a href="https://support.apple.com/guide/iphone/change-app-access-to-private-data-iph251e92810/ios" target="_blank"> iOS settings</a>. If you do so, we will not collect your personal information related to that permission. However, the functionality of <span class="app-name" style="opacity: 1;">Ride Call</span> may be limited as a result.
-      </p>
-      <p>
-        We may receive technical information about your device, for example, its IP address or operating system.
-      </p>
-      </div>
-        <div id="mod-1p-practices-alt"></div>
-      </div>
+            .legal-content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0 24px;
+            }
 
-      <!-- Section-2P -->
-      <div id="sec-title-2P">
-        <br>
-        <h2 id="personal_information_sharing">
-          <span class="num">2</span>. Personal Information Sharing
-        </h2>
-        <div id="mod-2p-practices">
-    <p>We do not share any personal information.</p>
-    </div>
-        <div id="mod-2p-practices-alt"></div>
-      </div>
+            .legal-content h1 {
+                font-size: 2.5rem;
+                margin-bottom: 8px;
+                color: var(--color-text);
+            }
 
-      <!-- Section-3P -->
-      <div id="sec-title-3P">
-        <br>
-        <h2 id="social_login">
-          <span class="num">3</span>. Social Logins
-        </h2>
-        <div id="mod-3p-content"><p><span class="app-name" style="opacity: 1;">Ride Call</span> does not use any social login functionality. </p></div>
-      </div>
+            .legal-content .last-updated {
+                color: var(--color-text-light);
+                margin-bottom: 40px;
+                font-size: 0.9375rem;
+            }
 
-      <!-- Section-4P -->
-      <div id="sec-title-4P">
-        <br>
-        <h2 id="in-app_purchase">
-            <span class="num">4</span>. In-app Purchase Information
-        </h2>
-        <div id="mod-4p-content"><p><span class="app-name" style="opacity: 1;">Ride Call</span> does not process any in-app purchase information.</p></div>
-      </div>
+            .legal-content h2 {
+                font-size: 1.5rem;
+                margin-top: 40px;
+                margin-bottom: 16px;
+                color: var(--color-text);
+            }
 
-      <!-- Section-5P -->
+            .legal-content p {
+                color: var(--color-text-light);
+                line-height: 1.7;
+                margin-bottom: 16px;
+            }
 
+            .legal-content ul {
+                margin-bottom: 16px;
+                padding-left: 24px;
+            }
 
-      <!-- Section-6P -->
+            .legal-content li {
+                color: var(--color-text-light);
+                line-height: 1.7;
+                margin-bottom: 8px;
+            }
 
+            .legal-content strong {
+                color: var(--color-text);
+            }
 
-      <!-- Section-7P -->
-      <div id="sec-title-7P">
-        <br>
-        <h2 id="children_personal_information">
-          <span class="num">5</span>. Children's Personal Information
-        </h2>
-        <div id="mod-7p-content">
-    Users of <span class="app-name" style="opacity: 1;">Ride Call</span> must be at least 13 years old. We do not knowingly collect personal information from children. If we learn that we have collected personal information from a child, we will take all reasonable steps to delete it as soon as possible. If you become aware that a child has provided personal information to us, please contact us at the contact information <a href="#contact_us">below</a>.
-    </div>
-      </div>
+            .back-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--color-primary);
+                font-weight: 500;
+                margin-bottom: 32px;
+                transition: color var(--transition-fast);
+            }
 
-      <!-- Section-8P -->
-      <div id="mod-8p-title">
-        <br>
-        <h2 id="personal_information_retention">
-          <span class="num">6</span>. How Long We Keep Your Personal Information
-        </h2>
-        <div id="mod-8p-content"><p>We do not store your personal information.</p></div>
-      </div>
+            .back-link:hover {
+                color: var(--color-primary-dark);
+            }
 
-      <!-- Section-9P -->
-      <div id="sec-title-9P">
-        <br>
-        <h2 id="personal_information_protection">
-          <span class="num">7</span>. How We Protect Your Personal Information
-        </h2>
-        <div id="mod-9p-content"><p>No personal information is collected.</p></div>
-      </div>
+            .back-link svg {
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar scrolled">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img
+                        src="images/ride-plan-icon.png"
+                        alt="Ride Call"
+                        class="nav-icon"
+                    />
+                    <span>Ride Call</span>
+                </a>
+                <a href="index.html#download" class="nav-cta">Download</a>
+            </div>
+        </nav>
 
-      <!-- Section-10P -->
-      <div id="sec-title-10P">
-        <br>
-        <h2 id="policy_changes">
-          <span class="num">8</span>. Policy Changes
-        </h2>
-        <div id="mod-10p-content"><p>Privacy policy updates will be listed in the app change list.</p></div>
-      </div>
+        <main class="legal-page">
+            <div class="legal-content">
+                <a href="index.html" class="back-link">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Home
+                </a>
 
-      <!-- Section-11P -->
-      <div id="sec-title-11P">
-        <br>
-        <h2 id="accessibility">
-          <span class="num">9</span>. Accessibility
-        </h2>
-        <div id="mod-11p-content">
-  <p>This website conforms to the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines (WCAG) 2.1</a>. However, if you are having difficulties obtaining information from it, please contact us at the contact information <a href="#contact_us">below</a>. We will try to make the information available to you in another format and answer any question that you may have.</p>
-  </div>
-      </div>
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last Updated: December 30, 2025</p>
 
-      <!-- Section-12P -->
-      <div id="sec-title-12P" class="extra-margin-bottom">
-        <br>
-        <h2 id="contact_us">
-          <span class="num">10</span>. Contact Us
-        </h2>
-        <p>Please contact us if you have any questions or concerns.</p>
-        <div id="mod-12p-name"><p>Raemond Bergstrom-Wood</p></div>
-        <div id="mod-12p-email"><p><a href="support/">Support Page</a></p></div>
-      </div>
+                <p>
+                    The developers of Ride Call created this privacy policy to
+                    explain how we process personal information and your privacy
+                    rights. If you have any questions, please contact us through
+                    our support page.
+                </p>
 
-    <small>This privacy policy was generated with <a href="https://github.com/privacy-tech-lab/privacyflash-pro" target="_blank">PrivacyFlash Pro</a></small>
+                <h2>1. Personal Information Collection and Use</h2>
+                <p>
+                    The app collects the following types of data with your
+                    permission:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Location:</strong> Used to provide accurate
+                        local weather data for your area
+                    </li>
+                    <li>
+                        <strong>Notifications:</strong> Used to send evening
+                        alerts about tomorrow's ride conditions
+                    </li>
+                    <li>
+                        <strong>Alarms:</strong> Used to schedule wake-up alarms
+                        that work even in Do Not Disturb mode
+                    </li>
+                </ul>
+                <p>
+                    You can modify these permissions through iOS Settings at any
+                    time without permanent consequences beyond reduced
+                    functionality.
+                </p>
+                <p>
+                    Technical device information like IP addresses may be
+                    received during normal app operation.
+                </p>
+
+                <h2>2. Personal Information Sharing</h2>
+                <p>We do not share any personal information.</p>
+
+                <h2>3. Social Logins</h2>
+                <p>Social logins are not implemented in this app.</p>
+
+                <h2>4. In-app Purchase Information</h2>
+                <p>
+                    In-app purchase information is not processed by the
+                    application.
+                </p>
+
+                <h2>5. Children's Personal Information</h2>
+                <p>
+                    The minimum age requirement for using Ride Call is 13 years
+                    old. We commit to deleting any inadvertently collected child
+                    data promptly.
+                </p>
+
+                <h2>6. Data Retention</h2>
+                <p>We do not store your personal information.</p>
+
+                <h2>7. Data Protection</h2>
+                <p>
+                    No personal information collection occurs beyond what is
+                    necessary for the app to function.
+                </p>
+
+                <h2>8. Policy Changes</h2>
+                <p>
+                    Updates to this policy will appear in the app's change list.
+                </p>
+
+                <h2>9. Accessibility</h2>
+                <p>This website complies with WCAG 2.1 standards.</p>
+
+                <h2>10. Contact</h2>
+                <p>
+                    For questions about this privacy policy, please contact
+                    Raemond Bergstrom-Wood via our
+                    <a
+                        href="https://tally.so/r/kdGRY1"
+                        target="_blank"
+                        rel="noopener"
+                        >Support Page</a
+                    >.
+                </p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <img
+                            src="images/ride-plan-icon.png"
+                            alt="Ride Call"
+                            class="footer-icon"
+                        />
+                        <span class="footer-logo">Ride Call</span>
+                    </div>
+                    <div class="footer-links">
+                        <a
+                            href="https://tally.so/r/kdGRY1"
+                            target="_blank"
+                            rel="noopener"
+                            >Support</a
+                        >
+                        <a href="PrivacyPolicy.html">Privacy Policy</a>
+                        <a
+                            href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+                            target="_blank"
+                            rel="noopener"
+                            >Terms of Use</a
+                        >
+                    </div>
+                    <p class="footer-copyright">
+                        &copy; 2025 Ride Call. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+    </body>
 </html>

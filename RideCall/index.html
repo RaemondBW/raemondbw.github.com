@@ -1,101 +1,420 @@
-<!DOCTYPE html>
-<html dir="auto" lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Ride Call App</title>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ride Call - The Smart Alarm Clock for Cyclists</title>
+        <meta
+            name="description"
+            content="Ride Call connects your ride schedule with real-time weather intelligence to automatically manage your wake-up alarms. Stop gambling with your alarm clock."
+        />
 
-	<meta name="description" content="Ride Call App" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="icon" href="assets/favicon.png" />
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap"
+            rel="stylesheet"
+        />
 
-	<meta property="og:title" content="Ride Call App" />
-	<meta property="og:description" content="Ride Call, your cycling companion app." />
-	<meta property="og:image" content="assets/og-image.png" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="css/styles.css" />
 
-	<link rel="stylesheet" href="assets/tobi.css" />
-	<link rel="stylesheet" href="assets/style.css" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-	<style>
-		.app__name { font-family: 'Pacifico', cursive; }
-	</style>
+        <!-- Lottie Player -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-</head>
-	<body>
-		<main>
-<header class="app__header container">
-	<div class="app__logo-wrapper"> <img class="app__logo" src="content/image/app-icon.png" alt="Ride Call"></div>
-	<div class="app__infos">
-		<h1 class="app__name">Ride Call</h1>
-		<p class="app__description">Your cycling companion app.</p>
-		<div class="app__buttons app__buttons--desktop">
-			<a href="https://apps.apple.com/us/app/ride-plan/PLACEHOLDER" class="app__button-ios" target="_blank" title="Get on Appstore">
-				<img src="assets/ios-badge.svg" alt="Get on Appstore">
-			</a>
-		</div>
-	</div>
-</header>
-<div class="app__buttons app__buttons--mobile container">
-	<a href="https://apps.apple.com/us/app/ride-plan/PLACEHOLDER" class="app__button-ios" target="_blank" title="Get on Appstore">
-		<img src="assets/ios-badge.svg" alt="Get on Appstore">
-	</a>
-</div>
-<section class="app__screenshots app__section">
-	<div class="container">
-		<h2 class="app__section-title">Screenshots</h2>
-	</div>
-	<div class="app__screenshots-wrapper container-desktop">
-		<div class="app__screenshots-list">
-			<a href="content/image/01.png" class="lightbox">
-				<img src="content/image/01.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/02.png" class="lightbox">
-				<img src="content/image/02.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/03.png" class="lightbox">
-				<img src="content/image/03.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/04.png" class="lightbox">
-				<img src="content/image/04.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/05.png" class="lightbox">
-				<img src="content/image/05.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/06.png" class="lightbox">
-				<img src="content/image/06.png" class="app__screenshot" alt="" />
-			</a>
-			<a href="content/image/07.png" class="lightbox">
-				<img src="content/image/07.png" class="app__screenshot" alt="" />
-			</a>
-		</div>
-	</div>
-</section>
-		</main>
-		<footer class="footer">
-			<div class="container">
-				<div class="footer__container">
-					<ul class="footer__links">
-							<li class="footer__link">
-								<a href="support/">Support</a>
-							</li>
-							<li class="footer__link">
-								<a href="PrivacyPolicy.html">Privacy</a>
-							</li>
-							<li class="footer__link">
-								<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">EULA</a>
-							</li>
-					</ul>
-				</div>
-			</div>
-		</footer>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/ride-plan-icon.png" />
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">
+                    <img
+                        src="images/ride-plan-icon.png"
+                        alt="Ride Call"
+                        class="nav-icon"
+                    />
+                    <span>Ride Call</span>
+                </a>
+                <a href="#download" class="nav-cta">Download</a>
+            </div>
+        </nav>
 
-		<script type="text/javascript" src="assets/tobi.min.js" /></script>
-		<script>
-			window.onload = function () {
-				var tobi = new Tobi();
-			};
-		</script>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="topo-pattern"></div>
+            </div>
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge animate-fade-in">
+                        <span class="badge-icon">⏰</span>
+                        <span>Wake Up to Ride</span>
+                    </div>
+                    <h1 class="hero-title animate-fade-in-up">
+                        The smart alarm<br />
+                        <span class="gradient-text">for cyclists</span>
+                    </h1>
+                    <p class="hero-subtitle animate-fade-in-up delay-1">
+                        Stop gambling with your alarm clock. Ride Call only
+                        wakes you when conditions are actually good for riding.
+                    </p>
+                    <div class="hero-cta animate-fade-in-up delay-2">
+                        <a
+                            href="https://apps.apple.com/app/ride-call"
+                            class="app-store-btn"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="apple-icon"
+                            >
+                                <path
+                                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                                />
+                            </svg>
+                            <div class="btn-text">
+                                <span class="btn-label">Download on the</span>
+                                <span class="btn-title">App Store</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual animate-fade-in-up delay-2">
+                    <div class="phone-mockup hero-phone">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <img
+                                    src="images/hero.png"
+                                    alt="Ride Call App"
+                                />
+                            </div>
+                        </div>
+                        <div class="phone-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  </body>
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="container">
+                <div class="problem-content animate-on-scroll">
+                    <h2 class="problem-title">Every cyclist knows this pain</h2>
+                    <p class="problem-text">
+                        You set an early alarm for a morning ride, only to wake
+                        up, check the weather, and realize it's pouring rain. Or
+                        worse—you skip the alarm entirely "just in case," and
+                        miss a perfect riding day.
+                    </p>
+                    <p class="problem-solution">
+                        <strong>Ride Call ends the guesswork.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Phone Feature Section -->
+        <section id="features" class="sticky-features">
+            <div class="sticky-container">
+                <!-- Sticky Phone -->
+                <div class="sticky-phone-wrapper">
+                    <div class="phone-mockup sticky-phone">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <!-- Multiple screens that fade in/out -->
+                                <div
+                                    class="phone-screen-content screen-1 active"
+                                >
+                                    <lottie-player
+                                        id="lottie-alarm"
+                                        src="images/alarm-conditions.json"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 100%; height: 100%"
+                                        mode="normal"
+                                    ></lottie-player>
+                                </div>
+                                <div class="phone-screen-content screen-2">
+                                    <lottie-player
+                                        id="lottie-ride"
+                                        src="images/ride-preview.json"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 100%; height: 100%"
+                                        mode="normal"
+                                    ></lottie-player>
+                                </div>
+                                <div class="phone-screen-content screen-3">
+                                    <lottie-player
+                                        id="lottie-9days"
+                                        src="images/9days.json"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 100%; height: 100%"
+                                        mode="normal"
+                                    ></lottie-player>
+                                </div>
+                                <div class="phone-screen-content screen-4">
+                                    <lottie-player
+                                        id="lottie-day"
+                                        src="images/day-preview.json"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 100%; height: 100%"
+                                        mode="normal"
+                                    ></lottie-player>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phone-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Scrolling Feature Cards -->
+                <div class="feature-cards-container">
+                    <div class="feature-card-scroll" data-screen="1">
+                        <div class="feature-card-content">
+                            <div class="mobile-slide-phone">
+                                <lottie-player
+                                    class="mobile-lottie"
+                                    src="images/alarm-conditions.json"
+                                    background="transparent"
+                                    speed="1"
+                                    style="width: 100%; height: 100%"
+                                    mode="normal"
+                                ></lottie-player>
+                            </div>
+                            <div class="feature-icon-large">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 6v6l4 2" />
+                                </svg>
+                            </div>
+                            <h3>Weather-Aware Alarms</h3>
+                            <p>
+                                Your alarm only goes off when conditions meet
+                                your standards. Too rainy? Too windy? Sleep
+                                in—Ride Call already knows.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Set your weather thresholds</li>
+                                <li>
+                                    Max rain chance, wind speed, precipitation
+                                </li>
+                                <li>Automatic alarm management</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-scroll" data-screen="2">
+                        <div class="feature-card-content">
+                            <div class="mobile-slide-phone">
+                                <lottie-player
+                                    class="mobile-lottie"
+                                    src="images/ride-preview.json"
+                                    background="transparent"
+                                    speed="1"
+                                    style="width: 100%; height: 100%"
+                                    mode="normal"
+                                ></lottie-player>
+                            </div>
+                            <div class="feature-icon-large">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                                    />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                            </div>
+                            <h3>Route-Aware Forecasts</h3>
+                            <p>
+                                Link your Strava routes and get weather along
+                                your actual ride path, not just your starting
+                                location.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Weather for your entire route</li>
+                                <li>Conditions 20 miles in matter</li>
+                                <li>Sync with Strava routes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-scroll" data-screen="3">
+                        <div class="feature-card-content">
+                            <div class="mobile-slide-phone">
+                                <lottie-player
+                                    class="mobile-lottie"
+                                    src="images/9days.json"
+                                    background="transparent"
+                                    speed="1"
+                                    style="width: 100%; height: 100%"
+                                    mode="normal"
+                                ></lottie-player>
+                            </div>
+                            <div class="feature-icon-large">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <rect
+                                        x="3"
+                                        y="4"
+                                        width="18"
+                                        height="18"
+                                        rx="2"
+                                        ry="2"
+                                    />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                            </div>
+                            <h3>9-Day Ride Planner</h3>
+                            <p>
+                                See your entire ride week at a glance with
+                                beautiful hourly weather timelines, temperature
+                                charts, and condition overlays.
+                            </p>
+                            <ul class="feature-list">
+                                <li>Hourly weather timelines</li>
+                                <li>Temperature charts</li>
+                                <li>Plan your week ahead</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="feature-card-scroll" data-screen="4">
+                        <div class="feature-card-content">
+                            <div class="mobile-slide-phone">
+                                <lottie-player
+                                    class="mobile-lottie"
+                                    src="images/day-preview.json"
+                                    background="transparent"
+                                    speed="1"
+                                    style="width: 100%; height: 100%"
+                                    mode="normal"
+                                ></lottie-player>
+                            </div>
+                            <div class="feature-icon-large">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                                    />
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                </svg>
+                            </div>
+                            <h3>Evening Briefings</h3>
+                            <p>
+                                Get a single, actionable notification each
+                                evening: tomorrow's conditions, alarm status,
+                                and everything you need to plan.
+                            </p>
+                            <ul class="feature-list">
+                                <li>One notification, all the info</li>
+                                <li>Tomorrow's conditions summary</li>
+                                <li>Alarm status confirmation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="download" class="cta-section">
+            <div class="container">
+                <div class="cta-content animate-on-scroll">
+                    <h2 class="cta-title">
+                        Stop gambling with<br />your alarm clock
+                    </h2>
+                    <p class="cta-subtitle">
+                        Ride Call gives you back your sleep on bad days and
+                        makes sure you never miss a good one.
+                    </p>
+                    <p class="cta-tagline">
+                        Your rides. Your weather. Your call.
+                    </p>
+                    <a
+                        href="https://apps.apple.com/app/ride-call"
+                        class="app-store-btn large"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            class="apple-icon"
+                        >
+                            <path
+                                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                            />
+                        </svg>
+                        <div class="btn-text">
+                            <span class="btn-label">Download on the</span>
+                            <span class="btn-title">App Store</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="cta-bg">
+                    <div class="topo-pattern"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <img
+                            src="images/ride-plan-icon.png"
+                            alt="Ride Call"
+                            class="footer-icon"
+                        />
+                        <span class="footer-logo">Ride Call</span>
+                    </div>
+                    <div class="footer-links">
+                        <a
+                            href="https://tally.so/r/kdGRY1"
+                            target="_blank"
+                            rel="noopener"
+                            >Support</a
+                        >
+                        <a href="PrivacyPolicy.html">Privacy Policy</a>
+                        <a
+                            href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+                            target="_blank"
+                            rel="noopener"
+                            >Terms of Use</a
+                        >
+                    </div>
+                    <p class="footer-copyright">
+                        &copy; 2025 Ride Call. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+    </body>
 </html>
