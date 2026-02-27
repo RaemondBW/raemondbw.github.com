@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G45LKW0Y0C"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", "G-G45LKW0Y0C");
+    </script>
+
+    <title>All Innings - Live Baseball Scores</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="All Innings - A beautifully designed baseball scores app. Live scores, every play, every pitch." />
+    <meta property="og:title" content="All Innings" />
+    <meta property="og:description" content="Live baseball scores. Every play. Every pitch." />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .page {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        h1 {
+            font-family: "Playwrite DK Loopet", cursive;
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #888;
+            max-width: 360px;
+            line-height: 1.5;
+            margin-bottom: 3rem;
+        }
+
+        /* Device frame using PNG image */
+        .device {
+            position: relative;
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .device-frame {
+            width: 100%;
+            display: block;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .device-screen {
+            position: absolute;
+            /* Inset to match the iPhone 16 Pro frame's screen area */
+            top: 1.8%;
+            left: 5.2%;
+            width: 89.6%;
+            height: 96.6%;
+            border-radius: 12% / 6%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .lottie-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f8f8;
+        }
+
+        .lottie-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: #ccc;
+            font-size: 0.75rem;
+            gap: 8px;
+        }
+
+        .lottie-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: #ddd;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 100px;
+            background: #f5f5f5;
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-top: 2rem;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .device {
+                width: 220px;
+            }
+        }
+
+        @media (max-height: 800px) {
+            .device {
+                width: 220px;
+            }
+
+            .tagline {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>All Innings</h1>
+        <p class="tagline">Live baseball scores. Every play. Every pitch.</p>
+
+        <div class="device">
+            <div class="device-screen">
+                <div id="lottie-player" class="lottie-container">
+                    <div class="lottie-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16 10 8"/>
+                        </svg>
+                        Lottie animation
+                    </div>
+                </div>
+            </div>
+            <img class="device-frame" src="iPhone 16 Pro - Natural Titanium - Portrait.png" alt="" />
+        </div>
+
+        <span class="coming-soon-badge">Coming Soon</span>
+
+        <footer>
+            <a href="/">raemond.com</a> &middot; <a href="/AllInnings/support">Support</a>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll-driven Lottie animation (uses wheel events since page doesn't scroll)
+        // Place your Lottie JSON file at /AllInnings/animation.json
+
+        const lottieFile = '/AllInnings/allinnings.json';
+
+        fetch(lottieFile, { method: 'HEAD' })
+            .then(res => {
+                if (!res.ok) return;
+
+                const placeholder = document.querySelector('.lottie-placeholder');
+                if (placeholder) placeholder.remove();
+
+                const anim = lottie.loadAnimation({
+                    container: document.getElementById('lottie-player'),
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: false,
+                    path: lottieFile
+                });
+
+                anim.addEventListener('DOMLoaded', () => {
+                    const totalFrames = anim.totalFrames;
+                    let currentFrame = 0;
+
+                    window.addEventListener('wheel', (e) => {
+                        e.preventDefault();
+                        currentFrame += e.deltaY * 0.05;
+                        currentFrame = Math.min(Math.max(currentFrame, 0), totalFrames - 1);
+                        anim.goToAndStop(Math.floor(currentFrame), true);
+                    }, { passive: false });
+
+                    // Touch support
+                    let lastTouchY = 0;
+                    window.addEventListener('touchstart', (e) => {
+                        lastTouchY = e.touches[0].clientY;
+                    }, { passive: true });
+
+                    window.addEventListener('touchmove', (e) => {
+                        e.preventDefault();
+                        const touchY = e.touches[0].clientY;
+                        const delta = lastTouchY - touchY;
+                        lastTouchY = touchY;
+                        currentFrame += delta * 0.15;
+                        currentFrame = Math.min(Math.max(currentFrame, 0), totalFrames - 1);
+                        anim.goToAndStop(Math.floor(currentFrame), true);
+                    }, { passive: false });
+                });
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>
