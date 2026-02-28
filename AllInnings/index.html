@@ -31,7 +31,6 @@
 
         html, body {
             height: 100%;
-            overflow: hidden;
         }
 
         body {
@@ -137,10 +136,7 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 0;
-            right: 0;
+            margin-top: auto;
             text-align: center;
             color: #ccc;
             font-size: 0.8rem;
@@ -222,40 +218,12 @@
                 const placeholder = document.querySelector('.lottie-placeholder');
                 if (placeholder) placeholder.remove();
 
-                const anim = lottie.loadAnimation({
+                lottie.loadAnimation({
                     container: document.getElementById('lottie-player'),
                     renderer: 'svg',
-                    loop: false,
-                    autoplay: false,
+                    loop: true,
+                    autoplay: true,
                     path: lottieFile
-                });
-
-                anim.addEventListener('DOMLoaded', () => {
-                    const totalFrames = anim.totalFrames;
-                    let currentFrame = 0;
-
-                    window.addEventListener('wheel', (e) => {
-                        e.preventDefault();
-                        currentFrame += e.deltaY * 0.05;
-                        currentFrame = Math.min(Math.max(currentFrame, 0), totalFrames - 1);
-                        anim.goToAndStop(Math.floor(currentFrame), true);
-                    }, { passive: false });
-
-                    // Touch support
-                    let lastTouchY = 0;
-                    window.addEventListener('touchstart', (e) => {
-                        lastTouchY = e.touches[0].clientY;
-                    }, { passive: true });
-
-                    window.addEventListener('touchmove', (e) => {
-                        e.preventDefault();
-                        const touchY = e.touches[0].clientY;
-                        const delta = lastTouchY - touchY;
-                        lastTouchY = touchY;
-                        currentFrame += delta * 0.15;
-                        currentFrame = Math.min(Math.max(currentFrame, 0), totalFrames - 1);
-                        anim.goToAndStop(Math.floor(currentFrame), true);
-                    }, { passive: false });
                 });
             })
             .catch(() => {});
