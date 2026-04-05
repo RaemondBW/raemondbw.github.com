@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Live Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #121212;
+    --surface: #1E1E1E;
+    --surface2: #2C2C2C;
+    --primary: #BB86FC;
+    --secondary: #03DAC6;
+    --accent: #CF6679;
+    --text: #E0E0E0;
+    --text2: #9E9E9E;
+    --earth: #4FC3F7;
+    --moon: #BDBDBD;
+    --trajectory: rgba(187,134,252,0.5);
+    --artemis: #FF7043;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    cursor: grab;
+  }
+  #canvas:active { cursor: grabbing; }
+
+  .panel {
+    position: absolute;
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+
+  .title-panel {
+    top: 20px; left: 20px;
+  }
+  .title-panel h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .title-panel .subtitle {
+    color: var(--text2);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .title-panel .live-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(76,175,80,0); }
+  }
+
+  .info-panel {
+    top: 20px; right: 20px;
+    min-width: 240px;
+  }
+  .info-panel .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text2);
+    margin-bottom: 4px;
+  }
+  .info-panel .value {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .info-panel .value.primary { color: var(--artemis); }
+  .info-panel .value.secondary { color: var(--secondary); }
+  .info-panel .value small {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text2);
+    margin-left: 4px;
+  }
+  .info-panel .divider {
+    height: 1px;
+    background: var(--surface2);
+    margin: 12px 0;
+  }
+
+  .legend-panel {
+    bottom: 80px; left: 20px;
+    display: flex;
+    gap: 16px;
+    padding: 14px 20px;
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .time-panel {
+    bottom: 80px;
+    right: 20px;
+    text-align: right;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .time-panel .utc {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--surface2);
+    z-index: 10;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 1s linear;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s;
+  }
+  .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+  .loading-overlay .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--surface2);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .loading-overlay p {
+    margin-top: 16px;
+    color: var(--text2);
+    font-size: 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .scrubber-panel {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    min-width: 420px;
+    max-width: 600px;
+    width: 40vw;
+    z-index: 20;
+  }
+  .scrubber-panel input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  .scrubber-panel input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(187,134,252,0.5);
+    transition: transform 0.15s;
+  }
+  .scrubber-panel input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+  .scrubber-panel input[type="range"]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(187,134,252,0.5);
+  }
+  .scrubber-date {
+    font-size: 11px;
+    color: var(--text2);
+    min-width: 56px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .now-btn {
+    background: var(--primary);
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .now-btn:hover { transform: scale(1.05); }
+  .now-btn.active {
+    background: var(--surface2);
+    color: var(--text2);
+  }
+
+  .unit-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .unit-toggle .toggle-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .unit-toggle .toggle-label.active { color: var(--text); }
+  .toggle-track {
+    width: 36px;
+    height: 20px;
+    background: var(--surface2);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle-track.on { background: var(--primary); }
+  .toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--text);
+    border-radius: 50%;
+    transition: left 0.2s;
+  }
+  .toggle-track.on .toggle-thumb { left: 18px; }
+
+  .credit {
+    position: absolute;
+    bottom: 142px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--text2);
+    opacity: 0.5;
+    z-index: 10;
+  }
+  .credit a { color: var(--text2); }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="panel title-panel">
+  <h1><span class="live-dot"></span>Artemis II</h1>
+  <div class="subtitle">Live mission tracker — Top-down view</div>
+</div>
+
+<div class="panel info-panel" id="infoPanel">
+  <div class="label">Distance from Earth</div>
+  <div class="value primary" id="distEarth">—<small>km</small></div>
+  <div class="label">Distance from Moon</div>
+  <div class="value secondary" id="distMoon">—<small>km</small></div>
+  <div class="divider"></div>
+  <div class="label">Velocity</div>
+  <div class="value" id="velocity">—<small>km/s</small></div>
+  <div class="label">Mission elapsed time</div>
+  <div class="value" id="met" style="font-size:16px;">—</div>
+  <div class="divider"></div>
+  <div class="unit-toggle">
+    <span class="toggle-label active" id="labelKm">KM</span>
+    <div class="toggle-track" id="unitToggle"><div class="toggle-thumb"></div></div>
+    <span class="toggle-label" id="labelMi">MI</span>
+  </div>
+</div>
+
+<div class="panel legend-panel">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--earth)"></div>Earth</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--moon)"></div>Moon</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--artemis)"></div>Artemis II</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--trajectory);border:1px solid var(--primary)"></div>Trajectory</div>
+</div>
+
+<div class="panel time-panel">
+  <div>Mission time (UTC)</div>
+  <div class="utc" id="utcClock">—</div>
+  <div style="margin-top:10px;" id="localLabel">Local time</div>
+  <div class="utc" id="localClock">—</div>
+</div>
+
+<div class="panel scrubber-panel" id="scrubberPanel">
+  <span class="scrubber-date" id="scrubStart">Apr 2 01:59</span>
+  <input type="range" id="scrubber" min="0" max="1000" value="1000" step="1">
+  <span class="scrubber-date" id="scrubEnd">Apr 10 23:00</span>
+  <button class="now-btn" id="nowBtn">LIVE</button>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <p>Loading trajectory data…</p>
+</div>
+
+<div class="credit">Data: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank">JPL Horizons</a> · <a href="https://www.nasa.gov/missions/artemis-ii/arow/" target="_blank">NASA AROW</a></div>
+
+<script>
+// ── Config ──────────────────────────────────────────────────────────
+const MISSION_START = Date.UTC(2026, 3, 1, 22, 35, 12); // Apr 1 22:35:12 UTC
+const MISSION_END   = Date.UTC(2026, 3, 11, 0, 17, 0);  // Apr 11 00:17 UTC
+const MOON_ORBIT_RADIUS_KM = 384400;
+const EARTH_RADIUS_KM = 6371;
+const MOON_RADIUS_KM = 1737;
+
+// ── Planets config ──────────────────────────────────────────────────
+const PLANETS = [
+  { id: '10',  name: 'Sun',     img: 'sun.png',     color: '#FDD835', radiusKm: 695700 },
+  { id: '199', name: 'Mercury', img: 'mercury.png', color: '#9E9E9E', radiusKm: 2440 },
+  { id: '299', name: 'Venus',   img: 'venus.png',   color: '#FFE0B2', radiusKm: 6052 },
+  { id: '499', name: 'Mars',    img: 'mars.png',    color: '#EF5350', radiusKm: 3390 },
+  { id: '599', name: 'Jupiter', img: 'jupiter.png', color: '#FFAB91', radiusKm: 69911 },
+  { id: '699', name: 'Saturn',  img: 'saturn.png',  color: '#FFF9C4', radiusKm: 58232 },
+  { id: '799', name: 'Uranus',  img: 'uranus.png',  color: '#80DEEA', radiusKm: 25362 },
+  { id: '899', name: 'Neptune', img: 'neptune.png', color: '#5C6BC0', radiusKm: 24622 },
+];
+
+// ── Preload images ─────────────────────────────────────────────────
+const BODY_IMAGES = {};
+function preloadImages() {
+  const bodies = [
+    { key: 'earth', src: 'earth.png' },
+    { key: 'moon',  src: 'moon.png' },
+    ...PLANETS.map(p => ({ key: p.id, src: p.img })),
+  ];
+  for (const b of bodies) {
+    const img = new Image();
+    img.src = b.src;
+    BODY_IMAGES[b.key] = img;
+  }
+}
+preloadImages();
+
+// ── State ───────────────────────────────────────────────────────────
+let artemisData = [];  // {t, x, y, z, vx, vy, vz}
+let moonData = [];     // {t, x, y, z}
+let planetData = {};   // { id: [{t, x, y, z}] }
+let pan = { x: 0, y: 0 };
+let zoom = 1;
+let dragging = false;
+let dragStart = { x: 0, y: 0 };
+let panStart = { x: 0, y: 0 };
+let isLive = true;
+let overrideTime = null; // null = live
+let useMiles = false;
+const KM_TO_MI = 0.621371;
+
+// ── Unit toggle ─────────────────────────────────────────────────────
+const unitToggle = document.getElementById('unitToggle');
+const labelKm = document.getElementById('labelKm');
+const labelMi = document.getElementById('labelMi');
+function setUnit(miles) {
+  useMiles = miles;
+  unitToggle.classList.toggle('on', useMiles);
+  labelKm.classList.toggle('active', !useMiles);
+  labelMi.classList.toggle('active', useMiles);
+}
+unitToggle.addEventListener('click', () => setUnit(!useMiles));
+labelKm.addEventListener('click', () => setUnit(false));
+labelMi.addEventListener('click', () => setUnit(true));
+
+function formatDist(km) {
+  const val = useMiles ? km * KM_TO_MI : km;
+  const unit = useMiles ? 'mi' : 'km';
+  if (val >= 1e9) return (val / 1e9).toFixed(1) + 'B ' + unit;
+  if (val >= 1e6) return (val / 1e6).toFixed(1) + 'M ' + unit;
+  if (val >= 1e4) return formatNumber(val) + ' ' + unit;
+  return val.toFixed(0) + ' ' + unit;
+}
+
+function formatSpeed(kmPerSec) {
+  const val = useMiles ? kmPerSec * KM_TO_MI : kmPerSec;
+  const unit = useMiles ? 'mi/s' : 'km/s';
+  return val.toFixed(2) + ' ' + unit;
+}
+
+function unitLabel() { return useMiles ? 'mi' : 'km'; }
+
+// ── Canvas setup ────────────────────────────────────────────────────
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  const dpr = window.devicePixelRatio || 1;
+  W = canvas.clientWidth;
+  H = canvas.clientHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── Pan & Zoom ──────────────────────────────────────────────────────
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  dragStart = { x: e.clientX, y: e.clientY };
+  panStart = { ...pan };
+});
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  pan.x = panStart.x + (e.clientX - dragStart.x);
+  pan.y = panStart.y + (e.clientY - dragStart.y);
+});
+window.addEventListener('mouseup', () => dragging = false);
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const factor = e.deltaY > 0 ? 0.9 : 1.1;
+  const mx = e.clientX - W / 2 - pan.x;
+  const my = e.clientY - H / 2 - pan.y;
+  zoom *= factor;
+  zoom = Math.max(0.0005, Math.min(10, zoom));
+  pan.x -= mx * (factor - 1);
+  pan.y -= my * (factor - 1);
+}, { passive: false });
+
+// Touch support
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    dragging = true;
+    dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    panStart = { ...pan };
+  }
+});
+canvas.addEventListener('touchmove', e => {
+  if (dragging && e.touches.length === 1) {
+    e.preventDefault();
+    pan.x = panStart.x + (e.touches[0].clientX - dragStart.x);
+    pan.y = panStart.y + (e.touches[0].clientY - dragStart.y);
+  }
+}, { passive: false });
+canvas.addEventListener('touchend', () => dragging = false);
+
+// ── Data loading ────────────────────────────────────────────────────
+// Trajectory data is pre-fetched from JPL Horizons and stored as static JSON.
+// Format: arrays of [t, x, y, z] or [t, x, y, z, vx, vy, vz]
+function unpackData(arr) {
+  return arr.map(p => ({
+    t: p[0], x: p[1], y: p[2], z: p[3],
+    vx: p[4] || 0, vy: p[5] || 0, vz: p[6] || 0,
+  }));
+}
+
+const PLANET_KEY_MAP = {
+  '10': 'sun', '199': 'mercury', '299': 'venus', '499': 'mars',
+  '599': 'jupiter', '699': 'saturn', '799': 'uranus', '899': 'neptune',
+};
+
+async function fetchData() {
+  try {
+    const res = await fetch('trajectory_data.json');
+    const raw = await res.json();
+
+    artemisData = unpackData(raw.artemis);
+    moonData = unpackData(raw.moon);
+
+    for (const p of PLANETS) {
+      const key = PLANET_KEY_MAP[p.id];
+      if (key && raw[key]) planetData[p.id] = unpackData(raw[key]);
+    }
+
+    if (artemisData.length === 0) throw new Error('No Artemis data in file');
+    document.getElementById('loading').classList.add('hidden');
+  } catch (err) {
+    console.error('Load error:', err);
+    document.querySelector('#loading p').textContent = `Error: ${err.message}`;
+  }
+}
+
+// ── Interpolation ───────────────────────────────────────────────────
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function interpolate(data, time) {
+  if (data.length === 0) return null;
+  if (time <= data[0].t) return data[0];
+  if (time >= data[data.length - 1].t) return data[data.length - 1];
+
+  // Binary search
+  let lo = 0, hi = data.length - 1;
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (data[mid].t <= time) lo = mid; else hi = mid;
+  }
+
+  const frac = (time - data[lo].t) / (data[hi].t - data[lo].t);
+  return {
+    t: time,
+    x: lerp(data[lo].x, data[hi].x, frac),
+    y: lerp(data[lo].y, data[hi].y, frac),
+    z: lerp(data[lo].z, data[hi].z, frac),
+    vx: lerp(data[lo].vx || 0, data[hi].vx || 0, frac),
+    vy: lerp(data[lo].vy || 0, data[hi].vy || 0, frac),
+    vz: lerp(data[lo].vz || 0, data[hi].vz || 0, frac),
+  };
+}
+
+// ── Drawing ─────────────────────────────────────────────────────────
+function kmToScreen(km) {
+  const base = Math.min(W, H) / (MOON_ORBIT_RADIUS_KM * 2.8);
+  return km * base * zoom;
+}
+
+function worldToScreen(x, y) {
+  return {
+    sx: W / 2 + pan.x + kmToScreen(x),
+    sy: H / 2 + pan.y - kmToScreen(y), // flip Y
+  };
+}
+
+function drawCircle(cx, cy, r, fill, stroke, lineWidth) {
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineWidth || 1; ctx.stroke(); }
+}
+
+function drawGrid() {
+  ctx.save();
+  const steps = [50000, 100000, 200000, 300000, 400000];
+  ctx.setLineDash([2, 6]);
+  ctx.lineWidth = 0.5;
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+
+  for (const r of steps) {
+    const { sx, sy } = worldToScreen(0, 0);
+    const sr = kmToScreen(r);
+    ctx.beginPath();
+    ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Label
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.font = '10px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${(r / 1000).toFixed(0)}k km`, sx, sy - sr - 4);
+    ctx.setLineDash([2, 6]);
+  }
+  ctx.restore();
+}
+
+function drawMoonOrbit(moonPos) {
+  if (!moonPos) return;
+  const dist = Math.sqrt(moonPos.x ** 2 + moonPos.y ** 2);
+  const { sx, sy } = worldToScreen(0, 0);
+  const sr = kmToScreen(dist);
+
+  ctx.save();
+  ctx.setLineDash([4, 8]);
+  ctx.strokeStyle = 'rgba(189,189,189,0.15)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawTrajectory(now) {
+  if (artemisData.length < 2) return;
+
+  ctx.save();
+  ctx.lineWidth = 2;
+
+  // Past trajectory (solid)
+  ctx.beginPath();
+  let started = false;
+  for (const pt of artemisData) {
+    if (pt.t > now) break;
+    const { sx, sy } = worldToScreen(pt.x, pt.y);
+    if (!started) { ctx.moveTo(sx, sy); started = true; }
+    else ctx.lineTo(sx, sy);
+  }
+  ctx.strokeStyle = 'rgba(187,134,252,0.6)';
+  ctx.stroke();
+
+  // Future trajectory (dashed)
+  ctx.beginPath();
+  ctx.setLineDash([6, 6]);
+  started = false;
+  for (const pt of artemisData) {
+    if (pt.t < now) continue;
+    const { sx, sy } = worldToScreen(pt.x, pt.y);
+    if (!started) {
+      // connect from current pos
+      const cur = interpolate(artemisData, now);
+      if (cur) {
+        const c = worldToScreen(cur.x, cur.y);
+        ctx.moveTo(c.sx, c.sy);
+        ctx.lineTo(sx, sy);
+      } else {
+        ctx.moveTo(sx, sy);
+      }
+      started = true;
+    } else {
+      ctx.lineTo(sx, sy);
+    }
+  }
+  ctx.strokeStyle = 'rgba(187,134,252,0.2)';
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBodyImage(sx, sy, r, imgKey, color) {
+  const img = BODY_IMAGES[imgKey];
+  if (img && img.complete && img.naturalWidth > 0) {
+    const size = r * 2;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(img, sx - r, sy - r, size, size);
+    ctx.restore();
+  } else {
+    drawCircle(sx, sy, r, color);
+  }
+}
+
+function drawBody(x, y, radiusKm, color, label, minPx, imgKey) {
+  const { sx, sy } = worldToScreen(x, y);
+  const realR = kmToScreen(radiusKm);
+  const r = Math.max(realR, minPx || 6);
+
+  // Glow
+  const glowR = Math.max(r * 3, 12);
+  const grad = ctx.createRadialGradient(sx, sy, r * 0.5, sx, sy, glowR);
+  grad.addColorStop(0, color + '4D');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(sx - glowR, sy - glowR, glowR * 2, glowR * 2);
+
+  // Draw image
+  drawBodyImage(sx, sy, r, imgKey, color);
+
+  // Label
+  const labelOffset = r + 6;
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  ctx.font = '500 12px Inter';
+  ctx.textAlign = 'center';
+  ctx.fillText(label, sx, sy - labelOffset);
+}
+
+function drawArtemis(pos) {
+  if (!pos) return;
+  const { sx, sy } = worldToScreen(pos.x, pos.y);
+  const r = 5;
+
+  // Pulse ring
+  const t = (Date.now() % 2000) / 2000;
+  const pulseR = r + 15 * t;
+  ctx.beginPath();
+  ctx.arc(sx, sy, pulseR, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(255,112,67,${0.6 * (1 - t)})`;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Glow
+  const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, 20);
+  grad.addColorStop(0, 'rgba(255,112,67,0.4)');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(sx - 20, sy - 20, 40, 40);
+
+  // Dot
+  drawCircle(sx, sy, r, '#FF7043');
+  drawCircle(sx, sy, r - 1.5, '#FFAB91');
+
+  // Label
+  ctx.fillStyle = '#FF7043';
+  ctx.font = '600 12px Inter';
+  ctx.textAlign = 'left';
+  ctx.fillText('Orion', sx + 12, sy - 4);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.font = '11px Inter';
+  ctx.fillText('Artemis II', sx + 12, sy + 10);
+}
+
+function drawPlanets(now) {
+  for (const planet of PLANETS) {
+    const data = planetData[planet.id];
+    if (!data || data.length === 0) continue;
+    const pos = interpolate(data, now);
+    if (!pos) continue;
+
+    const { sx, sy } = worldToScreen(pos.x, pos.y);
+    const onScreen = sx > -50 && sx < W + 50 && sy > -50 && sy < H + 50;
+
+    if (onScreen) {
+      // Real-scale radius, with minimum so it's always visible
+      const realR = kmToScreen(planet.radiusKm);
+      const r = Math.max(realR, 4);
+
+      // Glow
+      const glowR = Math.max(r * 2.5, 16);
+      const grad = ctx.createRadialGradient(sx, sy, r * 0.3, sx, sy, glowR);
+      grad.addColorStop(0, planet.color + '66');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(sx - glowR, sy - glowR, glowR * 2, glowR * 2);
+
+      // Draw image
+      drawBodyImage(sx, sy, r, planet.id, planet.color);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.font = '500 11px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText(planet.name, sx, sy - r - 6);
+    } else {
+      // Calculate how far off-screen the planet is (in km)
+      const offX = sx < 0 ? -sx : sx > W ? sx - W : 0;
+      const offY = sy < 0 ? -sy : sy > H ? sy - H : 0;
+      const offScreenPx = Math.sqrt(offX * offX + offY * offY);
+      const base = Math.min(W, H) / (MOON_ORBIT_RADIUS_KM * 2.8);
+      const offScreenKm = offScreenPx / (base * zoom);
+
+      // Edge indicator position
+      const cx = W / 2, cy = H / 2;
+      const angle = Math.atan2(sy - cy, sx - cx);
+      const margin = 40;
+      const edgeX = Math.max(margin, Math.min(W - margin, cx + Math.cos(angle) * (W / 2 - margin)));
+      const edgeY = Math.max(margin, Math.min(H - margin, cy + Math.sin(angle) * (H / 2 - margin)));
+
+      // Arrow
+      ctx.save();
+      ctx.translate(edgeX, edgeY);
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(10, 0);
+      ctx.lineTo(0, -4);
+      ctx.lineTo(0, 4);
+      ctx.closePath();
+      ctx.fillStyle = planet.color + 'AA';
+      ctx.fill();
+      ctx.restore();
+
+      // Thumbnail image at edge
+      drawBodyImage(edgeX - 18, edgeY, 8, planet.id, planet.color);
+
+      ctx.fillStyle = planet.color + 'CC';
+      ctx.font = '500 10px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText(planet.name, edgeX, edgeY - 14);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '9px Inter';
+      ctx.fillText(formatDist(offScreenKm) + ' away', edgeX, edgeY + 16);
+    }
+  }
+}
+
+// ── UI updates ──────────────────────────────────────────────────────
+function formatNumber(n) {
+  return n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+}
+
+function formatMET(ms) {
+  const neg = ms < 0;
+  ms = Math.abs(ms);
+  const s = Math.floor(ms / 1000) % 60;
+  const m = Math.floor(ms / 60000) % 60;
+  const h = Math.floor(ms / 3600000) % 24;
+  const d = Math.floor(ms / 86400000);
+  const pad = n => String(n).padStart(2, '0');
+  return `${neg ? 'T-' : 'T+'} ${d}d ${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
+function updateUI(now, artemisPos, moonPos) {
+  const utcStr = new Date(now).toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+  document.getElementById('utcClock').textContent = utcStr;
+  const d = new Date(now);
+  const tz = d.toLocaleTimeString(undefined, { timeZoneName: 'short' }).split(' ').pop();
+  document.getElementById('localLabel').textContent = `Local time (${tz})`;
+  const localStr = d.getFullYear() + '-'
+    + String(d.getMonth() + 1).padStart(2, '0') + '-'
+    + String(d.getDate()).padStart(2, '0') + ' '
+    + String(d.getHours()).padStart(2, '0') + ':'
+    + String(d.getMinutes()).padStart(2, '0') + ':'
+    + String(d.getSeconds()).padStart(2, '0');
+  document.getElementById('localClock').textContent = localStr;
+
+  if (artemisPos) {
+    const distE = Math.sqrt(artemisPos.x ** 2 + artemisPos.y ** 2 + artemisPos.z ** 2);
+    document.getElementById('distEarth').innerHTML = `${formatDist(distE)}`;
+
+    if (moonPos) {
+      const dx = artemisPos.x - moonPos.x;
+      const dy = artemisPos.y - moonPos.y;
+      const dz = artemisPos.z - moonPos.z;
+      const distM = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      document.getElementById('distMoon').innerHTML = `${formatDist(distM)}`;
+    }
+
+    const speed = Math.sqrt(artemisPos.vx ** 2 + artemisPos.vy ** 2 + artemisPos.vz ** 2);
+    document.getElementById('velocity').innerHTML = `${formatSpeed(speed)}`;
+  }
+
+  const met = now - MISSION_START;
+  document.getElementById('met').textContent = formatMET(met);
+
+  const progress = Math.max(0, Math.min(1, (now - MISSION_START) / (MISSION_END - MISSION_START)));
+  document.getElementById('progressFill').style.width = `${progress * 100}%`;
+}
+
+// ── Time scrubber ───────────────────────────────────────────────────
+const DATA_START = Date.UTC(2026, 3, 2, 1, 59, 0); // earliest Horizons data
+const DATA_END   = Date.UTC(2026, 3, 10, 23, 0, 0);
+
+const scrubber = document.getElementById('scrubber');
+const nowBtn = document.getElementById('nowBtn');
+const liveDot = document.querySelector('.live-dot');
+
+function scrubberToTime(val) {
+  return DATA_START + (val / 1000) * (DATA_END - DATA_START);
+}
+
+function timeToScrubber(t) {
+  return Math.round(((t - DATA_START) / (DATA_END - DATA_START)) * 1000);
+}
+
+scrubber.addEventListener('input', () => {
+  isLive = false;
+  overrideTime = scrubberToTime(parseFloat(scrubber.value));
+  nowBtn.classList.add('active');
+  nowBtn.textContent = 'LIVE';
+  liveDot.style.background = '#9E9E9E';
+  liveDot.style.animation = 'none';
+});
+
+nowBtn.addEventListener('click', () => {
+  isLive = true;
+  overrideTime = null;
+  nowBtn.classList.remove('active');
+  nowBtn.textContent = 'LIVE';
+  liveDot.style.background = '#4CAF50';
+  liveDot.style.animation = 'pulse 2s infinite';
+});
+
+function getCurrentTime() {
+  return overrideTime !== null ? overrideTime : Date.now();
+}
+
+// ── Render loop ─────────────────────────────────────────────────────
+function render() {
+  ctx.clearRect(0, 0, W, H);
+
+  const now = getCurrentTime();
+
+  // Update scrubber position when live
+  if (isLive) {
+    scrubber.value = timeToScrubber(now);
+  }
+
+  const moonPos = interpolate(moonData, now);
+  const artemisPos = interpolate(artemisData, now);
+
+  drawGrid();
+  drawMoonOrbit(moonPos);
+  drawTrajectory(now);
+
+  // Earth at center
+  drawBody(0, 0, EARTH_RADIUS_KM, '#4FC3F7', 'Earth', 8, 'earth');
+
+  // Moon
+  if (moonPos) {
+    drawBody(moonPos.x, moonPos.y, MOON_RADIUS_KM, '#BDBDBD', 'Moon', 5, 'moon');
+  }
+
+  // Planets
+  drawPlanets(now);
+
+  // Artemis
+  drawArtemis(artemisPos);
+
+  updateUI(now, artemisPos, moonPos);
+  requestAnimationFrame(render);
+}
+
+// ── Init ────────────────────────────────────────────────────────────
+fetchData().then(() => {
+  render();
+});
+
+</script>
+</body>
+</html>
