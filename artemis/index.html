@@ -755,8 +755,7 @@ function drawBodyImage(sx, sy, r, imgKey, color) {
 
 function drawBody(x, y, radiusKm, color, label, minPx, imgKey) {
   const { sx, sy } = worldToScreen(x, y);
-  const realR = kmToScreen(radiusKm);
-  const r = Math.max(realR, minPx || 6);
+  const r = zoomBodyRadius(radiusKm, minPx || 6);
 
   // Glow
   const glowR = Math.max(r * 3, 12);
@@ -813,6 +812,15 @@ function drawArtemis(pos) {
   ctx.fillText('Artemis II', sx + 12, sy + 10);
 }
 
+// ── Zoom-based body sizing ───────────────────────────────────────
+function zoomBodyRadius(radiusKm, minPx) {
+  // Power curve keeps size differences visible without extreme ratios
+  // Gentle zoom exponent (0.15) so bodies stay distinct even when zoomed way out
+  const base = 8 * Math.pow(radiusKm / EARTH_RADIUS_KM, 0.45);
+  const zoomFactor = Math.pow(Math.max(zoom, 0.0005), 0.15);
+  return Math.max(base * zoomFactor, minPx || 4);
+}
+
 function drawPlanets(now) {
   for (const planet of PLANETS) {
     const data = planetData[planet.id];
@@ -824,9 +832,7 @@ function drawPlanets(now) {
     const onScreen = sx > -50 && sx < W + 50 && sy > -50 && sy < H + 50;
 
     if (onScreen) {
-      // Real-scale radius, with minimum so it's always visible
-      const realR = kmToScreen(planet.radiusKm);
-      const r = Math.max(realR, 4);
+      const r = zoomBodyRadius(planet.radiusKm, 4);
 
       // Glow
       const glowR = Math.max(r * 2.5, 16);
