@@ -296,6 +296,83 @@
     z-index: 10;
   }
   .credit a { color: var(--text2); }
+
+  /* ── Mobile layout ─────────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .panel {
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+
+    .title-panel {
+      top: 10px; left: 10px;
+      padding: 8px 12px;
+    }
+    .title-panel h1 { font-size: 16px; }
+    .title-panel .subtitle { font-size: 11px; }
+
+    .info-panel {
+      top: auto;
+      bottom: 60px;
+      right: 10px;
+      left: auto;
+      min-width: 0;
+      width: auto;
+      max-width: 160px;
+      padding: 10px 12px;
+    }
+    .info-panel .label { font-size: 9px; margin-bottom: 2px; }
+    .info-panel .value { font-size: 14px; margin-bottom: 8px; }
+    .info-panel .value small { font-size: 10px; }
+    .info-panel .value#met { font-size: 12px !important; }
+    .info-panel .divider { margin: 6px 0; }
+    .info-panel .unit-toggle { gap: 4px; }
+    .info-panel .unit-toggle .toggle-label { font-size: 9px; }
+    .toggle-track { width: 28px; height: 16px; }
+    .toggle-thumb { width: 12px; height: 12px; }
+    .toggle-track.on .toggle-thumb { left: 14px; }
+
+    .legend-panel {
+      bottom: 60px;
+      left: 10px;
+      right: auto;
+      gap: 8px;
+      padding: 8px 10px;
+      font-size: 10px;
+      flex-wrap: wrap;
+      max-width: 150px;
+    }
+    .legend-dot { width: 8px; height: 8px; }
+
+    .time-panel {
+      top: 10px;
+      right: 10px;
+      bottom: auto;
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+    .time-panel .utc { font-size: 12px; }
+
+    .scrubber-panel {
+      min-width: 0;
+      width: calc(100% - 20px);
+      max-width: none;
+      bottom: 10px;
+      padding: 8px 12px;
+      gap: 6px;
+    }
+    .scrubber-date { font-size: 9px; min-width: 40px; }
+    .now-btn { padding: 4px 10px; font-size: 10px; }
+
+    .credit {
+      bottom: 1px;
+      top: auto;
+      font-size: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+  }
 </style>
 </head>
 <body>
@@ -304,7 +381,7 @@
 
 <div class="panel title-panel">
   <h1><span class="live-dot"></span>Artemis II</h1>
-  <div class="subtitle">Live mission tracker — Top-down view</div>
+  <div class="subtitle">Live mission tracker</div>
 </div>
 
 <div class="panel info-panel" id="infoPanel">
@@ -899,6 +976,63 @@ function getCurrentTime() {
   return overrideTime !== null ? overrideTime : Date.now();
 }
 
+// ── Auto-frame ──────────────────────────────────────────────────────
+let autoFrame = true;
+
+function computeAutoFrame(artemisPos, moonPos) {
+  const points = [{ x: 0, y: 0 }];
+  if (moonPos) points.push({ x: moonPos.x, y: moonPos.y });
+  if (artemisPos) points.push({ x: artemisPos.x, y: artemisPos.y });
+  if (points.length < 2) return null;
+
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for (const p of points) {
+    minX = Math.min(minX, p.x);
+    maxX = Math.max(maxX, p.x);
+    minY = Math.min(minY, p.y);
+    maxY = Math.max(maxY, p.y);
+  }
+
+  const padFrac = 0.55;
+  const rangeX = (maxX - minX) || 1;
+  const rangeY = (maxY - minY) || 1;
+  minX -= rangeX * padFrac;
+  maxX += rangeX * padFrac;
+  minY -= rangeY * padFrac;
+  maxY += rangeY * padFrac;
+
+  const centerX = (minX + maxX) / 2;
+  const centerY = (minY + maxY) / 2;
+  const spanX = maxX - minX;
+  const spanY = maxY - minY;
+
+  const base = Math.min(W, H) / (MOON_ORBIT_RADIUS_KM * 2.8);
+  const zoomX = W / (spanX * base);
+  const zoomY = H / (spanY * base);
+  const targetZoom = Math.min(zoomX, zoomY);
+
+  const targetPanX = -centerX * base * targetZoom;
+  const targetPanY = centerY * base * targetZoom;
+
+  return { zoom: targetZoom, panX: targetPanX, panY: targetPanY };
+}
+
+function applyAutoFrame(artemisPos, moonPos) {
+  const target = computeAutoFrame(artemisPos, moonPos);
+  if (!target) return;
+  const t = 0.05;
+  zoom += (target.zoom - zoom) * t;
+  pan.x += (target.panX - pan.x) * t;
+  pan.y += (target.panY - pan.y) * t;
+}
+
+// Disable auto-frame on manual interaction
+canvas.addEventListener('mousedown', () => { autoFrame = false; });
+canvas.addEventListener('wheel', () => { autoFrame = false; });
+canvas.addEventListener('touchstart', () => { autoFrame = false; });
+// Re-enable on LIVE click
+nowBtn.addEventListener('click', () => { autoFrame = true; });
+
 // ── Render loop ─────────────────────────────────────────────────────
 function render() {
   ctx.clearRect(0, 0, W, H);
@@ -912,6 +1046,8 @@ function render() {
 
   const moonPos = interpolate(moonData, now);
   const artemisPos = interpolate(artemisData, now);
+
+  if (autoFrame) applyAutoFrame(artemisPos, moonPos);
 
   drawGrid();
   drawMoonOrbit(moonPos);
