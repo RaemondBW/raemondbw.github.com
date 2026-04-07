@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumon Industries - Macrodata Refinement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* ---- CAPTCHA MODAL CONTAINER ---- */
+  .captcha-modal {
+    width: 400px;
+    background: #f9f9f9;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---- BLUE HEADER ---- */
+  .captcha-header {
+    background: #4a90d9;
+    padding: 14px 16px 14px 16px;
+    min-height: 73px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .captcha-header .instruction {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .captcha-header .category {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+
+  /* ---- MDR DISPLAY (canvas) ---- */
+  .mdr-display {
+    position: relative;
+    width: 400px;
+    height: 360px;
+    background: #000;
+    overflow: hidden;
+  }
+  .mdr-display canvas {
+    display: block;
+    width: 400px;
+    height: 360px;
+  }
+
+  /* ---- FOOTER BAR ---- */
+  .captcha-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    min-height: 42px;
+  }
+  .footer-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .footer-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+  }
+  .footer-icons button:hover { opacity: 0.85; }
+  .footer-icons svg { width: 18px; height: 18px; fill: #555; }
+  .verify-btn {
+    background: #4a90d9;
+    color: #fff;
+    border: none;
+    padding: 9px 22px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .verify-btn:hover { background: #3a7bc8; }
+  .verify-btn:disabled { background: #a0c4e8; cursor: default; }
+
+  /* ---- OVERLAY SCREENS ---- */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.88);
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .overlay.visible { opacity: 1; pointer-events: all; }
+  .overlay h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(157,227,235);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .overlay p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: rgb(157,227,235);
+    opacity: 0.7;
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+  .overlay .praise {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: rgb(157,227,235);
+    margin-top: 14px;
+    opacity: 0.85;
+    font-style: italic;
+    text-align: center;
+    max-width: 260px;
+    line-height: 1.5;
+  }
+  .overlay button {
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid rgb(157,227,235);
+    color: rgb(157,227,235);
+    padding: 8px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .overlay button:hover { background: rgba(157,227,235,0.1); }
+</style>
+</head>
+<body>
+
+<div class="captcha-modal">
+
+  <!-- Blue header -->
+  <div class="captcha-header">
+    <div class="instruction">Select all numbers that feel</div>
+    <div class="category" id="catLabel">Woe (WO)</div>
+  </div>
+
+  <!-- MDR display -->
+  <div class="mdr-display">
+    <canvas id="c"></canvas>
+
+    <!-- Success overlay -->
+    <div class="overlay" id="successOverlay">
+      <h2>Refinement Complete</h2>
+      <p>Your macrodata file has been processed.<br>Lumon thanks you for your service.</p>
+      <div class="praise" id="praiseText"></div>
+      <button id="restartBtn">Begin New File</button>
+    </div>
+
+    <!-- Failure overlay -->
+    <div class="overlay" id="failOverlay">
+      <h2>Refinement Error</h2>
+      <p id="failText"></p>
+      <button id="retryBtn">Try Again</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="captcha-footer">
+    <div class="footer-icons">
+      <!-- Refresh -->
+      <button id="refreshBtn" title="Get new challenge">
+        <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+      </button>
+      <!-- Audio -->
+      <button title="Audio challenge">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      </button>
+      <!-- Info -->
+      <button title="Help">
+        <svg viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+      </button>
+    </div>
+    <button class="verify-btn" id="verifyBtn">Verify</button>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// PERLIN NOISE
+// ============================================================
+class Perlin {
+  constructor(seed) {
+    this.g = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
+    this.p = [];
+    const r = this.sr(seed);
+    for (let i = 0; i < 256; i++) this.p[i] = i;
+    for (let i = 255; i > 0; i--) {
+      const j = Math.floor(r() * (i + 1));
+      [this.p[i], this.p[j]] = [this.p[j], this.p[i]];
+    }
+    this.pm = [...this.p, ...this.p];
+  }
+  sr(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  noise(x, y) {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
+    x -= Math.floor(x); y -= Math.floor(y);
+    const u = x*x*x*(x*(x*6-15)+10), v = y*y*y*(y*(y*6-15)+10);
+    const aa = this.pm[X]+Y, ab = this.pm[X]+Y+1, ba = this.pm[X+1]+Y, bb = this.pm[X+1]+Y+1;
+    const d = (i,px,py) => this.g[this.pm[i]%8][0]*px + this.g[this.pm[i]%8][1]*py;
+    const l = (a,b,t) => a+t*(b-a);
+    return l(l(d(aa,x,y),d(ba,x-1,y),u), l(d(ab,x,y-1),d(bb,x-1,y-1),u), v);
+  }
+}
+
+// ============================================================
+// CONFIG
+// ============================================================
+const LUM = 'rgb(157,227,235)';
+const CW = 400, CH = 360;
+const COLS = 18, ROWS = 14;
+const CX = CW / COLS, CY = CH / ROWS;
+const BIN_NAMES = ['WO','FC','DR','MA','MR'];
+const BIN_FULL = ['Woe','Frolic','Dread','Malice','Mischief'];
+const FILES = ['Coldwater','Allentown','Dranesville','Tumwater','Cairnholm'];
+const ROUNDS = 5, TARGETS = 6;
+const PRAISES = [
+  "You are a shining star in the Lumon firmament.",
+  "Kier smiles upon your diligent work.",
+  "A melon bar has been placed in the break room.",
+  "You have earned a Music Dance Experience.",
+  "Praise Kier. Praise the work.",
+  "The Eagan family honors your dedication.",
+];
+const FAILS = [
+  "A visit to the wellness center has been scheduled.",
+  "The numbers know what they are. You must feel them.",
+  "The Board is disappointed. Please try again.",
+  "Your refiner's instincts require recalibration.",
+];
+
+// ============================================================
+// STATE
+// ============================================================
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const perlin = new Perlin(555);
+let dpr, time = 0, mx = -99, my = -99;
+let round = 0, cat = 0;
+let grid = [], sel = new Set(), tgts = new Set();
+let anims = [];
+let binProg = [0,0,0,0,0], binTot = [0,0,0,0,0];
+let state = 'play';
+const HEADER_ZONE = 28; // top area for file name inside canvas
+const BIN_ZONE = 44;    // bottom area for bins inside canvas
+const GRID_TOP = HEADER_ZONE + 8;
+const GRID_BOT = CH - BIN_ZONE;
+const GRID_H = GRID_BOT - GRID_TOP;
+const GRID_ROWS = 10;
+const GRID_CY = GRID_H / GRID_ROWS;
+
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  canvas.width = CW * dpr;
+  canvas.height = CH * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+// ============================================================
+// GRID
+// ============================================================
+function cellPos(c, r) {
+  return [c * CX + CX / 2, GRID_TOP + r * GRID_CY + GRID_CY / 2];
+}
+function binPos(i) {
+  return [(CW / 6) * (i + 1), CH - BIN_ZONE / 2 + 2];
+}
+
+function initRound() {
+  sel.clear(); tgts.clear(); anims = [];
+  cat = round % 5;
+  state = 'play';
+  grid = [];
+
+  for (let r = 0; r < GRID_ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      grid.push({
+        c, r,
+        d: Math.floor(Math.random() * 10),
+        ax: Math.random() > 0.5 ? 'x' : 'y',
+        a: 0,
+        fs: 0.01 + Math.random() * 0.025,
+      });
+    }
+  }
+
+  // Pick targets using perlin clustering
+  const scored = grid.map((n, i) => ({
+    i, v: perlin.noise(n.c * 0.4 + round * 30, n.r * 0.4 + round * 30)
+  }));
+  scored.sort((a, b) => b.v - a.v);
+  for (let k = 0; k < TARGETS; k++) tgts.add(scored[k].i);
+  binTot[cat] = (binTot[cat] || 0) + TARGETS;
+
+  document.getElementById('catLabel').textContent = `${BIN_FULL[cat]} (${BIN_NAMES[cat]})`;
+  document.getElementById('verifyBtn').disabled = false;
+}
+
+// ============================================================
+// UPDATE
+// ============================================================
+function update() {
+  time++;
+  grid.forEach(n => { if (n.a < 1) n.a = Math.min(1, n.a + n.fs); });
+
+  anims = anims.filter(a => {
+    const [bx, by] = binPos(a.bin);
+    const dx = bx - a.x, dy = by - a.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 3) { binProg[a.bin]++; return false; }
+    const spd = 3 + dist * 0.05;
+    a.x += dx/dist * spd;
+    a.y += dy/dist * spd;
+    a.sc = Math.max(0.2, dist / a.sd);
+    return true;
+  });
+
+  if (state === 'adv' && anims.length === 0) {
+    round++;
+    if (round >= ROUNDS) {
+      state = 'win';
+      document.getElementById('praiseText').textContent = PRAISES[Math.floor(Math.random() * PRAISES.length)];
+      document.getElementById('successOverlay').classList.add('visible');
+    } else {
+      initRound();
+    }
+  }
+}
+
+// ============================================================
+// DRAW
+// ============================================================
+function draw() {
+  ctx.clearRect(0, 0, CW, CH);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, CW, CH);
+
+  drawInternalHeader();
+  drawSep(GRID_TOP - 6); drawSep(GRID_TOP - 2);
+  drawSep(GRID_BOT + 2); drawSep(GRID_BOT + 6);
+  drawNums();
+  drawAnims();
+  drawBins();
+}
+
+function drawSep(y) {
+  ctx.fillStyle = LUM;
+  ctx.globalAlpha = 0.7;
+  ctx.fillRect(0, y, CW, 1.5);
+  ctx.globalAlpha = 1;
+}
+
+function drawInternalHeader() {
+  // File box
+  const bx = 10, by = 4, bw = 130, bh = 20;
+  ctx.strokeStyle = LUM;
+  ctx.lineWidth = 0.8;
+  ctx.globalAlpha = 0.7;
+  ctx.strokeRect(bx, by, bw, bh);
+  ctx.font = '700 10px Montserrat';
+  ctx.fillStyle = LUM;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'left';
+  ctx.fillText(FILES[round] || FILES[0], bx + 8, by + bh/2);
+  ctx.textAlign = 'right';
+  ctx.font = '400 8px Montserrat';
+  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = LUM;
+  ctx.fillText('LUMON INDUSTRIES', CW - 10, by + bh/2);
+  ctx.globalAlpha = 1;
+  ctx.textAlign = 'left';
+}
+
+function drawNums() {
+  const t = time * 0.001;
+  for (let i = 0; i < grid.length; i++) {
+    const n = grid[i];
+    if (n.a <= 0) continue;
+    if (anims.some(a => a.idx === i)) continue;
+
+    let [sx, sy] = cellPos(n.c, n.r);
+
+    // Perlin wiggle
+    const nv = perlin.noise(n.c * 0.15 + t * 4, n.r * 0.15 + t * 3);
+    if (n.ax === 'x') sx += nv * 3.5; else sy += nv * 3.5;
+
+    const isT = tgts.has(i);
+    const isS = sel.has(i);
+
+    // Target pulse
+    let glow = 0, extraSc = 0, jx = 0, jy = 0;
+    if (isT && state === 'play') {
+      const p = Math.sin(time * 0.035 + i * 1.1) * 0.5 + 0.5;
+      extraSc = p * 0.3;
+      glow = 0.2 + p * 0.35;
+      jx = Math.sin(time * 0.05 + i * 0.7) * 1.5;
+      jy = Math.cos(time * 0.04 + i * 0.9) * 1.5;
+    }
+
+    // Mouse proximity
+    const dx = mx - sx, dy = my - sy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    let ms = 0;
+    if (dist < 50) ms = (50 - dist) / 50 * 1.0;
+
+    const sc = 1 + ms + extraSc;
+    const fs = 10 * sc;
+    const fx = sx + jx, fy = sy + jy;
+
+    // Selection: blue tint like reCAPTCHA
+    if (isS) {
+      ctx.save();
+      ctx.fillStyle = '#4a90d9';
+      ctx.globalAlpha = 0.18;
+      const hw = CX * 0.48, hh = GRID_CY * 0.48;
+      ctx.fillRect(fx - hw, fy - hh, hw * 2, hh * 2);
+      ctx.globalAlpha = 0.6;
+      ctx.strokeStyle = '#4a90d9';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(fx - hw, fy - hh, hw * 2, hh * 2);
+      // Checkmark
+      ctx.globalAlpha = 0.9;
+      const ckx = fx + hw - 6, cky = fy - hh + 6;
+      ctx.beginPath();
+      ctx.arc(ckx, cky, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#4a90d9';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(ckx - 2.5, cky);
+      ctx.lineTo(ckx - 0.5, cky + 2);
+      ctx.lineTo(ckx + 2.5, cky - 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Glow
+    if (glow > 0) {
+      ctx.save();
+      ctx.shadowColor = LUM;
+      ctx.shadowBlur = 8 * glow;
+      ctx.globalAlpha = n.a * glow * 0.4;
+      ctx.font = `700 ${fs}px Montserrat`;
+      ctx.fillStyle = LUM;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(n.d.toString(), fx, fy);
+      ctx.restore();
+    }
+
+    // Digit
+    let al = n.a * (0.25 + ms * 0.35 + (isT ? 0.45 : 0) + (isS ? 0.25 : 0));
+    ctx.globalAlpha = Math.min(1, al);
+    ctx.font = `700 ${fs}px Montserrat`;
+    ctx.fillStyle = LUM;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(n.d.toString(), fx, fy);
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawAnims() {
+  for (const a of anims) {
+    const s = a.sc || 1;
+    ctx.globalAlpha = Math.max(0.2, s);
+    ctx.font = `700 ${10 * (0.5 + s * 0.5)}px Montserrat`;
+    ctx.fillStyle = LUM;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.shadowColor = LUM; ctx.shadowBlur = 5;
+    ctx.fillText(a.d.toString(), a.x, a.y);
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawBins() {
+  for (let i = 0; i < 5; i++) {
+    const [bx, by] = binPos(i);
+    const bw = 32, bh = 16;
+
+    // Active bin subtle highlight
+    if (i === cat && state === 'play') {
+      ctx.fillStyle = LUM;
+      ctx.globalAlpha = 0.05;
+      ctx.fillRect(bx - bw/2 - 1, by - bh/2 - 1, bw + 2, bh + 2);
+    }
+
+    // Incoming flash
+    if (anims.some(a => a.bin === i)) {
+      ctx.fillStyle = LUM;
+      ctx.globalAlpha = 0.2;
+      ctx.fillRect(bx - bw/2, by - bh - 5, bw, 4);
+    }
+
+    ctx.globalAlpha = 0.8;
+    ctx.strokeStyle = LUM;
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(bx - bw/2, by - bh/2, bw, bh);
+
+    ctx.font = '700 9px Montserrat';
+    ctx.fillStyle = LUM;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(BIN_NAMES[i], bx, by);
+
+    // Progress bar
+    const pw = 32, ph = 3, py = by + bh/2 + 4;
+    ctx.globalAlpha = 0.3;
+    ctx.strokeRect(bx - pw/2, py, pw, ph);
+    const tot = binTot[i] || 1;
+    const pct = Math.min(1, (binProg[i] || 0) / tot);
+    if (pct > 0) {
+      ctx.fillStyle = LUM;
+      ctx.globalAlpha = 0.35;
+      ctx.fillRect(bx - pw/2 + 0.5, py + 0.5, (pw - 1) * pct, ph - 1);
+    }
+    ctx.globalAlpha = 0.45;
+    ctx.font = '700 7px Montserrat';
+    ctx.fillText(Math.round(pct * 100) + '%', bx, py + ph + 8);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ============================================================
+// VERIFY
+// ============================================================
+function doVerify() {
+  if (sel.size === 0 || state !== 'play') return;
+
+  let ok = 0, bad = 0;
+  for (const idx of sel) {
+    const n = grid[idx];
+    const [sx, sy] = cellPos(n.c, n.r);
+    if (tgts.has(idx)) {
+      ok++;
+      const [bx, by] = binPos(cat);
+      anims.push({
+        x: sx, y: sy, d: n.d, bin: cat, sc: 1,
+        sd: Math.sqrt((bx-sx)**2 + (by-sy)**2), idx
+      });
+      tgts.delete(idx);
+    } else {
+      bad++;
+    }
+  }
+  sel.clear();
+
+  if (bad > ok) {
+    state = 'fail';
+    document.getElementById('failText').textContent = FAILS[Math.floor(Math.random() * FAILS.length)];
+    document.getElementById('failOverlay').classList.add('visible');
+    return;
+  }
+
+  // Remaining targets? keep going. All done? advance.
+  if (tgts.size === 0) {
+    state = 'adv';
+    document.getElementById('verifyBtn').disabled = true;
+  }
+}
+
+// ============================================================
+// INPUT
+// ============================================================
+canvas.addEventListener('mousemove', e => {
+  const r = canvas.getBoundingClientRect();
+  mx = e.clientX - r.left;
+  my = e.clientY - r.top;
+});
+canvas.addEventListener('mouseleave', () => { mx = -99; my = -99; });
+
+canvas.addEventListener('click', e => {
+  if (state !== 'play') return;
+  const r = canvas.getBoundingClientRect();
+  const cx = e.clientX - r.left, cy = e.clientY - r.top;
+  if (cy < GRID_TOP || cy > GRID_BOT) return;
+
+  let best = -1, bestD = 999;
+  for (let i = 0; i < grid.length; i++) {
+    const n = grid[i];
+    const [sx, sy] = cellPos(n.c, n.r);
+    const d = Math.sqrt((cx-sx)**2 + (cy-sy)**2);
+    if (d < bestD && d < CX * 0.6) { bestD = d; best = i; }
+  }
+  if (best >= 0) {
+    if (sel.has(best)) sel.delete(best); else sel.add(best);
+  }
+});
+
+document.getElementById('verifyBtn').addEventListener('click', doVerify);
+
+document.getElementById('refreshBtn').addEventListener('click', () => {
+  if (state === 'play') initRound();
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  document.getElementById('successOverlay').classList.remove('visible');
+  round = 0; binProg = [0,0,0,0,0]; binTot = [0,0,0,0,0];
+  initRound();
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  document.getElementById('failOverlay').classList.remove('visible');
+  initRound();
+});
+
+// ============================================================
+// LOOP
+// ============================================================
+function loop() { update(); draw(); requestAnimationFrame(loop); }
+resize();
+window.addEventListener('resize', resize);
+initRound();
+loop();
+</script>
+</body>
+</html>
