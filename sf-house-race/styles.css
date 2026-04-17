@@ -1,0 +1,329 @@
+:root {
+  --bg: #0f1116;
+  --panel: #1a1d25;
+  --text: #e8eaed;
+  --muted: #8892a6;
+  --accent: #61dafb;
+  --border: #2a2f3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+header {
+  padding: 24px 32px 8px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 760px;
+}
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 16px 32px;
+  align-items: center;
+}
+
+.control-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+button:hover {
+  background: #232732;
+  border-color: #3a4152;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.view-btn.active,
+.geo-btn.active,
+.amount-btn.active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.candidate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.candidate-btn .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Short/long button labels: show short on narrow screens, full on wider. */
+button .short {
+  display: none;
+}
+@media (max-width: 640px) {
+  button .full {
+    display: none;
+  }
+  button .short {
+    display: inline;
+  }
+}
+
+.candidate-btn.off {
+  opacity: 0.4;
+}
+
+#chart-container {
+  position: relative;
+  margin: 0 16px 16px;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 280px;
+}
+
+#chart,
+#dots {
+  position: absolute;
+  display: block;
+}
+
+#chart {
+  pointer-events: none;
+}
+
+#dots {
+  cursor: crosshair;
+}
+
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(10, 12, 16, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text);
+  max-width: 280px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.12s;
+  z-index: 10;
+}
+
+#tooltip.above {
+  transform: translate(-50%, calc(-100% - 14px));
+}
+
+#tooltip.below {
+  transform: translate(-50%, 14px);
+}
+
+#tooltip.hidden {
+  opacity: 0;
+}
+
+#tooltip .name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+#tooltip .amount {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#tooltip .row {
+  color: var(--muted);
+}
+
+#tooltip .candidate-tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #0f1116;
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+  background: var(--panel);
+  z-index: 5;
+}
+
+#loading.hidden {
+  display: none;
+}
+
+#legend {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 17, 22, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: var(--muted);
+  pointer-events: none;
+  line-height: 1.6;
+}
+
+#legend .title {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+circle.donation {
+  cursor: pointer;
+  transition: stroke-width 0.12s, opacity 0.2s;
+}
+
+circle.donation.dim {
+  opacity: 0.05;
+}
+
+circle.donation:hover {
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.axis text {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.axis line,
+.axis path {
+  stroke: var(--border);
+}
+
+.map path.state {
+  fill: #232732;
+  stroke: #3a4152;
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+}
+
+.map path.county {
+  fill: #1e222b;
+  stroke: #3f4658;
+  stroke-width: 0.6;
+}
+
+.map path.zip {
+  fill: #1e222b;
+  stroke: #4a5268;
+  stroke-width: 0.7;
+}
+
+footer {
+  padding: 16px 32px 32px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  header {
+    padding: 12px 14px 2px;
+  }
+  header h1 {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    display: none;
+  }
+  #controls {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .control-group {
+    gap: 5px;
+  }
+  button {
+    padding: 4px 9px;
+    font-size: 11.5px;
+    border-radius: 999px;
+  }
+  .candidate-btn .swatch {
+    display: none;
+  }
+  #chart-container {
+    margin: 0 8px 10px;
+  }
+  footer {
+    padding: 6px 14px 10px;
+    font-size: 10.5px;
+  }
+  footer p {
+    margin: 0 0 3px;
+  }
+  #legend {
+    display: none;
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Francisco Congressional District — Donations</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>San Francisco Congressional District — Donations</h1>
+    <p class="subtitle">
+      Itemized individual contributions reported to the FEC for the three main
+      candidates. Each circle is one contribution, sized by dollar amount.
+    </p>
+  </header>
+
+  <div id="controls">
+    <div class="control-group" id="view-controls">
+      <button data-view="bubble" class="view-btn active">Bubble chart</button>
+      <button data-view="timeline" class="view-btn">Timeline</button>
+      <button data-view="map" class="view-btn">Map</button>
+    </div>
+
+    <div class="control-group" id="candidate-controls">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="control-group" id="geo-controls">
+      <button data-geo="all" class="geo-btn active">
+        <span class="full">All locations</span><span class="short">All</span>
+      </button>
+      <button data-geo="ca" class="geo-btn">
+        <span class="full">California only</span><span class="short">CA</span>
+      </button>
+      <button data-geo="sf" class="geo-btn">
+        <span class="full">San Francisco only</span><span class="short">SF</span>
+      </button>
+    </div>
+
+    <div class="control-group" id="amount-controls">
+      <button data-min="0" class="amount-btn active">
+        <span class="full">Any amount</span><span class="short">Any $</span>
+      </button>
+      <button data-min="100" class="amount-btn">
+        <span class="full">Over $100</span><span class="short">&gt;$100</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="chart-container">
+    <svg id="chart"></svg>
+    <canvas id="dots"></canvas>
+    <div id="tooltip" class="hidden"></div>
+    <div id="loading">Loading donation data…</div>
+    <div id="legend"></div>
+  </div>
+
+  <footer>
+    <p>Source: FEC Schedule A itemized receipts.</p>
+    <p>
+      Note: Q1 2026 filings (January–March 2026) have not yet been made
+      available by the Federal Election Commission, so this chart covers
+      donations through December 31, 2025.
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
