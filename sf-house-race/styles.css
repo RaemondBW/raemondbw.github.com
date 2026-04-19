@@ -310,9 +310,6 @@ footer p {
     font-size: 11.5px;
     border-radius: 999px;
   }
-  .candidate-btn .swatch {
-    display: none;
-  }
   #chart-container {
     margin: 0 8px 10px;
   }
