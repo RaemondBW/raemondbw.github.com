@@ -312,9 +312,10 @@ function rebuildProjection() {
 
 function initNodes() {
   const records = state.data.records;
-  const maxAmount = d3.max(records, (r) => r.a);
-  // Use the range baked into the layouts file so client-side drawing radii
-  // match the radii used in the precomputed force-simulation layouts.
+  // Cap at $10k to match the precompute (prevents candidate self-funding
+  // from dominating the radius scale).
+  const rawMax = d3.max(records, (r) => r.a);
+  const maxAmount = Math.min(10000, rawMax);
   const range = (state.layouts && state.layouts.radiusRange) || [1.5, 10];
   state.radius = d3
     .scaleSqrt()
