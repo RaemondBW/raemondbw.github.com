@@ -82,7 +82,8 @@ button:active {
 
 .view-btn.active,
 .geo-btn.active,
-.amount-btn.active {
+.amount-btn.active,
+.self-btn.active {
   background: var(--text);
   color: var(--bg);
   border-color: var(--text);
@@ -288,6 +289,9 @@ footer p {
 }
 
 @media (max-width: 640px) {
+  .desktop-only {
+    display: none !important;
+  }
   header {
     padding: 12px 14px 2px;
   }
@@ -309,6 +313,10 @@ footer p {
     padding: 4px 9px;
     font-size: 11.5px;
     border-radius: 999px;
+  }
+  .candidate-btn .swatch {
+    width: 8px;
+    height: 8px;
   }
   #chart-container {
     margin: 0 8px 10px;

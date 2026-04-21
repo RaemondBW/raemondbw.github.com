@@ -27,6 +27,7 @@ const state = {
   active: new Set(),
   geo: "all",
   minAmount: 0,
+  includeSelf: false,
   view: "bubble",
   width: 0,
   height: 0,
@@ -167,6 +168,33 @@ function buildCandidateButtons() {
     d3.select(this).classed("active", true);
     onFilterChanged({ geoChanged: true });
   });
+
+  d3.selectAll(".self-btn").on("click", function () {
+    const include = this.dataset.self === "include";
+    if (include === state.includeSelf) return;
+    state.includeSelf = include;
+    d3.selectAll(".self-btn").classed("active", false);
+    d3.select(this).classed("active", true);
+    onFilterChanged();
+  });
+}
+
+function rebuildRadii() {
+  const records = state.data.records;
+  // Scale is fixed to the max non-self amount, so toggling self on/off
+  // doesn't shrink the regular dots. Self dots extrapolate past the domain
+  // via the sqrt scale with no clamp, giving them much larger radii.
+  const maxAmount = d3.max(
+    records.filter((r) => !r.self),
+    (r) => r.a
+  );
+  const range = (state.layouts && state.layouts.radiusRange) || [1.5, 10];
+  state.radius = d3
+    .scaleSqrt()
+    .domain([1, maxAmount || 1])
+    .range(range)
+    .clamp(false);
+  for (const n of state.nodes) n.r = state.radius(n.record.a);
 }
 
 function onFilterChanged({ geoChanged = false } = {}) {
@@ -182,10 +210,15 @@ function isVisible(node) {
   if (!state.active.has(node.candidate)) return false;
   if (state.view === "map" && node.mapHidden) return false;
   const r = node.record;
+  if (!state.includeSelf && r.self) return false;
   if (state.minAmount > 0 && r.a <= state.minAmount) return false;
   if (state.geo === "ca") return r.s === "CA";
   if (state.geo === "sf") {
     return r.s === "CA" && (r.z || "").startsWith("941");
+  }
+  if (state.geo === "notca") return r.s !== "CA";
+  if (state.geo === "notsf") {
+    return !(r.s === "CA" && (r.z || "").startsWith("941"));
   }
   return true;
 }
@@ -278,7 +311,9 @@ function rebuildProjection() {
   const w = state.width;
   const h = state.height;
   const padded = [[20, 20], [w - 20, h - 20]];
-  if (state.geo === "all") {
+  // "all", "notca", and "notsf" all show the full US map — the set of dots
+  // differs but the projection and outlines are the same.
+  if (state.geo === "all" || state.geo === "notca" || state.geo === "notsf") {
     state.projection = d3
       .geoAlbersUsa()
       .fitSize([w, h], {
@@ -312,16 +347,19 @@ function rebuildProjection() {
 
 function initNodes() {
   const records = state.data.records;
-  // Cap at $10k to match the precompute (prevents candidate self-funding
-  // from dominating the radius scale).
-  const rawMax = d3.max(records, (r) => r.a);
-  const maxAmount = Math.min(10000, rawMax);
+  // Scale fixed to max non-self amount so regular dots stay the same size
+  // regardless of the self-contribution toggle. Self dots extrapolate past
+  // the domain (no clamp) and render much larger.
+  const maxAmount = d3.max(
+    records.filter((r) => !r.self),
+    (r) => r.a
+  );
   const range = (state.layouts && state.layouts.radiusRange) || [1.5, 10];
   state.radius = d3
     .scaleSqrt()
-    .domain([1, maxAmount])
+    .domain([1, maxAmount || 1])
     .range(range)
-    .clamp(true);
+    .clamp(false);
 
   state.nodes = records.map((r, i) => ({
     id: i,
@@ -347,8 +385,8 @@ function colorFor(cid) {
 }
 
 function layoutLookupKey() {
-  // Bubble and map layouts share the same (candidates|geo|min) key.
-  return `${[...state.active].sort().join(",")}|${state.geo}|${state.minAmount}`;
+  const self = state.includeSelf ? "with" : "without";
+  return `${[...state.active].sort().join(",")}|${state.geo}|${state.minAmount}|${self}`;
 }
 
 function applyLayouts() {
