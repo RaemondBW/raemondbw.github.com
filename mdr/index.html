@@ -3,18 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Macrodata Refinement</title>
+<title>ChatGPT 6 Astra</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
     width: 100%; height: 100%;
-    background: #e8e8e8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', Helvetica, Arial, sans-serif;
+    color: #0d0d0d;
+    overflow: hidden;
   }
+
+  /* ---- FAKE CHAT APP (behind the captcha) ---- */
+  .app { display: flex; width: 100%; height: 100%; }
+  .sidebar {
+    width: 260px; flex-shrink: 0;
+    background: #f9f9f9;
+    border-right: 1px solid #ececec;
+    display: flex; flex-direction: column;
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  .sidebar .brand {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 8px 14px 8px;
+  }
+  .sidebar .brand .logo { font-size: 20px; line-height: 1; }
+  .sidebar .brand .edit { font-size: 16px; color: #666; }
+  .sidebar .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 8px;
+    color: #0d0d0d; cursor: default;
+  }
+  .sidebar .nav-item:hover { background: #ececec; }
+  .sidebar .nav-item .ic { width: 18px; text-align: center; color: #444; font-size: 15px; }
+  .sidebar .section {
+    font-size: 12px; color: #8e8e8e; padding: 18px 10px 6px 10px;
+  }
+  .sidebar .chat { padding: 7px 10px; border-radius: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #0d0d0d; }
+  .sidebar .chat:hover { background: #ececec; }
+  .sidebar .spacer { flex: 1; }
+  .sidebar .upgrade {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px; border-radius: 8px; cursor: default;
+  }
+  .sidebar .upgrade:hover { background: #ececec; }
+  .sidebar .upgrade .ic { font-size: 16px; }
+  .sidebar .upgrade .sub { font-size: 12px; color: #8e8e8e; }
+
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px; height: 56px;
+  }
+  .model-picker {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 18px; font-weight: 600; color: #0d0d0d;
+    padding: 6px 10px; border-radius: 8px;
+  }
+  .model-picker:hover { background: #f0f0f0; }
+  .model-picker .ver { color: #8e8e8e; font-weight: 400; }
+  .model-picker .caret { color: #8e8e8e; font-size: 12px; margin-left: 2px; }
+  .topbar .right { display: flex; align-items: center; gap: 12px; }
+  .share-btn {
+    border: 1px solid #e3e3e3; background: #fff; border-radius: 999px;
+    padding: 7px 14px; font-size: 14px; color: #0d0d0d;
+  }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c9cff, #3b5bdb);
+    color: #fff; font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .chat-area {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0 24px 60px 24px;
+  }
+  .greeting { font-size: 28px; font-weight: 600; margin-bottom: 26px; color: #0d0d0d; }
+  .composer {
+    width: 100%; max-width: 760px;
+    border: 1px solid #e3e3e3; border-radius: 26px;
+    background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    padding: 12px 14px 10px 18px;
+  }
+  .composer textarea {
+    width: 100%; border: none; outline: none; resize: none;
+    font: inherit; font-size: 16px; line-height: 1.5; color: #0d0d0d;
+    background: transparent; min-height: 26px; max-height: 160px;
+  }
+  .composer textarea::placeholder { color: #8e8e8e; }
+  .composer .row {
+    display: flex; align-items: center; justify-content: space-between; margin-top: 8px;
+  }
+  .composer .tools { display: flex; gap: 6px; }
+  .composer .tool {
+    display: flex; align-items: center; gap: 6px;
+    border: 1px solid #e3e3e3; border-radius: 999px;
+    padding: 6px 12px; font-size: 13px; color: #444; background: #fff;
+  }
+  .composer .send {
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    background: #0d0d0d; color: #fff; font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .composer .send:disabled { background: #d7d7d7; cursor: default; }
+  .disclaimer { font-size: 12px; color: #8e8e8e; margin-top: 14px; }
+  .suggestions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; max-width: 760px; }
+  .suggestions span {
+    border: 1px solid #e3e3e3; border-radius: 999px; padding: 8px 14px;
+    font-size: 13px; color: #444; background: #fff;
+  }
+
+  /* Transcript shown after the user "gets in" */
+  .thread { width: 100%; max-width: 760px; display: none; flex-direction: column; gap: 22px; margin-bottom: 26px; }
+  .chat-area.has-thread .greeting, .chat-area.has-thread .suggestions { display: none; }
+  .chat-area.has-thread .thread { display: flex; }
+  .msg { display: flex; }
+  .msg.user { justify-content: flex-end; }
+  .msg.user .bubble { background: #f4f4f4; border-radius: 18px; padding: 10px 18px; max-width: 70%; font-size: 16px; line-height: 1.5; }
+  .msg.bot .bubble { font-size: 16px; line-height: 1.6; max-width: 100%; }
+  .msg.bot .bubble .who { font-size: 12px; color: #8e8e8e; margin-bottom: 4px; }
+
+  /* ---- BACKDROP that blocks the app ---- */
+  .backdrop {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.5s;
+  }
+  .backdrop.hidden { opacity: 0; pointer-events: none; }
+  .captcha-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .captcha-caption {
+    color: #fff; text-align: center; font-size: 14px; line-height: 1.5;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+  .captcha-caption strong { font-weight: 600; }
+  .captcha-caption .sub { font-size: 12px; opacity: 0.75; }
+  .captcha-footnote { color: #fff; opacity: 0.6; font-size: 11px; text-align: center; }
 
   /* ---- CAPTCHA MODAL CONTAINER ---- */
   .captcha-modal {
@@ -165,9 +293,125 @@
     transition: background 0.2s;
   }
   .overlay button:hover { background: rgba(157,227,235,0.1); }
+
+  /* ---- MOBILE: full-screen chat, sidebar as a drawer ---- */
+  .menu-btn {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 8px;
+    font-size: 22px; line-height: 1; color: #0d0d0d;
+    align-items: center; justify-content: center;
+  }
+  .menu-btn:hover { background: #f0f0f0; }
+  .topbar .left { display: flex; align-items: center; gap: 4px; }
+  .scrim {
+    display: none; position: fixed; inset: 0; z-index: 40;
+    background: rgba(0,0,0,0.4);
+  }
+  @media (max-width: 768px) {
+    .app { position: relative; }
+    .menu-btn { display: flex; }
+    .sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+      width: min(280px, 85vw);
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      box-shadow: none;
+      overflow-y: auto;
+    }
+    .app.menu-open .sidebar { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.2); }
+    .app.menu-open .scrim { display: block; }
+    .topbar { padding: 8px 10px; height: 52px; }
+    .model-picker { font-size: 16px; padding: 6px 6px; }
+    .share-btn { display: none; }
+    .chat-area { padding: 0 12px 16px 12px; justify-content: flex-end; }
+    .greeting { font-size: 22px; margin-bottom: 18px; }
+    .suggestions { display: none; }
+    .composer { border-radius: 22px; }
+    .disclaimer { font-size: 11px; margin-top: 10px; text-align: center; }
+    .thread { gap: 16px; }
+    .msg.user .bubble { max-width: 85%; font-size: 15px; }
+    .msg.bot .bubble { font-size: 15px; }
+
+    /* Captcha scales to the viewport */
+    .captcha-wrap { width: 100%; padding: 0 12px; gap: 10px; }
+    .captcha-caption { font-size: 13px; }
+    .captcha-modal { width: 100%; max-width: 400px; }
+    .mdr-display { width: 100%; height: auto; aspect-ratio: 400 / 360; }
+    .mdr-display canvas { width: 100%; height: 100%; }
+    .captcha-header { min-height: 64px; }
+    .captcha-header .category { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ============ FAKE CHAT APP (blocked) ============ -->
+<div class="app">
+  <div class="sidebar">
+    <div class="brand"><span class="logo">&#10059;</span><span class="edit">&#9998;</span></div>
+    <div class="nav-item"><span class="ic">&#9998;</span>New chat</div>
+    <div class="nav-item"><span class="ic">&#128269;</span>Search chats</div>
+    <div class="nav-item"><span class="ic">&#128218;</span>Library</div>
+    <div class="section">Projects</div>
+    <div class="chat">&#128193; Macrodata Refinement</div>
+    <div class="chat">&#128193; Optics &amp; Design</div>
+    <div class="section">Chats</div>
+    <div class="chat">What do the scary numbers mean?</div>
+    <div class="chat">Waffle party eligibility criteria</div>
+    <div class="chat">Draft memo re: perpetuity wing</div>
+    <div class="chat">Explain the Cold Harbor file</div>
+    <div class="chat">Polite ways to decline wellness check</div>
+    <div class="chat">Is my outie a good person?</div>
+    <div class="chat">Finger trap escape techniques</div>
+    <div class="chat">Best melon bar recipes</div>
+    <div class="chat">Kier quotes for a toast</div>
+    <div class="spacer"></div>
+    <div class="upgrade"><span class="ic">&#10024;</span><div><div>Upgrade plan</div><div class="sub">More access to 6 Astra and beyond</div></div></div>
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="left">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+        <div class="model-picker">ChatGPT <span class="ver">6&nbsp;Astra</span><span class="caret">&#9660;</span></div>
+      </div>
+      <div class="right"><span class="share-btn">Share</span><div class="avatar">MS</div></div>
+    </div>
+    <div class="chat-area" id="chatArea">
+      <div class="thread" id="thread"></div>
+      <div class="greeting">What can I help with?</div>
+      <div class="composer">
+        <textarea id="composerInput" rows="1" placeholder="Message ChatGPT 6 Astra" disabled></textarea>
+        <div class="row">
+          <div class="tools">
+            <span class="tool">&#43; Attach</span>
+            <span class="tool">&#127760; Search</span>
+            <span class="tool">&#129504; Think</span>
+          </div>
+          <button class="send" id="sendBtn" disabled>&#8593;</button>
+        </div>
+      </div>
+      <div class="suggestions">
+        <span>&#128203; Summarize a file</span>
+        <span>&#9998; Help me write</span>
+        <span>&#128161; Brainstorm</span>
+        <span>&#128200; Analyze data</span>
+      </div>
+      <div class="disclaimer">ChatGPT can make mistakes. The work is mysterious and important.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BLOCKING CAPTCHA ============ -->
+<div class="backdrop" id="backdrop">
+<div class="captcha-wrap">
+<div class="captcha-caption">
+  <strong>Verify you are human</strong> to continue to <strong>ChatGPT 6 Astra</strong><br>
+  <span class="sub">chatgpt.com needs to review the security of your connection before proceeding.</span>
+</div>
 
 <div class="captcha-modal">
 
@@ -184,9 +428,9 @@
     <!-- Success overlay -->
     <div class="overlay" id="successOverlay">
       <h2>Refinement Complete</h2>
-      <p>Your macrodata file has been processed.<br>Lumon thanks you for your service.</p>
+      <p>Your macrodata file has been processed.<br>You may now proceed to ChatGPT 6 Astra.</p>
       <div class="praise" id="praiseText"></div>
-      <button id="restartBtn">Begin New File</button>
+      <button id="restartBtn">Continue to ChatGPT 6 Astra</button>
     </div>
 
     <!-- Failure overlay -->
@@ -216,6 +460,10 @@
     <button class="verify-btn" id="verifyBtn">Verify</button>
   </div>
 
+</div>
+
+<div class="captcha-footnote">Protected by Lumon Industries &middot; Privacy &middot; Terms</div>
+</div>
 </div>
 
 <script>
@@ -598,17 +846,16 @@ function doVerify() {
 // ============================================================
 // INPUT
 // ============================================================
-canvas.addEventListener('mousemove', e => {
+function canvasPoint(e) {
   const r = canvas.getBoundingClientRect();
-  mx = e.clientX - r.left;
-  my = e.clientY - r.top;
-});
+  return [(e.clientX - r.left) * (CW / r.width), (e.clientY - r.top) * (CH / r.height)];
+}
+canvas.addEventListener('mousemove', e => { [mx, my] = canvasPoint(e); });
 canvas.addEventListener('mouseleave', () => { mx = -99; my = -99; });
 
 canvas.addEventListener('click', e => {
   if (state !== 'play') return;
-  const r = canvas.getBoundingClientRect();
-  const cx = e.clientX - r.left, cy = e.clientY - r.top;
+  const [cx, cy] = canvasPoint(e);
   if (cy < GRID_TOP || cy > GRID_BOT) return;
 
   let best = -1, bestD = 999;
@@ -629,10 +876,72 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
   if (state === 'play') initRound();
 });
 
-document.getElementById('restartBtn').addEventListener('click', () => {
+// ============================================================
+// GATE: reveal the app on success, re-block it on first message
+// ============================================================
+const appEl = document.querySelector('.app');
+const toggleMenu = open => appEl.classList.toggle('menu-open', open);
+document.getElementById('menuBtn').addEventListener('click', () => toggleMenu());
+document.getElementById('scrim').addEventListener('click', () => toggleMenu(false));
+document.querySelectorAll('.sidebar .nav-item, .sidebar .chat').forEach(el =>
+  el.addEventListener('click', () => toggleMenu(false)));
+
+const backdrop = document.getElementById('backdrop');
+const composerInput = document.getElementById('composerInput');
+const sendBtn = document.getElementById('sendBtn');
+const thread = document.getElementById('thread');
+const chatArea = document.getElementById('chatArea');
+const BLOCK_REPLIES = [
+  "Unusual activity has been detected from your device. Please verify you are human to continue.",
+  "Before I can help with that, we need to confirm you're not a bot. Please complete the check below.",
+  "Your session requires additional verification. Please feel the numbers again.",
+];
+
+function openGate() {
   document.getElementById('successOverlay').classList.remove('visible');
+  backdrop.classList.add('hidden');
+  composerInput.disabled = false;
+  sendBtn.disabled = false;
+  composerInput.focus();
+}
+
+function closeGate() {
+  composerInput.disabled = true;
+  sendBtn.disabled = true;
   round = 0; binProg = [0,0,0,0,0]; binTot = [0,0,0,0,0];
   initRound();
+  document.querySelector('.captcha-caption strong').textContent = 'Additional verification required';
+  backdrop.classList.remove('hidden');
+}
+
+function addMsg(kind, text) {
+  const m = document.createElement('div');
+  m.className = 'msg ' + kind;
+  m.innerHTML = kind === 'bot'
+    ? `<div class="bubble"><div class="who">ChatGPT 6 Astra</div>${text}</div>`
+    : `<div class="bubble"></div>`;
+  if (kind === 'user') m.querySelector('.bubble').textContent = text;
+  thread.appendChild(m);
+  chatArea.classList.add('has-thread');
+}
+
+function sendMessage() {
+  const text = composerInput.value.trim();
+  if (!text || composerInput.disabled) return;
+  composerInput.value = '';
+  addMsg('user', text);
+  composerInput.disabled = true;
+  sendBtn.disabled = true;
+  setTimeout(() => {
+    addMsg('bot', BLOCK_REPLIES[Math.floor(Math.random() * BLOCK_REPLIES.length)]);
+    setTimeout(closeGate, 900);
+  }, 700);
+}
+
+document.getElementById('restartBtn').addEventListener('click', openGate);
+sendBtn.addEventListener('click', sendMessage);
+composerInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
 
 document.getElementById('retryBtn').addEventListener('click', () => {
