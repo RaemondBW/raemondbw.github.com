@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G45LKW0Y0C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-G45LKW0Y0C");
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How San Francisco shifted on Sunset Dunes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <article>
+    <header>
+      <p class="kicker">San Francisco &middot; Nov. 3, 2026 election</p>
+      <h1>How every San Francisco precinct shifted on Sunset Dunes</h1>
+      <p class="dek" id="dek">
+        In 2024, voters closed the Upper Great Highway to cars and made it a park (Proposition K).
+        This year Proposition G asked whether to let cars back on weekdays.
+      </p>
+      <p class="prelim" id="asof"></p>
+    </header>
+
+    <section class="topline" id="topline"></section>
+
+    <section class="figure">
+      <h2>Shift in support for the park, by precinct</h2>
+      <p class="figure-note">
+        Each arrow shows how much a precinct&rsquo;s vote moved between <b>Yes on K</b> in 2024
+        and <b>No on G</b> in 2026, both of which kept the road car-free.
+      </p>
+      <div class="legend" id="legend"></div>
+      <div class="filter" id="filter" role="group" aria-label="Filter arrows"></div>
+      <div id="map-wrap">
+        <svg id="map"></svg>
+        <div id="tooltip" class="hidden"></div>
+      </div>
+      <p class="zoom-hint">Pinch, or hold Ctrl/&#8984; and scroll, to zoom. Drag to pan.</p>
+    </section>
+
+    <section class="figure">
+      <h2>Support for the park, 2024 &rarr; 2026</h2>
+      <p class="figure-note">
+        Share of votes for keeping the park car-free in each neighborhood or precinct.
+      </p>
+      <div id="nh-chart"></div>
+    </section>
+
+    <footer>
+      <p>
+        <b>Notes:</b> Support for the park is Yes on Proposition K (Nov. 5, 2024) and No on Proposition G (Nov. 3, 2026),
+        as a share of Yes + No votes. 2024 figures are the certified final Statement of the Vote.
+        2026 figures are from <span id="report"></span><span id="prelim-note"> and only include ballots counted so far, so
+        they will change as late-arriving mail ballots are tabulated</span>. Both elections use the precinct lines drawn in 2022.
+        Precincts with fewer than <span id="minv"></span> votes in either election are not drawn.
+        Very small shifts are drawn with a short minimum length so their direction stays visible.
+      </p>
+      <p>
+        <b>Sources:</b>
+        <a href="https://www.sfelections.org/results/20261103w/detail.html">San Francisco Department of Elections</a>;
+        precinct boundaries from <a href="https://data.sfgov.org/d/d6x4-hefw">DataSF</a>.
+      </p>
+    </footer>
+  </article>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
