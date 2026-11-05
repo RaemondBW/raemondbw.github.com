@@ -190,12 +190,6 @@ h1 {
   pointer-events: none;
 }
 
-.ocean-label {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 13px;
-  fill: #9aa;
-}
 
 #tooltip {
   position: absolute;

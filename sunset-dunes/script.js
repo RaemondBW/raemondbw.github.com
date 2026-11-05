@@ -219,6 +219,7 @@ function drawMap(geo) {
 
   function render() {
     const W = wrap.clientWidth;
+    if (!W) return; // not laid out yet (e.g. hidden tab); resize will redraw
     const H = Math.round(W * 0.78);
     svg.attr("viewBox", `0 0 ${W} ${H}`).attr("width", W).attr("height", H);
     svg.selectAll("*").remove();
@@ -232,8 +233,6 @@ function drawMap(geo) {
     const strokeW = W < 600 ? 1.1 : 1.5;
 
     svg.append("rect").attr("width", W).attr("height", H).attr("fill", "transparent");
-    const ocean = svg.append("text").attr("class", "ocean-label").text("Pacific Ocean");
-    const oceanXY = [pad, H * 0.55];
 
     const pg = svg.append("g");
     pg.selectAll("path")
@@ -297,7 +296,6 @@ function drawMap(geo) {
       arrowGs.attr("transform", (a) => `translate(${t.apply(a.c)})`);
       labelTs.attr("transform", (d) => `translate(${t.apply(d.c)})`)
         .attr("display", W >= 480 || t.k >= 2 ? null : "none");
-      ocean.attr("transform", `translate(${t.apply(oceanXY)})`);
       zoomCtl.classed("zoomed", t.k > 1.01);
       // Let one-finger swipes scroll the page until the map is zoomed in.
       svg.style("touch-action", t.k > 1.01 ? "none" : "pan-x pan-y");
