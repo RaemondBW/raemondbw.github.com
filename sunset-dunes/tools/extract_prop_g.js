@@ -6,6 +6,10 @@
 //   { report, asOf, sovUrl, total: {reg, yes, no}, rows: "pct,reg,yes,no\n..." }
 // Paste the returned JSON into a file and run:
 //   python3 tools/update_results.py extracted.json
+//
+// The result (or "ERR <message>") is also left in window._extOut, so a caller that
+// can't await a long promise can start this and read window._extOut later.
+window._extOut = null;
 (async () => {
   const MEASURE = /^Measure G\b/i;
 
@@ -50,4 +54,7 @@
   }
   if (!rowsOut.length) throw new Error("Measure G sheet not found in " + sovUrl);
   return JSON.stringify({ report, asOf, sovUrl, total, rows: "pct,reg,yes,no\n" + rowsOut.join("\n") });
-})();
+})().then(
+  (r) => (window._extOut = r),
+  (e) => (window._extOut = "ERR " + e.message)
+);
