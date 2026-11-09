@@ -50,6 +50,10 @@ LANDMARKS = {
 # 298 m tall, decks at 85 m and 215 m, three masts splaying out above the top deck.
 SUTRO = (37.75523, -122.45277)
 SUTRO_H = 298
+# True to scale it's a small fork ~10 km out, half hidden behind 555 California.
+# Drawn larger (the way it reads in zoomed-in photos) and nudged just clear of it.
+SUTRO_SCALE = 1.6
+SUTRO_NUDGE = 7              # units to the right
 SKY = 14                     # units of sky above the tallest point
 WATER = 0                    # units of bay below the shore (0: the city sits right on the footer bar)
 
@@ -187,7 +191,7 @@ def main(npz, html_path, preview=None):
         m &= ~((col < BRIDGE_COLS) & (d < BRIDGE_DEPTH))   # the bridge is drawn separately
         tops.append(np.maximum(envelope(col[m], v[m], n), shore))
     top_v = max(float(t[CROP[0]:CROP[1]].max()) for t in tops)
-    top_v = max([top_v, math.atan2(sutro["ground"] + SUTRO_H - EYE - curv(sutro["d"]), sutro["d"])]
+    top_v = max([top_v, math.atan2(sutro["ground"] + SUTRO_H * SUTRO_SCALE - EYE - curv(sutro["d"]), sutro["d"])]
                 + [math.atan2(L["top"] - EYE - curv(L["d"]), L["d"]) for L in lm.values()])
 
     # SVG units: 1 unit = 1 column = COL radians. y grows downward.
@@ -231,7 +235,7 @@ def main(npz, html_path, preview=None):
 
     def sutro_path():
         dd, g = sutro["d"], sutro["ground"]
-        P = lambda x, h: (sutro["col"] + x / dd / COL, y_of(math.atan2(g + h - EYE - curv(dd), dd)))
+        P = lambda x, h: (sutro["col"] + SUTRO_NUDGE + x * SUTRO_SCALE / dd / COL, y_of(math.atan2(g + h * SUTRO_SCALE - EYE - curv(dd), dd)))
         H_ = SUTRO_H
         segs = [[(-24, 0), (-4, 215)], [(24, 0), (4, 215)], [(0, 0), (0, 215)],     # three legs
                 [(-4, 215), (-10, H_)], [(0, 215), (0, H_ - 4)], [(4, 215), (10, H_)],  # masts
