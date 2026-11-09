@@ -234,14 +234,35 @@ def main(npz, html_path, preview=None):
         return "M" + " L".join(f"{fmt(a)} {fmt(b_)}" for a, b_ in rdp(pts, 0.15)) + "Z"
 
     def sutro_path():
+        """Sutro Tower as solid shapes, proportions from a measured elevation drawing
+        (metres from the base): three legs pinch in to a waist at 173 m, flare out to
+        the wide top platform, then three masts end in thin antennas."""
         dd, g = sutro["d"], sutro["ground"]
-        P = lambda x, h: (sutro["col"] + SUTRO_NUDGE + x * SUTRO_SCALE / dd / COL, y_of(math.atan2(g + h * SUTRO_SCALE - EYE - curv(dd), dd)))
-        H_ = SUTRO_H
-        segs = [[(-24, 0), (-4, 215)], [(24, 0), (4, 215)], [(0, 0), (0, 215)],     # three legs
-                [(-4, 215), (-10, H_)], [(0, 215), (0, H_ - 4)], [(4, 215), (10, H_)],  # masts
-                [(-17.5, 85), (17.5, 85)], [(-8, 215), (8, 215)], [(-6.5, 250), (6.5, 250)],
-                [(-19, 66), (0, 150), (19, 66)]]
-        d_ = "".join("M" + " L".join(f"{fmt(a)} {fmt(b_)}" for a, b_ in (P(*q) for q in seg)) for seg in segs)
+        P = lambda x, h: (sutro["col"] + SUTRO_NUDGE + x * SUTRO_SCALE / dd / COL,
+                          y_of(math.atan2(g + h * SUTRO_SCALE - EYE - curv(dd), dd)))
+        polys = []
+
+        def member(pts):                       # centreline [(x, h, width)] -> polygon
+            left = [(x - w / 2, h) for x, h, w in pts]
+            right = [(x + w / 2, h) for x, h, w in reversed(pts)]
+            polys.append(left + right)
+
+        def bar(x0, x1, h0, h1, inset=0.0):   # horizontal piece; inset narrows the bottom
+            polys.append([(x0 + inset, h0), (x0, h1), (x1, h1), (x1 - inset, h0)])
+
+        for s_ in (-1, 1):                     # outer legs and their masts
+            member([(s_ * 25, 0, 6.5), (s_ * 8.5, 173, 4.2), (s_ * 15.5, 238, 3.8),
+                    (s_ * 16.7, 244, 3.6), (s_ * 16.7, 277, 3.4)])
+            member([(s_ * 16.7, 276, 1.4), (s_ * 16.7, SUTRO_H, 1.0)])
+        member([(0, 0, 3.8), (0, 277, 3.4)])   # centre leg / mast
+        member([(0, 276, 1.4), (0, SUTRO_H, 1.0)])
+        bar(-20.5, 20.5, 52, 57)               # lower crossbars
+        bar(-14.5, 14.5, 115, 120)
+        bar(-9.5, 9.5, 171, 175)               # waist
+        bar(-11.5, 11.5, 202, 207)             # middle platform
+        bar(-34, 34, 234, 241, inset=5)        # top platform
+        d_ = "".join("M" + " L".join(f"{fmt(a_)} {fmt(b_)}" for a_, b_ in (P(*q) for q in poly)) + "Z"
+                     for poly in polys)
         return f'<path class="sutro" d="{d_}"/>'
 
     for b in reversed(range(len(BANDS) - 1)):
