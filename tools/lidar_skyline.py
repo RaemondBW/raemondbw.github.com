@@ -33,7 +33,7 @@ SIMPLIFY = 0.45              # how far (units) an outline may stray from the sca
 FINE = 3                     # building outlines are traced at 1/FINE of a unit
 BRIDGE_COLS = 700            # bridge occupies the left of the frame
 BRIDGE_DEPTH = 3150          # ...and is nearer than downtown
-CROP = (150, 2470)           # columns kept: bridge tower to past Coit Tower
+CROP = (270, 1930)           # columns kept: bridge side span to just past the Transamerica Pyramid
 VIEW = (37.8165, -122.3725)  # must match tools/fetch_lidar.py
 
 # Landmarks are drawn from their own points: at each height, the scan gives the
