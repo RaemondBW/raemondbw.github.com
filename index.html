@@ -1166,10 +1166,11 @@
     </script>
     <script>
         // The Bay Lights: each LED on the bridge's suspenders is a dot in the footer
-        // skyline. Like the real installation, the light moves slowly and organically:
-        // rain streaking down the cables, ripples crossing the bay, clouds drifting,
-        // a twinkling starfield, and long swooshes sweeping the span. Patterns drift
-        // into one another, and everything runs only while the skyline is on screen.
+        // skyline. Like the real installation, the light flows left to right along the
+        // span: whales gliding across, rolling waves, comets, drifting clouds, sideways rain
+        // and racing pulses.
+        // Patterns drift into one another, and everything runs only while the skyline
+        // is on screen.
         (function () {
             var g = document.querySelector(".skyline .baylights");
             if (!g) return;
@@ -1203,36 +1204,63 @@
             function frac(x) { return x - Math.floor(x); }
             function smooth(e0, e1, x) { x = Math.min(1, Math.max(0, (x - e0) / (e1 - e0))); return x * x * (3 - 2 * x); }
 
+            // Everything travels left to right along the span, as on the real bridge.
+            // f(x - speed * t) moves a shape rightward; x is 0..1 along the span.
             var patterns = [
-                function (d, t) { // rain: a bright drop with a soft tail slides down each cable
-                    var p = frac(t * rate[d.cable] * 0.35 + offs[d.cable]) * 1.8 - 0.3;
-                    var k = p - d.v;                                // >0: the drop has passed
-                    return k < 0 ? Math.exp(-k * k * 400) : Math.exp(-k * 5) * 0.9;
+                function (d, t) { // whales: big soft shapes gliding across, head first, tail fading
+                    var best = 0;
+                    for (var c = 0; c < 4; c++) {
+                        var len = 0.24 + 0.14 * hash(c + 30);              // body length, fraction of span
+                        var head = frac(t * (0.03 + 0.012 * hash(c + 20)) + hash(c + 40)) * (1 + 2 * len) - len * 0.3;
+                        var a = (head - d.x) / len;                       // 0 at the head .. 1 at the tail
+                        if (a < -0.3 || a > 1.1) continue;
+                        var body = Math.sin(Math.PI * Math.min(1, Math.max(0, (a + 0.15) / 1.15)));
+                        var thick = 0.12 + 0.42 * body;                    // fattest just behind the head
+                        var cy = 0.55 + 0.14 * Math.sin(t * 0.45 + c * 2.1 + d.x * 7);  // gentle swimming
+                        var dy = (d.h - cy) / thick;
+                        var glow = a < 0 ? Math.exp(-a * a * 60) : 0.3 + 0.7 * Math.pow(1 - Math.min(a, 1), 1.4);
+                        best = Math.max(best, Math.exp(-dy * dy * 1.8) * glow);
+                    }
+                    return best;
                 },
-                function (d, t) { // ripples: two slow wave trains crossing like water
-                    var a = Math.sin(6.283 * (d.x * 3.1 - t * 0.11) + d.h * 2.0);
-                    var b = Math.sin(6.283 * (d.x * 1.7 + t * 0.07) - d.h * 3.0 + 1.3);
-                    return Math.pow(Math.max(0, (a + b) / 2), 2.2);
+                function (d, t) { // long soft waves rolling across the span
+                    var a = 0.5 + 0.5 * Math.sin(6.283 * (d.x * 2.2 - t * 0.12) + d.h * 0.8);
+                    var b = 0.5 + 0.5 * Math.sin(6.283 * (d.x * 5.0 - t * 0.21) - d.h * 1.5);
+                    return Math.pow(a, 2.5) * (0.55 + 0.45 * b);
                 },
-                function (d, t) { // clouds: soft bright masses drifting across the span
-                    var n = Math.sin(d.x * 9 - t * 0.25) * Math.sin(d.h * 3.5 + t * 0.13 + d.x * 4)
-                          + 0.6 * Math.sin(d.x * 17 + t * 0.4 + 1.7) * Math.cos(d.h * 6 - t * 0.21);
-                    return smooth(0.15, 1.1, n);
+                function (d, t) { // comets: bright heads with long fading tails
+                    var best = 0;
+                    for (var c = 0; c < 3; c++) {
+                        var head = frac(t * (0.07 + 0.025 * c) + c * 0.37) * 1.6 - 0.3;
+                        var k = head - d.x - (d.h - 0.5) * 0.03;
+                        best = Math.max(best, k < 0 ? Math.exp(-k * k * 1500) : Math.exp(-k * 12) * 0.8);
+                    }
+                    return best;
                 },
-                function (d, t) { // stars: each LED slowly brightens and fades on its own clock
-                    var s = 0.5 + 0.5 * Math.sin(t * (0.6 + 1.2 * d.r1) + d.r2 * 40);
-                    return 0.06 + Math.pow(s, 14);
+                function (d, t) { // clouds: soft patches drifting rightward
+                    var x = d.x - t * 0.045;
+                    var n = Math.sin(x * 13 + Math.sin(x * 5.3) * 1.5) * Math.cos(d.h * 3.2 + x * 6)
+                          + 0.55 * Math.sin(x * 29 + 2.1) * Math.sin(d.h * 5.5 - x * 3);
+                    return smooth(0.1, 1.1, n);
                 },
-                function (d, t) { // swoosh: a band of light sweeps the span, trailing off
-                    var dir = Math.floor(t / 6) % 2 ? 1 : -1;
-                    var head = frac(t / 6) * 1.6 - 0.3;
-                    var x = dir > 0 ? d.x : 1 - d.x;
-                    var k = head - x + (d.h - 0.5) * 0.08;            // a slight lean
-                    return k < 0 ? Math.exp(-k * k * 900) : Math.exp(-k * 9) * 0.85;
+                function (d, t) { // rain blown sideways: slanted streaks sliding right
+                    var s = frac((d.x - t * 0.08) * 14 + d.v * 0.9 + offs[d.cable] * 0.15);
+                    var g = 0.5 + 0.5 * Math.sin(6.283 * (d.x * 1.3 - t * 0.05));
+                    return Math.exp(-Math.pow((s - 0.5) * 7, 2)) * (0.35 + 0.65 * g);
+                },
+                function (d, t) { // pulses: groups of bars racing right at their own speeds
+                    var best = 0;
+                    for (var c = 0; c < 5; c++) {
+                        var head = frac(t * (0.05 + 0.03 * hash(c + 4)) + hash(c)) * 1.4 - 0.2;
+                        var k = (d.x - head) * 60;
+                        var band = d.v > hash(c + 9) * 0.5 && d.v < 0.5 + hash(c + 9) * 0.5;
+                        if (band) best = Math.max(best, Math.exp(-k * k / 4));
+                    }
+                    return best;
                 }
             ];
-            var HOLD = 14, FADE = 3, last = 0, running = false, start = performance.now();
-            var order = [0, 1, 3, 4, 2];
+            var HOLD = 16, FADE = 3, last = 0, running = false, start = performance.now();
+            var order = [0, 1, 0, 2, 0, 3, 4, 0, 5];   // whales come around most often
             function frame(now) {
                 if (!running) return;
                 requestAnimationFrame(frame);
